@@ -3,56 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Привіт, світ!</title>
+    <title>Привіт, Іра! 😍</title>
     <style>
-        body {
-            background: linear-gradient(135deg, #89f7fe, #66a6ff);
+        /* Скидання стандартних стилів */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Відео на фоні */
+        .background-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        /* Основний контейнер */
+        .content {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            color: white;
+            height: 100%;
             text-align: center;
+            color: white;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+            animation: fadeIn 2s ease-in-out;
         }
 
         h1 {
             font-size: 3em;
-            animation: fadeIn 2s ease-in-out;
+            margin-bottom: 20px;
+            animation: slideIn 2s ease-out;
         }
 
         p {
             font-size: 1.5em;
-            margin-top: 20px;
+            margin-bottom: 30px;
+            animation: fadeIn 3s ease-in;
         }
 
+        /* Кнопка */
         .btn {
-            margin-top: 30px;
-            padding: 15px 30px;
-            font-size: 1em;
-            color: #333;
-            background-color: #fff;
+            padding: 15px 40px;
+            font-size: 1.2em;
             border: none;
-            border-radius: 30px;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #ff6b6b, #f94d6a, #f9d423);
+            color: white;
             cursor: pointer;
-            transition: background 0.3s;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
         }
 
         .btn:hover {
-            background-color: #ddd;
+            transform: scale(1.1);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
-    <h1>Привіт! 👋</h1>
-    <p>Мій перший прикольний сайт 🚀</p>
-    <button class="btn" onclick="alert('Ти натиснув кнопку!')">Натисни мене!</button>
+    <!-- Фон-відео -->
+    <video autoplay muted loop class="background-video">
+        <source src="https://cdn.coverr.co/videos/coverr-snowy-mountain-5590/1080p.mp4" type="video/mp4">
+        Ваш браузер не підтримує відео тег.
+    </video>
+
+    <!-- Контент -->
+    <div class="content">
+        <h1>Привіт, Іра! 👋</h1>
+        <p>Цей сайт спеціально зроблений, щоб тебе здивувати! 🚀</p>
+        <button class="btn" onclick="alert('Іра, ти найкраща! 🌟 Від Сухроба 😎')">Натисни мене!</button>
+    </div>
 </body>
 </html>
