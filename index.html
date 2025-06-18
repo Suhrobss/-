@@ -1,208 +1,209 @@
-+<!DOCTYPE html>
-+<html lang="uk">
-+<head>
-+    <meta charset="UTF-8">
-+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-+    <title>Твій морський старт | Профспілка & Освіта</title>
-+    <style>
-+        * {
-+            margin: 0;
-+            padding: 0;
-+            box-sizing: border-box;
-+        }
-+        body, html {
-+            font-family: Arial, sans-serif;
-+        }
-+        /* Sticky navigation */
-+        nav {
-+            position: sticky;
-+            top: 0;
-+            background: rgba(0,0,0,0.7);
-+            padding: 10px 20px;
-+            color: #fff;
-+            display: flex;
-+            gap: 20px;
-+            z-index: 10;
-+        }
-+        nav a {
-+            color: #fff;
-+            text-decoration: none;
-+        }
-+        /* Hero section */
-+        .hero {
-+            position: relative;
-+            height: 100vh;
-+            color: #fff;
-+            display: flex;
-+            align-items: center;
-+            justify-content: center;
-+            text-align: center;
-+            background: url("hero.jpg") center/cover no-repeat;
-+        }
-+        .hero h1 {
-+            font-size: 2.5em;
-+            margin-bottom: 10px;
-+        }
-+        .hero p {
-+            margin-bottom: 20px;
-+            font-size: 1.2em;
-+        }
-+        .hero .scroll-btn {
-+            padding: 10px 30px;
-+            border: none;
-+            background:#1e88e5;
-+            color: #fff;
-+            border-radius: 30px;
-+            cursor: pointer;
-+            font-size: 1em;
-+        }
-+        section {
-+            padding: 60px 20px;
-+        }
-+        h2 {
-+            margin-bottom: 20px;
-+            text-align: center;
-+        }
-+        /* About block */
-+        .tabs {
-+            display: flex;
-+            justify-content: center;
-+            margin-bottom: 20px;
-+        }
-+        .tabs button {
-+            background: #eee;
-+            border: none;
-+            padding: 10px 20px;
-+            margin: 0 5px;
-+            cursor: pointer;
-+        }
-+        .tabs button.active {
-+            background: #1e88e5;
-+            color: #fff;
-+        }
-+        .tab-content {
-+            display: none;
-+            text-align: center;
-+        }
-+        .tab-content.active {
-+            display: block;
-+        }
-+        /* Institutions */
-+        .cards {
-+            display: grid;
-+            gap: 20px;
-+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-+        }
-+        .card {
-+            border: 1px solid #ccc;
-+            padding: 20px;
-+            border-radius: 8px;
-+        }
-+        .card h3 {
-+            margin-bottom: 10px;
-+        }
-+        .cta-btn {
-+            display: inline-block;
-+            margin-top: 10px;
-+            padding: 10px 20px;
-+            background:#1e88e5;
-+            color: #fff;
-+            text-decoration: none;
-+            border-radius: 20px;
-+        }
-+        /* Bonus block */
-+        .bonus {
-+            background:#f5f5f5;
-+            text-align: center;
-+        }
-+        /* Simple footer */
-+        footer {
-+            text-align: center;
-+            padding: 20px;
-+            background:#333;
-+            color:#fff;
-+        }
-+        /* Responsive */
-+        @media (max-width:600px){
-+            .hero h1 {font-size:1.8em;}
-+        }
-+    </style>
-+</head>
-+<body>
-+    <nav>
-+        <a href="#about">Про ПРМТУ</a>
-+        <a href="#institutions">Навчальні заклади</a>
-+        <a href="#cta">Стати членом</a>
-+    </nav>
-+    <section class="hero" id="hero">
-+        <div>
-+            <h1>Морська освіта. Профспілка. Твій старт.</h1>
-+            <p>Дізнайся, як ПРМТУ допомагає молодим морякам ще до першого рейсу.</p>
-+            <button class="scroll-btn" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">Далі</button>
-+        </div>
-+    </section>
-+    <section id="about">
-+        <h2>Про ПРМТУ</h2>
-+        <div class="tabs">
-+            <button class="active" onclick="openTab('photo')">Фото</button>
-+            <button onclick="openTab('video')">Відео</button>
-+            <button onclick="openTab('stories')">Історії</button>
-+        </div>
-+        <div id="photo" class="tab-content active">
-+            <p>Фото з подій, навчань та портів...</p>
-+        </div>
-+        <div id="video" class="tab-content">
-+            <p>Відео з роботи ПРМТУ та відгуки молоді.</p>
-+        </div>
-+        <div id="stories" class="tab-content">
-+            <blockquote>
-+                “Завдяки ПРМТУ я отримав перший контракт. Безкоштовна допомога юриста — це безцінно.” – Андрій, випускник ОНМА
-+            </blockquote>
-+        </div>
-+        <p>Хто ми. Як допомагаємо курсантам і студентам. Правова підтримка, освітні проєкти, стипендії, житло, робота.</p>
-+    </section>
-+    <section id="cta">
-+        <h2>Стати членом ПРМТУ</h2>
-+        <a class="cta-btn" href="https://t.me/prmtu_bot" target="_blank">Стати членом ПРМТУ</a>
-+        <ul>
-+            <li>Безкоштовна юр. підтримка</li>
-+            <li>Допомога з контрактом</li>
-+            <li>Міжнародна спільнота</li>
-+        </ul>
-+    </section>
-+    <section id="institutions">
-+        <h2>Навчальні заклади морської освіти</h2>
-+        <div class="cards">
-+            <div class="card">
-+                <h3>Одеська національна морська академія</h3>
-+                <p>Державний ВНЗ, денна форма</p>
-+                <p>Навчання в симуляторі + практика на судні</p>
-+                <a class="cta-btn" href="#">Перейти на сайт</a>
-+            </div>
-+            <div class="card">
-+                <h3>Данський морський університет</h3>
-+                <p>Приватний ЗВО, денна та заочна форма</p>
-+                <p>Сучасні тренажери та стажування за кордоном</p>
-+                <a class="cta-btn" href="#">Перейти на сайт</a>
-+            </div>
-+        </div>
-+    </section>
-+    <section class="bonus">
-+        <h2>Твоя Профспілка = Твоя команда</h2>
-+        <p>#МореЦеЖиття #ЯЗПРМТУ #МійПершийКонтракт</p>
-+        <a class="cta-btn" href="#">Залишай питання — ми відповімо</a>
-+    </section>
-+    <footer>
-+        &copy; 2023 ПРМТУ
-+    </footer>
-+
-+    <script>
-+        function openTab(id){
-+            document.querySelectorAll('.tabs button').forEach(btn=>btn.classList.remove('active'));
-+            document.querySelectorAll('.tab-content').forEach(tab=>tab.classList.remove('active'));
-+            document.getElementById(id).classList.add('active');
-+            event.target.classList.add('active');
-+        }
-+    </script>
-+</body>
-+</html>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Твій морський старт | Профспілка & Освіта</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { font-family: Arial, sans-serif; scroll-behavior: smooth; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      z-index: 10;
+    }
+    nav a { color: #fff; text-decoration: none; font-weight: bold; }
+
+    .hero {
+      height: 100vh;
+      background: url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500&q=80") center/cover no-repeat;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+    }
+    .hero h1 { font-size: 2.5em; margin-bottom: 10px; }
+    .hero p { font-size: 1.2em; margin-bottom: 20px; }
+    .scroll-btn {
+      padding: 10px 30px;
+      background: #1e88e5;
+      color: #fff;
+      border: none;
+      border-radius: 30px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    section { padding: 60px 20px; }
+    h2 { text-align: center; margin-bottom: 20px; }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .tabs button {
+      padding: 10px 20px;
+      cursor: pointer;
+      border: none;
+      background: #eee;
+      font-weight: bold;
+    }
+    .tabs button.active { background: #1e88e5; color: white; }
+
+    .tab-content { display: none; text-align: center; }
+    .tab-content.active { display: block; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .card h3 { margin-bottom: 10px; }
+
+    .cta-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #1e88e5;
+      color: white;
+      border-radius: 20px;
+      text-decoration: none;
+    }
+
+    .bonus {
+      background: #f5f5f5;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #333;
+      color: white;
+    }
+
+    .social-links {
+      margin-top: 15px;
+    }
+
+    .social-links a {
+      color: #fff;
+      margin: 0 10px;
+      font-size: 1.2em;
+      text-decoration: none;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.8em; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#about">Про ПРМТУ</a>
+    <a href="#institutions">Навчальні заклади</a>
+    <a href="#cta">Стати членом</a>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <h1>Морська освіта. Профспілка. Твій старт.</h1>
+      <p>Дізнайся, як ПРМТУ допомагає молодим морякам ще до першого рейсу.</p>
+      <button class="scroll-btn" onclick="document.getElementById('about').scrollIntoView()">Далі</button>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>Про ПРМТУ</h2>
+    <div class="tabs">
+      <button class="active" onclick="openTab('photo', this)">Фото</button>
+      <button onclick="openTab('video', this)">Відео</button>
+      <button onclick="openTab('stories', this)">Історії</button>
+    </div>
+    <div id="photo" class="tab-content active">
+      <p>Фото з подій, навчань та портів...</p>
+    </div>
+    <div id="video" class="tab-content">
+      <p>Відео з роботи ПРМТУ та відгуки молоді.</p>
+    </div>
+    <div id="stories" class="tab-content">
+      <blockquote>
+        “Завдяки ПРМТУ я отримав перший контракт. Безкоштовна допомога юриста — це безцінно.” – Андрій, випускник ОНМА
+      </blockquote>
+    </div>
+    <p>Хто ми. Як допомагаємо курсантам і студентам. Правова підтримка, освітні проєкти, стипендії, житло, робота.</p>
+  </section>
+
+  <section id="cta">
+    <h2>Стати членом ПРМТУ</h2>
+    <a class="cta-btn" href="https://t.me/prmtu_bot" target="_blank">Стати членом ПРМТУ</a>
+    <ul>
+      <li>✅ Безкоштовна юр. підтримка</li>
+      <li>✅ Допомога з контрактом</li>
+      <li>✅ Міжнародна спільнота</li>
+    </ul>
+  </section>
+
+  <section id="institutions">
+    <h2>Навчальні заклади морської освіти</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Одеська національна морська академія</h3>
+        <p>Державний ВНЗ, денна форма</p>
+        <p>Навчання в симуляторі + практика на судні</p>
+        <a class="cta-btn" href="#">Перейти на сайт</a>
+      </div>
+      <div class="card">
+        <h3>Данський морський університет</h3>
+        <p>Приватний ЗВО, денна та заочна форма</p>
+        <p>Сучасні тренажери та стажування за кордоном</p>
+        <a class="cta-btn" href="#">Перейти на сайт</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bonus">
+    <h2>Твоя Профспілка = Твоя команда</h2>
+    <p>#МореЦеЖиття #ЯЗПРМТУ #МійПершийКонтракт</p>
+    <a class="cta-btn" href="#">Залишай питання — ми відповімо</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 ПРМТУ</p>
+    <div class="social-links">
+      <span>Ми в соцмережах:</span><br/>
+      <a href="https://t.me/prmtu" target="_blank">Telegram</a> |
+      <a href="https://instagram.com/prmtu" target="_blank">Instagram</a> |
+      <a href="https://tiktok.com/@prmtu" target="_blank">TikTok</a>
+    </div>
+  </footer>
+
+  <script>
+    function openTab(id, el) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tabs button').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      el.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
