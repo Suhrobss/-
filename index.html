@@ -379,7 +379,7 @@
         .board-wrapper:hover .board-image {
             transform: scale(1.05);
         }
-        
+    </style>  
 <!-- Cards Gallery Section -->
 <section class="cards-section" id="cards">
   <div class="cards-container">
@@ -467,6 +467,8 @@
     </div>
   </div>
 </section>
+    
+    <style>
         /* FAQ Section */
         .faq-section {
             position: relative;
@@ -1033,7 +1035,6 @@
                 height: 150px;
             }
         }
-    </style>
     .cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -1089,6 +1090,7 @@
   transform: rotateY(180deg);
 }
 
+    </style>
 </head>
 <body>
     <!-- Header Section -->
@@ -1543,10 +1545,44 @@
             
             // Check on scroll
             window.addEventListener('scroll', checkScroll);
-            
-            // FAQ accordion
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            
-            faqQuestions.forEach(question => {
-                question.addEventListener('click', () => {
-                    const answer = question.nextElementSi```
+     // FAQ accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
+
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            question.classList.toggle('active');
+            const answer = question.nextElementSibling;
+            answer.classList.toggle('active');
+        });
+    });
+
+    // Board modal
+    const boardWrapper = document.querySelector('.board-wrapper');
+    const boardModal = document.getElementById('boardModal');
+    const modalClose = boardModal.querySelector('.modal-close');
+
+    boardWrapper.addEventListener('click', () => {
+        boardModal.classList.add('active');
+    });
+
+    modalClose.addEventListener('click', () => {
+        boardModal.classList.remove('active');
+    });
+
+    // Back to top button
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+    </script>
+</body>
+</html>    
