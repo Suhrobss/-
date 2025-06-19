@@ -1004,41 +1004,180 @@
 </head>
 <body>
     <!-- Header Section -->
-    <section class="header" id="home">
-        <div class="header-content">
-            <div class="logo-container">
-                <svg class="logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="100" cy="100" r="90" fill="#0a3b5c" />
-                    <circle cx="100" cy="100" r="70" fill="none" stroke="#e9c46a" stroke-width="5" />
-                    <circle cx="100" cy="100" r="50" fill="#2a9d8f" opacity="0.7" />
-                    <path d="M100,30 L100,170 M30,100 L170,100 M58,58 L142,142 M58,142 L142,58" stroke="#e9c46a" stroke-width="3" />
-                    <circle cx="100" cy="100" r="15" fill="#e9c46a" />
-                    <text x="100" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle" fill="#0a3b5c">UP</text>
-                </svg>
-            </div>
-            <h1 class="title">UNION POLY</h1>
-            <p class="subtitle">Навчальна профспілкова настільна гра</p>
-        </div>
-        
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        
-        <svg class="ship" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10,40 L110,40 L100,60 L20,60 Z" fill="#6d8299" />
-            <rect x="40" y="10" width="40" height="30" fill="#e9c46a" />
-            <rect x="50" y="20" width="20" height="10" fill="#0a3b5c" />
-            <path d="M90,10 L90,40 L110,40 Z" fill="#e9c46a" />
-        </svg>
-        <svg class="seagull" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5,10 Q15,0 25,10 Q15,15 5,10 Z" fill="white" />
-        </svg>
-        <svg class="seagull" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5,10 Q15,0 25,10 Q15,15 5,10 Z" fill="white" />
-        </svg>
-        <svg class="seagull" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5,10 Q15,0 25,10 Q15,15 5,10 Z" fill="white" />
-        </svg>
+   <!-- ============================
+     Improved Header Section
+============================ -->
+<section class="header" id="home">
+  <!-- Canvas для партіклів -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="header-content">
+    <h1 class="title typewriter">UNION POLY</h1>
+    <p class="subtitle">Навчальна профспілкова настільна гра, що об’єднує серця</p>
+    <a href="#welcome" class="cta-button">Дізнатися більше</a>
+  </div>
+
+  <!-- SVG хвилі -->
+  <div class="wave wave1"></div>
+  <div class="wave wave2"></div>
+  <div class="wave wave3"></div>
+</section>
+
+<style>
+  /* ---------- Загальні стилі ---------- */
+  .header {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #0a3b5c, #2a9d8f);
+    animation: bgShift 10s ease infinite;
+  }
+
+  /* ---------- Градієнтний бг ---------- */
+  @keyframes bgShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  .header {
+    background-size: 200% 200%;
+  }
+
+  /* ---------- Canvas партікли ---------- */
+  #particle-canvas {
+    position: absolute;
+    top:0; left:0;
+    width:100%; height:100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ---------- Контент ---------- */
+  .header-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+  }
+  .title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 0.5em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .subtitle {
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: fadeIn 2s forwards 1s;
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* ---------- Typewriter ---------- */
+  .typewriter {
+    overflow: hidden;
+    border-right: .15em solid #e9c46a;
+    white-space: nowrap;
+    width: 0;
+    animation:
+      typing 3s steps(12, end) 0.5s forwards,
+      blinkCaret .75s step-end infinite;
+  }
+  @keyframes typing {
+    to { width: 13ch; }
+  }
+  @keyframes blinkCaret {
+    50% { border-color: transparent; }
+  }
+
+  /* ---------- CTA Button ---------- */
+  .cta-button {
+    display: inline-block;
+    margin-top: 2em;
+    padding: .75em 2em;
+    background: var(--gold);
+    color: var(--deep-blue);
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transform: translateY(0);
+    transition: all .3s;
+    opacity: 0;
+    animation: fadeIn 2s forwards 1.5s;
+  }
+  .cta-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  }
+
+  /* ---------- Waves (як раніше) ---------- */
+  .wave {
+    position:absolute; left:0; width:100%; height:100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .wave1 {
+    bottom: 0;
+    background-image: url("data:image/svg+xml,...");
+    animation: wave1 10s infinite linear;
+  }
+  .wave2 {
+    bottom:10px; opacity:.6;
+    animation: wave2 7s infinite linear;
+  }
+  .wave3 {
+    bottom:20px; opacity:.3;
+    animation: wave3 5s infinite linear;
+  }
+  @keyframes wave1 { to { background-position-x: 1000px; } }
+  @keyframes wave2 { to { background-position-x: -1000px; } }
+  @keyframes wave3 { to { background-position-x: 500px; } }
+</style>
+
+<script>
+  // ---------- Canvas particles ----------
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function initParticles() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    particles = Array.from({length: 100}, () => ({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: 1+Math.random()*3,
+      dx: (Math.random()-0.5)*0.5,
+      dy: (Math.random()-0.5)*0.5,
+      opacity: Math.random()
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x<0||p.x>W) p.dx *= -1;
+      if (p.y<0||p.y>H) p.dy *= -1;
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', initParticles);
+  initParticles();
+  draw();
+</script>
     </section>
     
 <!-- Welcome Section -->
