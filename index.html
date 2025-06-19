@@ -3,155 +3,128 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Твій морський старт | ПРМТУ</title>
+  <title>Union Poly | Профспілкова гра</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, html { font-family: 'Segoe UI', sans-serif; scroll-behavior: smooth; color: #111; }
-    nav {
-      background: #003366;
-      color: white;
-      padding: 1em;
-      position: sticky;
-      top: 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to bottom, #e3f2fd, #ffffff);
+      color: #003366;
     }
-    nav .menu a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    header.hero {
-      height: 100vh;
-      background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
+    header {
+      padding: 2rem;
       text-align: center;
-      padding: 0 20px;
-    }
-    header.hero h1 {
-      font-size: 2.8em;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-    }
-    section { padding: 60px 20px; max-width: 1200px; margin: auto; }
-    section h2 { text-align: center; margin-bottom: 20px; font-size: 2em; color: #003366; }
-    .about-tabs, .media-grid, .cards, .footer-social {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-    }
-    .media-grid img, .media-grid video {
-      width: 300px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-    }
-    .cards .card {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 20px;
-      width: 280px;
-      text-align: center;
-    }
-    .cta {
-      text-align: center;
-    }
-    .cta a {
-      background: #1e88e5;
+      background-color: #003366;
       color: white;
-      padding: 15px 30px;
-      border-radius: 25px;
-      text-decoration: none;
-      display: inline-block;
-      margin-top: 20px;
-      font-size: 1.2em;
+      background-image: url('board-preview.jpg');
+      background-size: cover;
+      background-blend-mode: multiply;
     }
-    footer {
-      background: #003366;
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
     }
-    .footer-social a {
-      color: white;
-      margin: 0 10px;
-      font-size: 1.3em;
-      text-decoration: none;
+    .welcome-video, .intro {
+      max-width: 800px;
+      margin: 1rem auto;
+      padding: 1rem;
+      background-color: #ffffffdd;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .main-button {
+      display: block;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+      font-size: 1.4rem;
+      background-color: #ffcc00;
+      color: #003366;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+    .main-button:hover {
+      transform: scale(1.05);
+    }
+    .section {
+      max-width: 800px;
+      margin: 1rem auto;
+      padding: 1rem;
+      background-color: #ffffffee;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .faq-button {
+      background-color: #f0f4f8;
+      border: none;
+      padding: 1rem;
+      width: 100%;
+      text-align: left;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: background-color 0.3s;
+    }
+    .faq-button:hover {
+      background-color: #e3f2fd;
+    }
+    .faq-content {
+      display: none;
+      background-color: white;
+      border-left: 4px solid #003366;
+      padding: 0.5rem 1rem;
+      margin-bottom: 0.5rem;
+      border-radius: 0 0 10px 10px;
     }
   </style>
 </head>
 <body>
-  <nav>
-    <div><strong>ПРМТУ</strong></div>
-    <div class="menu">
-      <a href="#about">Про нас</a>
-      <a href="#youth">Молодіжна рада</a>
-      <a href="#institutions">Навчання</a>
-      <a href="#join">Приєднатися</a>
-    </div>
-  </nav>
-
-  <header class="hero">
-    <div>
-      <h1>Морське майбутнє починається тут з ПРМТУ</h1>
-    </div>
+  <header>
+    <h1>Union Poly</h1>
+    <p>Навчальна профспілкова настільна гра</p>
   </header>
 
-  <section id="about">
-    <h2>Про ПРМТУ</h2>
-    <p style="text-align:center; max-width: 800px; margin:auto">Профспілка працівників морського транспорту України — це твій захист, підтримка та рушійна сила в кар'єрі. Ми допомагаємо з перших кроків у морській справі: від юридичної підтримки до працевлаштування.</p>
-  </section>
+  <div class="welcome-video">
+    <h2>🎤 Вітальне слово Голови Профспілки</h2>
+    <video controls width="100%">
+      <source src="video.mp4" type="video/mp4">
+      Ваш браузер не підтримує відео.
+    </video>
+  </div>
 
-  <section id="youth">
-    <h2>Молодіжна рада ПРМТУ</h2>
-    <div class="media-grid">
-      <img src="https://mtwtu.org.ua/storage/app/uploads/public/64b/17f/f87/64b17ff878539508702261.jpg" alt="Youth Activity"/>
-      <img src="https://mtwtu.org.ua/storage/app/uploads/public/64b/180/f1c/64b180f1c7f25711826978.jpg" alt="Youth Meeting"/>
-      <video src="https://mtwtu.org.ua/storage/app/media/news/2024/01/youth-video.mp4" controls></video>
-    </div>
-  </section>
+  <button class="main-button" onclick="document.getElementById('faq').scrollIntoView({ behavior: 'smooth' });">
+    📘 Почати гру
+  </button>
 
-  <section id="institutions">
-    <h2>Навчальні заклади</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>ОНМА</h3>
-        <p>Одеська національна морська академія</p>
-        <a href="#" class="cta-btn">Сайт академії</a>
-      </div>
-      <div class="card">
-        <h3>ДУІТ</h3>
-        <p>Державний університет інфраструктури та технологій</p>
-        <a href="#" class="cta-btn">Сайт ЗВО</a>
-      </div>
-      <div class="card">
-        <h3>Херсонський морський коледж</h3>
-        <p>Професійна підготовка моряків</p>
-        <a href="#" class="cta-btn">Сайт коледжу</a>
-      </div>
-    </div>
-  </section>
+  <div class="section">
+    <h2>🎯 Мета гри</h2>
+    <p>Навчити гравців основам профспілкової діяльності, стратегічного мислення та управління ресурсами. Завдання — накопичити UnionCoin, соціальний рейтинг та ППО.</p>
+  </div>
 
-  <section id="join" class="cta">
-    <h2>Хочеш бути з нами?</h2>
-    <p>Приєднуйся до ПРМТУ — захист, підтримка та можливості.</p>
-    <a href="https://t.me/Mtwtuofficial_bot" target="_blank">Приєднатись через Telegram-бот</a>
-  </section>
+  <div class="section" id="faq">
+    <h2>📜 Правила гри: Питання і Відповіді</h2>
 
-  <footer>
-    <p>Зв'яжись з нами:</p>
-    <div class="footer-social">
-      <a href="https://www.instagram.com/mtwtu_itf_ukraine/" target="_blank">Instagram</a>
-      <a href="https://www.instagram.com/mtwtuyouth/" target="_blank">Youth Instagram</a>
-      <a href="https://t.me/Mtwtuofficial_bot" target="_blank">Telegram-бот</a>
-      <a href="https://mtwtu.org.ua/" target="_blank">Офіційний сайт</a>
-    </div>
-    <p>&copy; 2025 ПРМТУ. Всі права захищені.</p>
-  </footer>
+    <button class="faq-button" onclick="toggleAnswer(this)">🎲 Хто починає гру першим?</button>
+    <div class="faq-content">Усі гравці кидають кубики — хто виб’є найбільше, той починає гру.</div>
+
+    <button class="faq-button" onclick="toggleAnswer(this)">🚶 Як проходить хід гравця?</button>
+    <div class="faq-content">Гравець кидає два кубики та переміщає фішку за годинниковою стрілкою на відповідну кількість клітин.</div>
+
+    <button class="faq-button" onclick="toggleAnswer(this)">💸 Що відбувається при банкрутстві?</button>
+    <div class="faq-content">Гравець може звернутись до БФ «Мортранс» і отримати 1000 UnionCoin.</div>
+
+    <button class="faq-button" onclick="toggleAnswer(this)">🏆 Як виграти гру?</button>
+    <div class="faq-content">Перемагає гравець із найбільшою сумою: UnionCoin + вартість ППО + соціальний рейтинг × 100. Мінімум 1 бал соціального рейтингу обов’язковий.</div>
+  </div>
+
+  <script>
+    function toggleAnswer(button) {
+      const content = button.nextElementSibling;
+      content.style.display = content.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
 </body>
 </html>
