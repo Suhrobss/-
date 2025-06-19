@@ -4,127 +4,232 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Union Poly | Профспілкова гра</title>
+  <!-- Підключення шрифтів -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Montserrat:wght@600;800&display=swap">
   <style>
+    /* Загальні стилі */
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
       background: linear-gradient(to bottom, #e3f2fd, #ffffff);
       color: #003366;
+      line-height: 1.6;
     }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* Хедер */
     header {
-      padding: 2rem;
+      position: relative;
+      padding: 4rem 2rem;
       text-align: center;
-      background-color: #003366;
+      background: #003366 url('board-preview.jpg') center/cover no-repeat;
       color: white;
-      background-image: url('board-preview.jpg');
-      background-size: cover;
-      background-blend-mode: multiply;
     }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
     }
-    .welcome-video, .intro {
-      max-width: 800px;
-      margin: 1rem auto;
-      padding: 1rem;
-      background-color: #ffffffdd;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    header > * {
+      position: relative;
+      z-index: 1;
     }
-    .main-button {
-      display: block;
-      margin: 2rem auto;
+    header h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Контейнери */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .section {
+      background: #ffffffdd;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      padding: 2rem;
+    }
+
+    /* Кнопки */
+    .main-button, .download-button {
+      display: inline-block;
       padding: 1rem 2rem;
+      font-family: 'Montserrat', sans-serif;
       font-size: 1.4rem;
-      background-color: #ffcc00;
-      color: #003366;
       border: none;
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: transform 0.2s;
+      transition: transform 0.2s, background-color 0.3s;
     }
-    .main-button:hover {
-      transform: scale(1.05);
+    .main-button {
+      background-color: #ffcc00;
+      color: #003366;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin: 0 auto;
     }
-    .section {
-      max-width: 800px;
-      margin: 1rem auto;
-      padding: 1rem;
-      background-color: #ffffffee;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    .main-button:hover { transform: scale(1.05); background-color: #ffe066; }
+    .download-button {
+      background-color: #4caf50;
+      color: white;
+      margin-top: 1rem;
     }
+    .download-button:hover { background-color: #43a047; }
+
+    /* FAQ */
     .faq-button {
-      background-color: #f0f4f8;
-      border: none;
-      padding: 1rem;
       width: 100%;
       text-align: left;
-      font-size: 1rem;
-      margin-top: 0.5rem;
-      cursor: pointer;
+      padding: 1rem;
+      font-size: 1.1rem;
+      background: #f0f4f8;
+      border: none;
       border-radius: 12px;
-      transition: background-color 0.3s;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
     }
-    .faq-button:hover {
-      background-color: #e3f2fd;
-    }
+    .faq-button:hover { background: #e3f2fd; }
     .faq-content {
       display: none;
-      background-color: white;
+      padding: 1rem;
+      margin-top: 0.5rem;
+      background: white;
       border-left: 4px solid #003366;
-      padding: 0.5rem 1rem;
-      margin-bottom: 0.5rem;
-      border-radius: 0 0 10px 10px;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* Галерея */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .gallery img {
+      width: 200px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    /* Формула */
+    .formula-box {
+      background: #fff3cd;
+      border: 1px solid #ffeeba;
+      padding: 1rem;
+      border-radius: 12px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* Футер */
+    footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+    }
+
+    /* Анімація кубика */
+    .dice {
+      width: 60px;
+      margin: 0 auto 1rem;
+      animation: roll 1s infinite alternate;
+    }
+    @keyframes roll {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
   </style>
 </head>
 <body>
+  <!-- Хедер -->
   <header>
     <h1>Union Poly</h1>
     <p>Навчальна профспілкова настільна гра</p>
   </header>
 
-  <div class="welcome-video">
-    <h2>🎤 Вітальне слово Голови Профспілки</h2>
-    <video controls width="100%">
-      <source src="video.mp4" type="video/mp4">
-      Ваш браузер не підтримує відео.
-    </video>
-  </div>
+  <div class="container">
+    <!-- Розділ вітання -->
+    <div class="section">
+      <h2>📸 Вітальне фото Голови Профспілки</h2>
+      <img src="chairman-photo.jpg" alt="Голова Профспілки">
+      <p>Ласкаво просимо до гри «Union Poly». Ця гра створена, щоб у інтерактивній та навчальній формі розкрити суть профспілкової діяльності...</p>
+    </div>
 
-  <button class="main-button" onclick="document.getElementById('faq').scrollIntoView({ behavior: 'smooth' });">
-    📘 Почати гру
-  </button>
+    <!-- Головна кнопка -->
+    <div style="text-align:center; margin-bottom:2rem;">
+      <button class="main-button" onclick="document.getElementById('goals').scrollIntoView({behavior:'smooth'});">
+        📘 Почати гру
+      </button>
+    </div>
 
-  <div class="section">
-    <h2>🎯 Мета гри</h2>
-    <p>Навчити гравців основам профспілкової діяльності, стратегічного мислення та управління ресурсами. Завдання — накопичити UnionCoin, соціальний рейтинг та ППО.</p>
-  </div>
+    <!-- Мета гри -->
+    <div id="goals" class="section">
+      <h2>🎯 Мета гри</h2>
+      <ul>
+        <li>Навчити основам профспілкової діяльності</li>
+        <li>Розвинути стратегічне мислення та управління ресурсами</li>
+        <li>Формувати розуміння впливу профспілки на соціальні процеси</li>
+      </ul>
+    </div>
 
-  <div class="section" id="faq">
-    <h2>📜 Правила гри: Питання і Відповіді</h2>
+    <!-- Ігрове поле -->
+    <div class="section">
+      <h2>🧩 Ігрове поле</h2>
+      <img src="board-final.jpg" alt="Ігрове поле Union Poly">
+    </div>
 
-    <button class="faq-button" onclick="toggleAnswer(this)">🎲 Хто починає гру першим?</button>
-    <div class="faq-content">Усі гравці кидають кубики — хто виб’є найбільше, той починає гру.</div>
+    <!-- Галерея карток -->
+    <div class="section">
+      <h2>🃏 Галерея прикладів карток</h2>
+      <div class="gallery">
+        <img src="card-positive.jpg" alt="Позитивна картка">
+        <img src="card-negative.jpg" alt="Негативна картка">
+        <img src="card-crisis.jpg" alt="Криза">
+        <img src="card-resource.jpg" alt="Ресурс">
+        <img src="card-boss.jpg" alt="Картка Голова ПРМТУ">
+        <img src="card-council.jpg" alt="Картка Центральна Рада">
+      </div>
+    </div>
 
-    <button class="faq-button" onclick="toggleAnswer(this)">🚶 Як проходить хід гравця?</button>
-    <div class="faq-content">Гравець кидає два кубики та переміщає фішку за годинниковою стрілкою на відповідну кількість клітин.</div>
+    <!-- Кубик-анімація та правила у форматі FAQ -->
+    <div class="section" id="faq">
+      <h2>📜 Правила гри: Питання і Відповіді</h2>
+      <img src="dice.png" alt="Кубик" class="dice">
 
-    <button class="faq-button" onclick="toggleAnswer(this)">💸 Що відбувається при банкрутстві?</button>
-    <div class="faq-content">Гравець може звернутись до БФ «Мортранс» і отримати 1000 UnionCoin.</div>
+      <button class="faq-button" onclick="toggleAnswer(this)">🎲 Хто починає гру першим?</button>
+      <div class="faq-content">Усі гравці кидають кубики — хто виб’є найбільше, той починає гру.</div>
 
-    <button class="faq-button" onclick="toggleAnswer(this)">🏆 Як виграти гру?</button>
-    <div class="faq-content">Перемагає гравець із найбільшою сумою: UnionCoin + вартість ППО + соціальний рейтинг × 100. Мінімум 1 бал соціального рейтингу обов’язковий.</div>
-  </div>
+      <button class="faq-button" onclick="toggleAnswer(this)">🚶 Як проходить хід гравця?</button>
+      <div class="faq-content">Гравець кидає два кубики та переміщає фішку за годинниковою стрілкою на відповідну кількість клітин.</div>
 
-  <script>
-    function toggleAnswer(button) {
-      const content = button.nextElementSibling;
-      content.style.display = content.style.display === 'block' ? 'none' : 'block';
-    }
-  </script>
-</body>
-</html>
+      <button class="faq-button" onclick="toggleAnswer(this)">💰 Купівля підприємств (ППО)</button>
+      <div class="faq-content">Якщо клітинка вільна, сплатіть вартість і забирайте. Якщо зайнята, сплатіть власнику внесок.</div>
+
+      <button class="faq-button" onclick="toggleAnswer(this)">💸 Що робити при нестачі UnionCoin?</button>
+      <div class="faq-content">Пропустіть хід і втратьте 2 бали соц. рейтингу або влаштуйте аукціон.</div>
+
+      <button class="faq-button" onclick="toggleAnswer(this)">⚖️ Аукціон підприємств</button>
+      <div class="faq-content">Початкова ставка не менше вартості. 100% вартості йде банку, надлишок — гравцю.</div>
+
+      <button class="faq-button" onclick="toggleAnswer(this)">💔 Банкрутство</button>
+      <div class="faq-content">При першому банкрутстві зверніться до БФ «Мортранс» за +1000 UnionCoin.</div>
+
+      <button class="faq-button" onclick="toggleAnswer(this)">🌐 З&rsquo;їзд профспілки</button>
+      <div class="faq-content">Кожні 5 раундів всі сплачують по 50 UCoin. З&rsquo;їзд віддає кошти найменш забезпеченому.</div>
+
+      <button class="faq-button" onclick="toggleAnswer(this)">
