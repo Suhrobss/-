@@ -1,1479 +1,361 @@
-I'll fix that issue with the chairman's photo. Let me update the code to ensure the image is properly displayed.
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Union Poly - Настільна гра</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        :root {
-            --deep-blue: #0a3b5c;
-            --sea-wave: #2a9d8f;
-            --gold: #e9c46a;
-            --white: #ffffff;
-            --mint: #a8dadc;
-            --cloud-gray: #6d8299;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            background-color: #f0f8ff;
-            overflow-x: hidden;
-        }
-        
-        /* Header Section */
-        .header {
-            position: relative;
-            height: 100vh;
-            width: 100%;
-            overflow: hidden;
-            background: linear-gradient(180deg, rgba(10,59,92,0.8) 0%, rgba(42,157,143,0.6) 100%);
-        }
-        
-        .header-content {
-            position: relative;
-            z-index: 10;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-        }
-        
-        .logo-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin-bottom: 20px;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .logo {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .title {
-            font-size: 4rem;
-            font-weight: 800;
-            color: white;
-            text-shadow: 2px 2px 0 var(--gold), 4px 4px 0 rgba(0,0,0,0.2);
-            margin-bottom: 10px;
-            animation: shine 3s infinite;
-            letter-spacing: 2px;
-        }
-        
-        .subtitle {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.9);
-            background: linear-gradient(90deg, var(--mint), var(--white));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 30px;
-        }
-        
-        /* Animated Elements */
-        .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23a8dadc' fill-opacity='0.8' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            background-repeat: no-repeat;
-            animation: wave-animation 10s linear infinite;
-        }
-        
-        .wave:nth-child(2) {
-            bottom: 10px;
-            opacity: 0.5;
-            animation: wave-animation 7s linear infinite;
-        }
-        
-        .wave:nth-child(3) {
-            bottom: 20px;
-            opacity: 0.2;
-            animation: wave-animation 5s linear infinite;
-        }
-        
-        .ship {
-            position: absolute;
-            bottom: 120px;
-            left: -150px;
-            width: 120px;
-            height: 60px;
-            animation: ship-movement 30s linear infinite;
-        }
-        
-        .seagull {
-            position: absolute;
-            top: 100px;
-            left: -50px;
-            width: 30px;
-            height: 20px;
-            animation: seagull-flight 15s linear infinite;
-        }
-        
-        .seagull:nth-child(2) {
-            top: 150px;
-            left: -100px;
-            animation-delay: 5s;
-        }
-        
-        .seagull:nth-child(3) {
-            top: 80px;
-            left: -150px;
-            animation-delay: 8s;
-        }
-        
-        /* Welcome Section */
-        .welcome-section {
-            position: relative;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
-        }
-        
-        .welcome-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
-        }
-        
-        @media (min-width: 768px) {
-            .welcome-container {
-                flex-direction: row;
-                align-items: flex-start;
-            }
-        }
-        
-        .welcome-image {
-            position: relative;
-            width: 300px;
-            height: 300px;
-            border-radius: 10px;
-            overflow: hidden;
-            background-color: #f0f8ff;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .welcome-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .welcome-frame {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 10px solid transparent;
-            border-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='none' stroke='%23e9c46a' stroke-width='8'/%3E%3Ccircle cx='10' cy='10' r='5' fill='%23e9c46a'/%3E%3Ccircle cx='90' cy='10' r='5' fill='%23e9c46a'/%3E%3Ccircle cx='10' cy='90' r='5' fill='%23e9c46a'/%3E%3Ccircle cx='90' cy='90' r='5' fill='%23e9c46a'/%3E%3C/svg%3E") 30;
-            z-index: 2;
-        }
-        
-        .chairman-title {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(10, 59, 92, 0.8);
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-weight: 600;
-            z-index: 1;
-        }
-        
-        .welcome-text {
-            flex: 1;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fade-in 1s forwards 0.5s;
-        }
-        
-        .welcome-text h2 {
-            font-size: 2rem;
-            color: var(--deep-blue);
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .welcome-text h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 80px;
-            height: 3px;
-            background: var(--gold);
-        }
-        
-        /* Game Goal Section */
-        .goal-section {
-            position: relative;
-            padding: 100px 20px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400' viewBox='0 0 800 800'%3E%3Cg fill='none' stroke='%23e9c46a' stroke-width='1'%3E%3Cpath d='M769 229L1037 260.9M927 880L731 737 520 660 309 538 40 599 295 764 126.5 879.5 40 599-197 493 102 382-31 229 126.5 79.5-69-63'/%3E%3Cpath d='M-31 229L237 261 390 382 603 493 308.5 537.5 101.5 381.5M370 905L295 764'/%3E%3Cpath d='M520 660L578 842 731 737 840 599 603 493 520 660 295 764 309 538 390 382 539 269 769 229 577.5 41.5 370 105 295 -36 126.5 79.5 237 261 102 382 40 599 -69 737 127 880'/%3E%3Cpath d='M520-140L578.5 42.5 731-63M603 493L539 269 237 261 370 105M902 382L539 269M390 382L102 382'/%3E%3Cpath d='M-222 42L126.5 79.5 370 105 539 269 577.5 41.5 927 80 769 229 902 382 603 493 731 737M295-36L577.5 41.5M578 842L295 764M40-201L127 80M102 382L-261 269'/%3E%3C/g%3E%3Cg fill='%232a9d8f' opacity='0.1'%3E%3Ccircle cx='769' cy='229' r='5'/%3E%3Ccircle cx='539' cy='269' r='5'/%3E%3Ccircle cx='603' cy='493' r='5'/%3E%3Ccircle cx='731' cy='737' r='5'/%3E%3Ccircle cx='520' cy='660' r='5'/%3E%3Ccircle cx='309' cy='538' r='5'/%3E%3Ccircle cx='295' cy='764' r='5'/%3E%3Ccircle cx='40' cy='599' r='5'/%3E%3Ccircle cx='102' cy='382' r='5'/%3E%3Ccircle cx='127' cy='80' r='5'/%3E%3Ccircle cx='370' cy='105' r='5'/%3E%3Ccircle cx='578' cy='42' r='5'/%3E%3Ccircle cx='237' cy='261' r='5'/%3E%3Ccircle cx='390' cy='382' r='5'/%3E%3C/g%3E%3C/svg%3E") center/cover;
-        }
-        
-        .goal-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .section-title {
-            font-size: 2.5rem;
-            color: var(--deep-blue);
-            margin-bottom: 50px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: var(--gold);
-            border-radius: 2px;
-        }
-        
-        .goal-items {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .goal-item {
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(5px);
-            border-radius: 15px;
-            padding: 30px 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-        
-        .goal-item.animate {
-            animation: slide-up 0.6s forwards;
-        }
-        
-        .goal-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-        
-        .goal-icon {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            display: inline-block;
-            color: var(--sea-wave);
-            animation: rotate 10s linear infinite;
-        }
-        
-        .goal-item h3 {
-            font-size: 1.3rem;
-            color: var(--deep-blue);
-            margin-bottom: 15px;
-        }
-        
-        .goal-item p {
-            color: #555;
-            line-height: 1.6;
-        }
-        
-        .goal-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, var(--sea-wave), var(--gold));
-        }
-        
-        /* Game Board Section */
-        .board-section {
-            position: relative;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
-        }
-        
-        .board-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .board-wrapper {
-            position: relative;
-            margin-top: 40px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-            border: 15px solid #8b5a2b;
-            background: linear-gradient(45deg, #7d4e24, #8b5a2b, #7d4e24);
-            padding: 10px;
-        }
-        
-        .board-image {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            transition: transform 0.5s;
-            cursor: pointer;
-        }
-        
-        .board-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        
-        .board-wrapper:hover .board-overlay {
-            opacity: 1;
-        }
-        
-        .board-wrapper:hover .board-image {
-            transform: scale(1.05);
-        }
-        
-        /* Cards Gallery Section */
-        .cards-section {
-            position: relative;
-            padding: 100px 20px;
-            background: linear-gradient(135deg, #e6f2ff 0%, #d9edff 100%);
-        }
-        
-        .cards-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .card-item {
-            position: relative;
-            height: 350px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
-        
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        
-        .card-item:hover .card-inner {
-            transform: translateY(-20px) rotateY(10deg);
-        }
-        
-        .card-front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-wave) 100%);
-            border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 5px solid white;
-        }
-        
-        .card-icon {
-            font-size: 3rem;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-        
-        .card-title {
-            font-size: 1.5rem;
-            color: white;
-            text-align: center;
-            font-weight: 600;
-        }
-        
-        /* FAQ Section */
-        .faq-section {
-            position: relative;
-            padding: 100px 20px;
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
-        }
-        
-        .faq-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .faq-item {
-            margin-bottom: 20px;
-        }
-        
-        .faq-question {
-            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-wave) 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-weight: 600;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .faq-question::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cpath fill='none' stroke='rgba(255,255,255,0.1)' stroke-width='2' d='M50,10 A40,40 0 1,1 50,90 A40,40 0 1,1 50,10 Z'/%3E%3Cpath fill='none' stroke='rgba(255,255,255,0.1)' stroke-width='2' d='M50,20 A30,30 0 1,1 50,80 A30,30 0 1,1 50,20 Z'/%3E%3Cpath fill='none' stroke='rgba(255,255,255,0.1)' stroke-width='2' d='M50,30 A20,20 0 1,1 50,70 A20,20 0 1,1 50,30 Z'/%3E%3C/svg%3E") center/contain no-repeat;
-            opacity: 0.3;
-        }
-        
-        .faq-question:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .faq-icon {
-            font-size: 1.5rem;
-            min-width: 30px;
-        }
-        
-        .faq-arrow {
-            margin-left: auto;
-            transition: transform 0.3s;
-        }
-        
-        .faq-question.active .faq-arrow {
-            transform: rotate(180deg);
-        }
-        
-        .faq-answer {
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f9f4e8'/%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='none' stroke='%23e9c46a' stroke-width='2' stroke-dasharray='5,5'/%3E%3C/svg%3E") center/cover;
-            border-radius: 0 0 10px 10px;
-            padding: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.5s;
-            opacity: 0;
-            margin-top: -10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .faq-answer.active {
-            padding: 20px;
-            max-height: 500px;
-            opacity: 1;
-            margin-top: 0;
-        }
-        
-        .faq-answer-content {
-            color: #333;
-            line-height: 1.6;
-        }
-        
-        /* Victory Formula Section */
-        .formula-section {
-            position: relative;
-            padding: 100px 20px;
-            background: linear-gradient(135deg, #e6f2ff 0%, #d9edff 100%);
-        }
-        
-        .formula-container {
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .formula-box {
-            position: relative;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f9f4e8'/%3E%3Cpath d='M0,0 L100,0 L100,100 L0,100 Z' fill='none' stroke='%23e9c46a' stroke-width='2'/%3E%3C/svg%3E") center/cover;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-            margin-top: 50px;
-            overflow: hidden;
-        }
-        
-        .formula-stamp {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 100px;
-            height: 100px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23ff0000' stroke-width='5'/%3E%3Ctext x='50' y='45' font-family='Arial' font-size='12' text-anchor='middle' fill='%23ff0000'%3ETOP%3C/text%3E%3Ctext x='50' y='60' font-family='Arial' font-size='12' text-anchor='middle' fill='%23ff0000'%3ESECRET%3C/text%3E%3C/svg%3E") center/contain no-repeat;
-            transform: rotate(15deg);
-            opacity: 0.8;
-        }
-        
-        .formula-content {
-            font-size: 1.5rem;
-            color: var(--deep-blue);
-            line-height: 1.8;
-            margin-top: 20px;
-        }
-        
-        .formula-highlight {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(233, 196, 106, 0.2);
-            padding: 5px 15px;
-            border-radius: 30px;
-            margin: 0 5px;
-            animation: pulse 2s infinite;
-        }
-        
-        /* Download Button Section */
-        .download-section {
-            position: relative;
-            padding: 80px 20px;
-            background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
-            text-align: center;
-        }
-        
-        .download-button {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 40px;
-            background: var(--sea-wave);
-            color: white;
-            font-size: 1.2rem;
-            font-weight: 600;
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            overflow: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(42, 157, 143, 0.4);
-            margin-top: 30px;
-        }
-        
-        .download-button::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 3px solid var(--sea-wave);
-            border-radius: 60px;
-            animation: pulse 2s infinite;
-            opacity: 0;
-        }
-        
-        .download-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(42, 157, 143, 0.6);
-            background: var(--deep-blue);
-        }
-        
-        .download-button:hover::before {
-            opacity: 1;
-        }
-        
-        .download-icon {
-            margin-right: 10px;
-            font-size: 1.5rem;
-        }
-        
-        /* Footer Section */
-        .footer {
-            position: relative;
-            padding: 80px 20px 40px;
-            background: var(--deep-blue);
-            color: white;
-            overflow: hidden;
-        }
-        
-        .footer-waves {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 50px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f0f8ff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E") center/cover;
-        }
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 40px;
-        }
-        
-        .footer-logo {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .footer-logo img {
-            width: 150px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-        
-        .footer-logo p {
-            color: rgba(255, 255, 255, 0.7);
-            line-height: 1.6;
-        }
-        
-        .footer-contact {
-            flex: 1;
-            min-width: 250px;
-        }
-        
-        .footer-contact h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .footer-contact h3::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--gold);
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .contact-icon {
-            margin-right: 15px;
-            font-size: 1.2rem;
-            color: var(--gold);
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-        }
-        
-        .social-link:hover {
-            background: var(--gold);
-            transform: translateY(-5px);
-        }
-        
-        .lighthouse {
-            position: absolute;
-            bottom: 0;
-            right: 50px;
-            width: 80px;
-            height: 200px;
-        }
-        
-        .lighthouse-light {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
-            background: var(--gold);
-            border-radius: 50%;
-            box-shadow: 0 0 30px var(--gold), 0 0 60px var(--gold);
-            animation: lighthouse-blink 3s infinite;
-        }
-        
-        .copyright {
-            width: 100%;
-            text-align: center;
-            padding-top: 40px;
-            margin-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.9rem;
-        }
-        
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--sea-wave);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 100;
-        }
-        
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .back-to-top:hover {
-            background: var(--deep-blue);
-            transform: translateY(-5px);
-        }
-        
-        /* Modal */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s;
-        }
-        
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .modal-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            overflow: auto;
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-            transform: scale(0.8);
-            transition: transform 0.3s;
-        }
-        
-        .modal.active .modal-content {
-            transform: scale(1);
-        }
-        
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 40px;
-            height: 40px;
-            background: var(--deep-blue);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .modal-close:hover {
-            background: var(--sea-wave);
-            transform: rotate(90deg);
-        }
-        
-        .modal-image {
-            width: 100%;
-            height: auto;
-        }
-        
-        /* Animations */
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-        
-        @keyframes shine {
-            0%, 100% {
-                text-shadow: 2px 2px 0 var(--gold), 4px 4px 0 rgba(0,0,0,0.2);
-            }
-            50% {
-                text-shadow: 2px 2px 0 var(--gold), 4px 4px 0 rgba(0,0,0,0.2), 0 0 20px rgba(255,255,255,0.5);
-            }
-        }
-        
-        @keyframes wave-animation {
-            0% {
-                background-position-x: 0;
-            }
-            100% {
-                background-position-x: 1000px;
-            }
-        }
-        
-        @keyframes ship-movement {
-            0% {
-                transform: translateX(0) rotate(0deg);
-                bottom: 120px;
-            }
-            25% {
-                bottom: 130px;
-            }
-            50% {
-                transform: translateX(calc(100vw + 150px)) rotate(0deg);
-                bottom: 120px;
-            }
-            51% {
-                transform: translateX(calc(100vw + 150px)) rotate(180deg);
-                bottom: 120px;
-            }
-            75% {
-                bottom: 130px;
-            }
-            100% {
-                transform: translateX(0) rotate(180deg);
-                bottom: 120px;
-            }
-        }
-        
-        @keyframes seagull-flight {
-            0% {
-                transform: translateX(0);
-            }
-            100% {
-                transform: translateX(calc(100vw + 50px));
-            }
-        }
-        
-        @keyframes fade-in {
-            0% {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes slide-up {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes rotate {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-            50% {
-                transform: scale(1.05);
-                opacity: 0.8;
-            }
-        }
-        
-        @keyframes lighthouse-blink {
-            0%, 100% {
-                opacity: 1;
-                box-shadow: 0 0 30px var(--gold), 0 0 60px var(--gold);
-            }
-            50% {
-                opacity: 0.3;
-                box-shadow: 0 0 5px var(--gold), 0 0 10px var(--gold);
-            }
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 768px) {
-            .title {
-                font-size: 2.5rem;
-            }
-            
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .goal-items, .cards-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-container {
-                flex-direction: column;
-            }
-            
-            .lighthouse {
-                right: 20px;
-                width: 60px;
-                height: 150px;
-            }
-        }
-    </style>
-</head>
-<body>
-    <!-- Header Section -->
-    <section class="header" id="home">
-        <div class="header-content">
-            <div class="logo-container">
-                <svg class="logo" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="100" cy="100" r="90" fill="#0a3b5c" />
-                    <circle cx="100" cy="100" r="70" fill="none" stroke="#e9c46a" stroke-width="5" />
-                    <circle cx="100" cy="100" r="50" fill="#2a9d8f" opacity="0.7" />
-                    <path d="M100,30 L100,170 M30,100 L170,100 M58,58 L142,142 M58,142 L142,58" stroke="#e9c46a" stroke-width="3" />
-                    <circle cx="100" cy="100" r="15" fill="#e9c46a" />
-                    <text x="100" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle" fill="#0a3b5c">UP</text>
-                </svg>
-            </div>
-            <h1 class="title">UNION POLY</h1>
-            <p class="subtitle">Навчальна профспілкова настільна гра</p>
-        </div>
-        
-        <div class="wave"></div>
-        <div class="wave"></div>
-        <div class="wave"></div>
-        
-        <svg class="ship" viewBox="0 0 120 60" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10,40 L110,40 L100,60 L20,60 Z" fill="#6d8299" />
-            <rect x="40" y="10" width="40" height="30" fill="#e9c46a" />
-            <rect x="50" y="20" width="20" height="10" fill="#0a3b5c" />
-            <path d="M90,10 L90,40 L110,40 Z" fill="#e9c46a" />
-        </svg>
-        
-        <svg class="seagull" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5,10 Q15,0 25,10 Q15,15 5,10 Z" fill="white" />
-        </svg>
-        <svg class="seagull" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5,10 Q15,0 25,10 Q15,15 5,10 Z" fill="white" />
-        </svg>
-        <svg class="seagull" viewBox="0 0 30 20" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5,10 Q15,0 25,10 Q15,15 5,10 Z" fill="white" />
-        </svg>
-    </section>
-    
-    <!-- Welcome Section -->
-    <section class="welcome-section" id="welcome">
-        <div class="welcome-container">
-            <div class="welcome-image">
-                <!-- Using direct image URL for the chairman's photo -->
-                <img src="https://mtwtu.org.ua/media/uploads/images/news/2022/12/28/1672217400.jpg" alt="Голова ПРМТУ" />
-                <div class="chairman-title">Голова ПРМТУ</div>
-                <div class="welcome-frame"></div>
-            </div>
-            <div class="welcome-text">
-                <h2>Привітання Голови ПРМТУ</h2>
-                <p>Шановні друзі та колеги! Радий представити вам унікальну настільну гру "Union Poly", яка допоможе кожному зрозуміти принципи роботи профспілки та важливість колективної співпраці.</p>
-                <p>Ця гра — результат нашої спільної роботи, спрямованої на інноваційні методи навчання та розвитку профспілкового руху. Сподіваюся, що "Union Poly" стане не лише захоплюючою розвагою, але й корисним інструментом для розуміння механізмів захисту прав працівників.</p>
-                <p>Бажаю вам захоплюючої гри та нових відкриттів у світі профспілкової діяльності!</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Game Goal Section -->
-    <section class="goal-section" id="goal">
-        <div class="goal-container">
-            <h2 class="section-title">Мета гри</h2>
-            <div class="goal-items">
-                <div class="goal-item">
-                    <div class="goal-icon">🧭</div>
-                    <h3>Навчання через гру</h3>
-                    <p>Зрозуміти основні принципи роботи профспілки в інтерактивному та захоплюючому форматі настільної гри.</p>
-                </div>
-                <div class="goal-item">
-                    <div class="goal-icon">🚢</div>
-                    <h3>Стратегічне мислення</h3>
-                    <p>Розвинути навички прийняття рішень, планування ресурсів та вирішення кризових ситуацій у профспілковій діяльності.</p>
-                </div>
-                <div class="goal-item">
-                    <div class="goal-icon">⚓</div>
-                    <h3>Командна робота</h3>
-                    <p>Сприяти розумінню важливості співпраці, переговорів та колективних дій для досягнення спільних цілей.</p>
-                </div>
-                <div class="goal-item">
-                    <div class="goal-icon">🏆</div>
-                    <h3>Перемога</h3>
-                    <p>Набрати найбільшу кількість балів через ефективне управління ресурсами, вирішення проблем та розвиток профспілкової організації.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Game Board Section -->
-    <section class="board-section" id="board">
-        <div class="board-container">
-            <h2 class="section-title">Ігрове поле</h2>
-            <div class="board-wrapper">
-                <svg class="board-image" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="800" height="600" fill="#a8dadc" />
-                    <path d="M50,50 L750,50 L750,550 L50,550 Z" fill="#f0f8ff" stroke="#0a3b5c" stroke-width="5" />
-                    
-                    <!-- Game Board Grid -->
-                    <g stroke="#0a3b5c" stroke-width="2">
-                        <line x1="200" y1="50" x2="200" y2="550" />
-                        <line x1="350" y1="50" x2="350" y2="550" />
-                        <line x1="500" y1="50" x2="500" y2="550" />
-                        <line x1="650" y1="50" x2="650" y2="550" />
-                        
-                        <line x1="50" y1="150" x2="750" y2="150" />
-                        <line x1="50" y1="250" x2="750" y2="250" />
-                        <line x1="50" y1="350" x2="750" y2="350" />
-                        <line x1="50" y1="450" x2="750" y2="450" />
-                    </g>
-                    
-                    <!-- Game Elements -->
-                    <circle cx="125" cy="100" r="30" fill="#e9c46a" />
-                    <text x="125" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle">СТАРТ</text>
-                    
-                    <rect x="225" y="75" width="100" height="50" rx="10" fill="#2a9d8f" />
-                    <text x="275" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle" fill="white">ПОРТ</text>
-                    
-                    <rect x="375" y="75" width="100" height="50" rx="10" fill="#0a3b5c" />
-                    <text x="425" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle" fill="white">КРИЗА</text>
-                    
-                    <rect x="525" y="75" width="100" height="50" rx="10" fill="#e9c46a" />
-                    <text x="575" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle">БОНУС</text>
-                    
-                    <rect x="675" y="75" width="50" height="50" rx="10" fill="#6d8299" />
-                    <text x="700" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle" fill="white">?</text>
-                    
-                    <!-- Center Logo -->
-                    <circle cx="400" cy="300" r="100" fill="#0a3b5c" />
-                    <circle cx="400" cy="300" r="80" fill="none" stroke="#e9c46a" stroke-width="5" />
-                    <circle cx="400" cy="300" r="60" fill="#2a9d8f" opacity="0.7" />
-                    <text x="400" y="310" font-family="Montserrat" font-weight="bold" font-size="24" text-anchor="middle" fill="white">UNION POLY</text>
-                    
-                    <!-- Ships -->
-                    <path d="M100,500 L150,500 L140,530 L110,530 Z" fill="#e9c46a" />
-                    <rect x="115" y="480" width="20" height="20" fill="#0a3b5c" />
-                    
-                    <path d="M300,400 L350,400 L340,430 L310,430 Z" fill="#2a9d8f" />
-                    <rect x="315" y="380" width="20" height="20" fill="#0a3b5c" />
-                    
-                    <path d="M600,200 L650,200 L640,230 L610,230 Z" fill="#6d8299" />
-                    <rect x="615" y="180" width="20" height="20" fill="#0a3b5c" />
-                </svg>
-                <div class="board-overlay">
-                    <span>👁️‍🗨️</span> Натисни для збільшення
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Cards Gallery Section -->
-    <section class="cards-section" id="cards">
-        <div class="cards-container">
-            <h2 class="section-title">Галерея карток</h2>
-            <div class="cards-grid">
-                <div class="card-item">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-icon">🌟</div>
-                            <h3 class="card-title">Картка позитивна</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-icon">⚠️</div>
-                            <h3 class="card-title">Картка кризи</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-icon">🧩</div>
-                            <h3 class="card-title">Картка Центральна Рада</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-icon">💰</div>
-                            <h3 class="card-title">Картка фінансова</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-icon">🛟</div>
-                            <h3 class="card-title">Картка допомоги</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-item">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-icon">📜</div>
-                            <h3 class="card-title">Картка завдань</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- FAQ Section -->
-    <section class="faq-section" id="faq">
-        <div class="faq-container">
-            <h2 class="section-title">Правила гри</h2>
-            <div class="faq-items">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-icon">🎲</div>
-                        <div>Як почати гру?</div>
-                        <div class="faq-arrow">▼</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Гра починається з розміщення фішок гравців на полі "СТАРТ". Кожен гравець отримує початковий капітал у розмірі 1000 UnionCoin та 3 картки завдань. Перший хід визначається киданням кубика - хто викине найбільше число, той і починає.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-icon">🛟</div>
-                        <div>Як відбувається хід гравця?</div>
-                        <div class="faq-arrow">▼</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Під час свого ходу гравець кидає кубик і переміщує свою фішку на відповідну кількість клітинок. Залежно від клітинки, на яку потрапив гравець, він виконує відповідну дію: бере картку, отримує бонус, вирішує кризову ситуацію або взаємодіє з іншими гравцями.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-icon">📦</div>
-                        <div>Як працюють картки?</div>
-                        <div class="faq-arrow">▼</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            У грі є різні типи карток: позитивні, кризові, фінансові, допомоги, завдань та Центральної Ради. Кожна картка містить інструкції, які гравець повинен виконати. Позитивні картки дають бонуси, кризові - створюють проблеми, які потрібно вирішити, фінансові - впливають на бюджет гравця, картки допомоги дозволяють взаємодіяти з іншими гравцями, а картки Центральної Ради можуть кардинально змінити хід гри.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-icon">🧭</div>
-                        <div>Як перемогти в грі?</div>
-                        <div class="faq-arrow">▼</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Гра закінчується після завершення визначеної кількості раундів (зазвичай 10). Переможцем стає гравець з найвищим загальним рейтингом, який розраховується за формулою: UnionCoin + Вартість підприємств + (Соціальний рейтинг × 100). Також можна грати до досягнення певної кількості балів одним із гравців.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Victory Formula Section -->
-    <section class="formula-section" id="formula">
-        <div class="formula-container">
-            <h2 class="section-title">Формула перемоги</h2>
-            <div class="formula-box">
-                <div class="formula-stamp"></div>
-                <div class="formula-content">
-                    <span class="formula-highlight">💰 UnionCoin</span> + <span class="formula-highlight">🏢 Вартість підприємств</span> + <span class="formula-highlight">❤️ Соціальний рейтинг × 100</span>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Download Button Section -->
-    <section class="download-section" id="download">
-        <h2 class="section-title">Завантажити правила</h2>
-        <button class="download-button">
-            <span class="download-icon">📄</span> Завантажити PDF
-        </button>
-    </section>
-    
-    <!-- Footer Section -->
-    <footer class="footer" id="contact">
-        <div class="footer-waves"></div>
-        <div class="footer-container">
-            <div class="footer-logo">
-                <svg width="150" height="100" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="150" height="100" fill="#0a3b5c" rx="10" />
-                    <text x="75" y="40" font-family="Montserrat" font-weight="bold" font-size="20" text-anchor="middle" fill="white">ПРМТУ</text>
-                    <text x="75" y="70" font-family="Montserrat" font-size="12" text-anchor="middle" fill="white">Профспілка робітників</text>
-                    <text x="75" y="85" font-family="Montserrat" font-size="12" text-anchor="middle" fill="white">морського транспорту</text>
-                </svg>
-                <p>Профспілка робітників морського транспорту України - захист прав та інтересів працівників морської галузі.</p>
-            </div>
-            <div class="footer-contact">
-                <h3>Контакти</h3>
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div>м. Одеса, вул. Морська, 123</div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div>+38 (048) 123-45-67</div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div>info@unionpoly.com</div>
-                </div>
-                <div class="social-links">
-                    <a href="#" class="social-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.38 15.84 14.22 15.51 15.99C15.37 16.74 15.09 16.99 14.83 17.02C14.25 17.07 13.81 16.64 13.25 16.27C12.37 15.69 11.87 15.33 11.02 14.77C10.03 14.12 10.67 13.76 11.24 13.18C11.39 13.03 13.95 10.7 14 10.49C14.0069 10.4582 14.0069 10.4252 14 10.3934C13.9931 10.3615 13.9796 10.3324 13.96 10.31C13.89 10.26 13.78 10.28 13.69 10.29C13.57 10.31 12.2 11.24 9.57 13.08C9.07 13.41 8.63 13.57 8.23 13.56C7.79 13.55 6.95 13.33 6.32 13.14C5.55 12.9 4.94 12.78 5 12.35C5.03 12.13 5.33 11.91 5.9 11.69C8.75 10.39 10.72 9.54 11.83 9.12C15.02 7.91 15.72 7.67 16.19 7.67C16.28 7.67 16.51 7.7 16.65 7.81C16.76 7.91 16.79 8.04 16.8 8.13C16.79 8.22 16.81 8.55 16.64 8.8H16.64Z" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2.163C15.204 2.163 15.584 2.175 16.85 2.233C20.102 2.381 21.621 3.924 21.769 7.152C21.827 8.417 21.838 8.797 21.838 12.001C21.838 15.206 21.826 15.585 21.769 16.85C21.62 20.075 20.105 21.621 16.85 21.769C15.584 21.827 15.206 21.839 12 21.839C8.796 21.839 8.416 21.827 7.151 21.769C3.891 21.62 2.38 20.07 2.232 16.849C2.174 15.584 2.162 15.205 2.162 12C2.162 8.796 2.175 8.417 2.232 7.151C2.381 3.924 3.896 2.38 7.151 2.232C8.417 2.175 8.796 2.163 12 2.163ZM12 0C8.741 0 8.333 0.014 7.053 0.072C2.695 0.272 0.273 2.69 0.073 7.052C0.014 8.333 0 8.741 0 12C0 15.259 0.014 15.668 0.072 16.948C0.272 21.306 2.69 23.728 7.052 23.928C8.333 23.986 8.741 24 12 24C15.259 24 15.668 23.986 16.948 23.928C21.302 23.728 23.73 21.31 23.927 16.948C23.986 15.668 24 15.259 24 12C24 8.741 23.986 8.333 23.928 7.053C23.732 2.699 21.311 0.273 16.949 0.073C15.668 0.014 15.259 0 12 0V0ZM12 5.838C8.597 5.838 5.838 8.597 5.838 12C5.838 15.403 8.597 18.163 12 18.163C15.403 18.163 18.162 15.404 18.162 12C18.162 8.597 15.403 5.838 12 5.838ZM12 16C9.791 16 8 14.21 8 12C8 9.791 9.791 8 12 8C14.209 8 16 9.791 16 12C16 14.21 14.209 16 12 16ZM18.406 4.155C17.61 4.155 16.965 4.8 16.965 5.595C16.965 6.39 17.61 7.035 18.406 7.035C19.201 7.035 19.845 6.39 19.845 5.595C19.845 4.8 19.201 4.155 18.406 4.155Z" fill="currentColor"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="lighthouse">
-            <svg viewBox="0 0 80 200" xmlns="http://www.w3.org/2000/svg">
-                <rect x="30" y="150" width="20" height="50" fill="#e9c46a" />
-                <path d="M20,150 L60,150 L50,50 L30,50 Z" fill="white" stroke="#0a3b5c" stroke-width="2" />
-                <rect x="25" y="130" width="30" height="10" fill="#0a3b5c" />
-                <rect x="25" y="100" width="30" height="10" fill="#0a3b5c" />
-                <rect x="25" y="70" width="30" height="10" fill="#0a3b5c" />
-                <path d="M30,50 L50,50 L45,30 L35,30 Z" fill="#e9c46a" />
-                <circle cx="40" cy="30" r="10" fill="#0a3b5c" />
-            </svg>
-            <div class="lighthouse-light"></div>
-        </div>
-        <div class="copyright">
-            © 2023 Union Poly. Всі права захищені.
-        </div>
-    </footer>
-    
-    <!-- Back to Top Button -->
-    <div class="back-to-top">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7 14L12 9L17 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </div>
-    
-    <!-- Modal -->
-    <div class="modal" id="boardModal">
-        <div class="modal-content">
-            <div class="modal-close">×</div>
-            <svg class="modal-image" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-                <rect width="800" height="600" fill="#a8dadc" />
-                <path d="M50,50 L750,50 L750,550 L50,550 Z" fill="#f0f8ff" stroke="#0a3b5c" stroke-width="5" />
-                
-                <!-- Game Board Grid -->
-                <g stroke="#0a3b5c" stroke-width="2">
-                    <line x1="200" y1="50" x2="200" y2="550" />
-                    <line x1="350" y1="50" x2="350" y2="550" />
-                    <line x1="500" y1="50" x2="500" y2="550" />
-                    <line x1="650" y1="50" x2="650" y2="550" />
-                    
-                    <line x1="50" y1="150" x2="750" y2="150" />
-                    <line x1="50" y1="250" x2="750" y2="250" />
-                    <line x1="50" y1="350" x2="750" y2="350" />
-                    <line x1="50" y1="450" x2="750" y2="450" />
-                </g>
-                
-                <!-- Game Elements -->
-                <circle cx="125" cy="100" r="30" fill="#e9c46a" />
-                <text x="125" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle">СТАРТ</text>
-                
-                <rect x="225" y="75" width="100" height="50" rx="10" fill="#2a9d8f" />
-                <text x="275" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle" fill="white">ПОРТ</text>
-                
-                <rect x="375" y="75" width="100" height="50" rx="10" fill="#0a3b5c" />
-                <text x="425" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle" fill="white">КРИЗА</text>
-                
-                <rect x="525" y="75" width="100" height="50" rx="10" fill="#e9c46a" />
-                <text x="575" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle">БОНУС</text>
-                
-                <rect x="675" y="75" width="50" height="50" rx="10" fill="#6d8299" />
-                <text x="700" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle" fill="white">?</text>
-                
-                <!-- Center Logo -->
-                <circle cx="400" cy="300" r="100" fill="#0a3b5c" />
-                <circle cx="400" cy="300" r="80" fill="none" stroke="#e9c46a" stroke-width="5" />
-                <circle cx="400" cy="300" r="60" fill="#2a9d8f" opacity="0.7" />
-                <text x="400" y="310" font-family="Montserrat" font-weight="bold" font-size="24" text-anchor="middle" fill="white">UNION POLY</text>
-                
-                <!-- Ships -->
-                <path d="M100,500 L150,500 L140,530 L110,530 Z" fill="#e9c46a" />
-                <rect x="115" y="480" width="20" height="20" fill="#0a3b5c" />
-                
-                <path d="M300,400 L350,400 L340,430 L310,430 Z" fill="#2a9d8f" />
-                <rect x="315" y="380" width="20" height="20" fill="#0a3b5c" />
-                
-                <path d="M600,200 L650,200 L640,230 L610,230 Z" fill="#6d8299" />
-                <rect x="615" y="180" width="20" height="20" fill="#0a3b5c" />
-                
-                <!-- Additional Game Elements -->
-                <circle cx="125" cy="200" r="20" fill="#0a3b5c" />
-                <text x="125" y="205" font-family="Montserrat" font-weight="bold" font-size="10" text-anchor="middle" fill="white">ФОНД</text>
-                
-                <circle cx="675" cy="500" r="20" fill="#e9c46a" />
-                <text x="675" y="505" font-family="Montserrat" font-weight="bold" font-size="10" text-anchor="middle">ПРИЗ</text>
-                
-                <rect x="75" y="275" width="50" height="50" rx="10" fill="#2a9d8f" />
-                <text x="100" y="305" font-family="Montserrat" font-weight="bold" font-size="10" text-anchor="middle" fill="white">НАВЧАННЯ</text>
-                
-                <rect x="675" y="275" width="50" height="50" rx="10" fill="#2a9d8f" />
-                <text x="700" y="305" font-family="Montserrat" font-weight="bold" font-size="10" text-anchor="middle" fill="white">АКЦІЯ</text>
-                
-                <path d="M225,500 L275,500 L265,530 L235,530 Z" fill="#0a3b5c" />
-                <text x="250" y="520" font-family="Montserrat" font-weight="bold" font-size="10" text-anchor="middle" fill="white">СУДНО</text>
-                
-                <path d="M525,500 L575,500 L565,530 L535,530 Z" fill="#0a3b5c" />
-                <text x="550" y="520" font-family="Montserrat" font-weight="bold" font-size="10" text-anchor="middle" fill="white">СУДНО</text>
-                
-                <rect x="375" y="475" width="50" height="50" rx="10" fill="#6d8299" />
-                <text x="400" y="505" font-family="Montserrat" font-weight="bold" font-size="10" text-anchor="middle" fill="white">ШАНС</text>
-            </svg>
-        </div>
-    </div>
-    
-    <!-- JavaScript -->
-    <script>
-        // Animate goal items on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const goalItems = document.querySelectorAll('.goal-item');
-            
-            function checkScroll() {
-                goalItems.forEach(item => {
-                    const itemTop = item.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (itemTop < windowHeight - 100) {
-                        item.classList.add('animate');
-                    }
-                });
-            }
-            
-            // Initial check
-            checkScroll();
-            
-            // Check on scroll
-            window.addEventListener('scroll', checkScroll);
-            
-            // FAQ accordion
-            const faqQuestions = document.querySelectorAll('.faq-question');
-            
-            faqQuestions.forEach(question => {
-                question.addEventListener('click', () => {
-                    const answer = question.nextElementSi```
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/index.html b/index.html
+index aaeba7fa05ccbaa2bfb06581bec443587792b9f2..6dd8f26c8562fde2c2bc6fd6fc55b8398bea4f55 100644
+--- a/index.html
++++ b/index.html
+@@ -379,97 +379,113 @@ I'll fix that issue with the chairman's photo. Let me update the code to ensure
+         
+         .board-wrapper:hover .board-image {
+             transform: scale(1.05);
+         }
+         
+         /* Cards Gallery Section */
+         .cards-section {
+             position: relative;
+             padding: 100px 20px;
+             background: linear-gradient(135deg, #e6f2ff 0%, #d9edff 100%);
+         }
+         
+         .cards-container {
+             max-width: 1200px;
+             margin: 0 auto;
+             text-align: center;
+         }
+         
+         .cards-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+             gap: 30px;
+             margin-top: 50px;
+         }
+         
+-        .card-item {
+-            position: relative;
+-            height: 350px;
+-            perspective: 1000px;
+-            cursor: pointer;
+-        }
+-        
+-        .card-inner {
+-            position: relative;
+-            width: 100%;
+-            height: 100%;
+-            transition: transform 0.6s;
+-            transform-style: preserve-3d;
+-        }
+-        
+-        .card-item:hover .card-inner {
+-            transform: translateY(-20px) rotateY(10deg);
+-        }
+-        
+-        .card-front {
+-            position: absolute;
+-            width: 100%;
+-            height: 100%;
+-            backface-visibility: hidden;
+-            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-wave) 100%);
+-            border-radius: 15px;
+-            padding: 20px;
+-            display: flex;
+-            flex-direction: column;
+-            justify-content: center;
+-            align-items: center;
+-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+-            border: 5px solid white;
+-        }
+-        
+-        .card-icon {
++        .card-item {
++            position: relative;
++            height: 350px;
++            perspective: 1200px;
++            cursor: pointer;
++        }
++
++        .card-inner {
++            position: relative;
++            width: 100%;
++            height: 100%;
++            transition: transform 0.8s cubic-bezier(.4, 2, .6, 1);
++            transform-style: preserve-3d;
++        }
++
++        .card-item:hover .card-inner,
++        .card-item:focus-within .card-inner {
++            transform: rotateY(180deg);
++        }
++        
++        .card-front,
++        .card-back {
++            position: absolute;
++            width: 100%;
++            height: 100%;
++            border-radius: 15px;
++            padding: 20px;
++            backface-visibility: hidden;
++            display: flex;
++            flex-direction: column;
++            justify-content: center;
++            align-items: center;
++            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
++            border: 5px solid white;
++            background: linear-gradient(135deg, #0a3b5c 0%, #2a9d8f 100%);
++            color: #fff;
++            font-size: 1.1rem;
++        }
++
++        .card-back {
++            background: linear-gradient(135deg, #e9c46a 0%, #2a9d8f 100%);
++            color: #222;
++            transform: rotateY(180deg);
++            font-size: 1.15rem;
++        }
++
++        .card-icon {
+             font-size: 3rem;
+             color: var(--gold);
+             margin-bottom: 20px;
+         }
+         
+-        .card-title {
+-            font-size: 1.5rem;
+-            color: white;
+-            text-align: center;
+-            font-weight: 600;
+-        }
++        .card-title {
++            font-size: 1.5rem;
++            color: white;
++            text-align: center;
++            font-weight: 600;
++        }
++
++        .card-desc {
++            padding: 10px;
++            text-align: center;
++        }
+         
+         /* FAQ Section */
+         .faq-section {
+             position: relative;
+             padding: 100px 20px;
+             background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
+         }
+         
+         .faq-container {
+             max-width: 900px;
+             margin: 0 auto;
+         }
+         
+         .faq-item {
+             margin-bottom: 20px;
+         }
+         
+         .faq-question {
+             background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-wave) 100%);
+             color: white;
+             padding: 20px;
+             border-radius: 10px;
+             cursor: pointer;
+             display: flex;
+             align-items: center;
+diff --git a/index.html b/index.html
+index aaeba7fa05ccbaa2bfb06581bec443587792b9f2..6dd8f26c8562fde2c2bc6fd6fc55b8398bea4f55 100644
+--- a/index.html
++++ b/index.html
+@@ -1143,106 +1159,136 @@ I'll fix that issue with the chairman's photo. Let me update the code to ensure
+                     <text x="700" y="105" font-family="Montserrat" font-weight="bold" font-size="12" text-anchor="middle" fill="white">?</text>
+                     
+                     <!-- Center Logo -->
+                     <circle cx="400" cy="300" r="100" fill="#0a3b5c" />
+                     <circle cx="400" cy="300" r="80" fill="none" stroke="#e9c46a" stroke-width="5" />
+                     <circle cx="400" cy="300" r="60" fill="#2a9d8f" opacity="0.7" />
+                     <text x="400" y="310" font-family="Montserrat" font-weight="bold" font-size="24" text-anchor="middle" fill="white">UNION POLY</text>
+                     
+                     <!-- Ships -->
+                     <path d="M100,500 L150,500 L140,530 L110,530 Z" fill="#e9c46a" />
+                     <rect x="115" y="480" width="20" height="20" fill="#0a3b5c" />
+                     
+                     <path d="M300,400 L350,400 L340,430 L310,430 Z" fill="#2a9d8f" />
+                     <rect x="315" y="380" width="20" height="20" fill="#0a3b5c" />
+                     
+                     <path d="M600,200 L650,200 L640,230 L610,230 Z" fill="#6d8299" />
+                     <rect x="615" y="180" width="20" height="20" fill="#0a3b5c" />
+                 </svg>
+                 <div class="board-overlay">
+                     <span>👁️‍🗨️</span> Натисни для збільшення
+                 </div>
+             </div>
+         </div>
+     </section>
+     
+-    <!-- Cards Gallery Section -->
+-    <section class="cards-section" id="cards">
+-        <div class="cards-container">
+-            <h2 class="section-title">Галерея карток</h2>
+-            <div class="cards-grid">
+-                <div class="card-item">
+-                    <div class="card-inner">
+-                        <div class="card-front">
+-                            <div class="card-icon">🌟</div>
+-                            <h3 class="card-title">Картка позитивна</h3>
+-                        </div>
+-                    </div>
+-                </div>
+-                <div class="card-item">
+-                    <div class="card-inner">
+-                        <div class="card-front">
+-                            <div class="card-icon">⚠️</div>
+-                            <h3 class="card-title">Картка кризи</h3>
+-                        </div>
+-                    </div>
+-                </div>
+-                <div class="card-item">
+-                    <div class="card-inner">
+-                        <div class="card-front">
+-                            <div class="card-icon">🧩</div>
+-                            <h3 class="card-title">Картка Центральна Рада</h3>
+-                        </div>
+-                    </div>
+-                </div>
+-                <div class="card-item">
+-                    <div class="card-inner">
+-                        <div class="card-front">
+-                            <div class="card-icon">💰</div>
+-                            <h3 class="card-title">Картка фінансова</h3>
+-                        </div>
+-                    </div>
+-                </div>
+-                <div class="card-item">
+-                    <div class="card-inner">
+-                        <div class="card-front">
+-                            <div class="card-icon">🛟</div>
+-                            <h3 class="card-title">Картка допомоги</h3>
+-                        </div>
+-                    </div>
+-                </div>
+-                <div class="card-item">
+-                    <div class="card-inner">
+-                        <div class="card-front">
+-                            <div class="card-icon">📜</div>
+-                            <h3 class="card-title">Картка завдань</h3>
+-                        </div>
+-                    </div>
+-                </div>
+-            </div>
+-        </div>
+-    </section>
++    <!-- Cards Gallery Section -->
++    <section class="cards-section" id="cards">
++        <div class="cards-container">
++            <h2 class="section-title">Галерея карток</h2>
++            <div class="cards-grid">
++                <div class="card-item">
++                    <div class="card-inner">
++                        <div class="card-front">
++                            <div class="card-icon">🌟</div>
++                            <h3 class="card-title">Картка позитивна</h3>
++                        </div>
++                        <div class="card-back">
++                            <div class="card-desc">
++                                <strong>Позитивна картка:</strong> Отримай бонус! Додай UnionCoin чи підвищ рейтинг профспілки.
++                            </div>
++                        </div>
++                    </div>
++                </div>
++                <div class="card-item">
++                    <div class="card-inner">
++                        <div class="card-front">
++                            <div class="card-icon">⚠️</div>
++                            <h3 class="card-title">Картка кризи</h3>
++                        </div>
++                        <div class="card-back">
++                            <div class="card-desc">
++                                <strong>Кризова картка:</strong> Сталася проблема. Втрачай UnionCoin чи соціальний рейтинг.
++                            </div>
++                        </div>
++                    </div>
++                </div>
++                <div class="card-item">
++                    <div class="card-inner">
++                        <div class="card-front">
++                            <div class="card-icon">🧩</div>
++                            <h3 class="card-title">Картка Центральна Рада</h3>
++                        </div>
++                        <div class="card-back">
++                            <div class="card-desc">
++                                <strong>Центральна Рада:</strong> Отримай рішення, яке впливає на всю гру. Може бути як плюс, так і мінус!
++                            </div>
++                        </div>
++                    </div>
++                </div>
++                <div class="card-item">
++                    <div class="card-inner">
++                        <div class="card-front">
++                            <div class="card-icon">💰</div>
++                            <h3 class="card-title">Картка фінансова</h3>
++                        </div>
++                        <div class="card-back">
++                            <div class="card-desc">
++                                <strong>Фінансова картка:</strong> Отримай чи втрачай гроші, інвестуй або плати штрафи.
++                            </div>
++                        </div>
++                    </div>
++                </div>
++                <div class="card-item">
++                    <div class="card-inner">
++                        <div class="card-front">
++                            <div class="card-icon">🛟</div>
++                            <h3 class="card-title">Картка допомоги</h3>
++                        </div>
++                        <div class="card-back">
++                            <div class="card-desc">
++                                <strong>Картка допомоги:</strong> Використай цю картку, щоб врятувати себе чи іншого гравця.
++                            </div>
++                        </div>
++                    </div>
++                </div>
++                <div class="card-item">
++                    <div class="card-inner">
++                        <div class="card-front">
++                            <div class="card-icon">📜</div>
++                            <h3 class="card-title">Картка завдань</h3>
++                        </div>
++                        <div class="card-back">
++                            <div class="card-desc">
++                                <strong>Картка завдань:</strong> Виконай завдання для додаткових бонусів чи уникнення штрафу!
++                            </div>
++                        </div>
++                    </div>
++                </div>
++            </div>
++        </div>
++    </section>
+     
+     <!-- FAQ Section -->
+     <section class="faq-section" id="faq">
+         <div class="faq-container">
+             <h2 class="section-title">Правила гри</h2>
+             <div class="faq-items">
+                 <div class="faq-item">
+                     <div class="faq-question">
+                         <div class="faq-icon">🎲</div>
+                         <div>Як почати гру?</div>
+                         <div class="faq-arrow">▼</div>
+                     </div>
+                     <div class="faq-answer">
+                         <div class="faq-answer-content">
+                             Гра починається з розміщення фішок гравців на полі "СТАРТ". Кожен гравець отримує початковий капітал у розмірі 1000 UnionCoin та 3 картки завдань. Перший хід визначається киданням кубика - хто викине найбільше число, той і починає.
+                         </div>
+                     </div>
+                 </div>
+                 <div class="faq-item">
+                     <div class="faq-question">
+                         <div class="faq-icon">🛟</div>
+                         <div>Як відбувається хід гравця?</div>
+                         <div class="faq-arrow">▼</div>
+                     </div>
+                     <div class="faq-answer">
+ 
+EOF
+)
