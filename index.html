@@ -1238,74 +1238,363 @@
 </section>
 
     <!-- FAQ Section -->
-    <section class="faq-section" id="faq">
-        <div class="faq-container">
-            <h2 class="section-title">Правила гри</h2>
-            <div class="faq-items">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-icon">🎲</div>
-                        <div>Як почати гру?</div>
-                        <div class="faq-arrow">▼</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Гра починається з розміщення фішок гравців на полі "СТАРТ". Кожен гравець отримує початковий капітал у розмірі 1000 UnionCoin та 3 картки завдань. Перший хід визначається киданням кубика - хто викине найбільше число, той і починає.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-icon">🛟</div>
-                        <div>Як відбувається хід гравця?</div>
-                        <div class="faq-arrow">▼</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Під час свого ходу гравець кидає кубик і переміщує свою фішку на відповідну кількість клітинок. Залежно від клітинки, на яку потрапив гравець, він виконує відповідну дію: бере картку, отримує бонус, вирішує кризову ситуацію або взаємодіє з іншими гравцями.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-icon">📦</div>
-                        <div>Як працюють картки?</div>
-                        <div class="faq-arrow">▼</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            У грі є різні типи карток: позитивні, кризові, фінансові, допомоги, завдань та Центральної Ради. Кожна картка містить інструкції, які гравець повинен виконати. Позитивні картки дають бонуси, кризові - створюють проблеми, які потрібно вирішити, фінансові - впливають на бюджет гравця, картки допомоги дозволяють взаємодіяти з іншими гравцями, а картки Центральної Ради можуть кардинально змінити хід гри.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <div class="faq-icon">🧭</div>
-                        <div>Як перемогти в грі?</div>
-                        <div class="faq-arrow">▼</div>
-                    </div>
-                    <div class="faq-answer">
-                        <div class="faq-answer-content">
-                            Гра закінчується після завершення визначеної кількості раундів (зазвичай 10). Переможцем стає гравець з найвищим загальним рейтингом, який розраховується за формулою: UnionCoin + Вартість підприємств + (Соціальний рейтинг × 100). Також можна грати до досягнення певної кількості балів одним із гравців.
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- Правила гри -->
+<section class="faq-section" id="faq">
+  <div class="faq-container">
+    <h2 class="section-title">Правила гри</h2>
+    <div class="faq-items">
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Хто починає гру першим?</div>
+          <div class="faq-arrow">▼</div>
         </div>
-    </section>
-    
-    <!-- Victory Formula Section -->
-    <section class="formula-section" id="formula">
-        <div class="formula-container">
-            <h2 class="section-title">Формула перемоги</h2>
-            <div class="formula-box">
-                <div class="formula-stamp"></div>
-                <div class="formula-content">
-                    <span class="formula-highlight">💰 UnionCoin</span> + <span class="formula-highlight">🏢 Вартість підприємств</span> + <span class="formula-highlight">❤️ Соціальний рейтинг × 100</span>
-                </div>
-            </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Усі гравці кидають кубики — хто виб’є найбільше, той починає гру.
+          </div>
         </div>
-    </section>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>З чого починається гра?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Усі гравці стартують із клітинки “Старт”, мають по 2000 UnionCoin та 10 балів соціального рейтингу.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що отримує гравець, коли проходить повне коло?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 +200 UnionCoin за повернення на клітинку “Старт”.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Як здійснюється хід гравця?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Гравець кидає два кубики і пересуває фішку за годинниковою стрілкою на відповідну кількість клітин.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що робити, якщо гравець потрапляє на клітинку з підприємством (ППО)?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Якщо вільна: гравець може купити ППО, сплативши його вартість.<br>
+            🔸 Якщо зайнята: сплачує власнику профспілковий внесок.<br>
+            🔸 Якщо підприємство — твоє: отримуєш дохід.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що робити, якщо гравець не має грошей на купівлю ППО?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Він або пропускає хід та втрачає 2 бали соціального рейтингу, або проводить аукціон між іншими гравцями.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Як працює аукціон?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Підприємство продається на відкритому аукціоні. Стартова ціна не нижча за вартість (наприклад, 2400 UCoin): 2400 — у банк, все, що вище — попередньому власнику.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Чи можна продати своє підприємство іншому гравцю?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Так, за домовленістю. Дозволяється також спільне володіння (50/50).
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що відбувається на клітинках “Події”?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Гравець тягне випадкову картку (позитивну, негативну або нейтральну).<br>
+            Наприклад: “Отримано грант” ➤ +500 UnionCoin;<br>
+            “Податкова перевірка” ➤ -10 UnionCoin та пропуск ходу.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що дають картки “Ресурсів”?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Гарантовані бонуси: UnionCoin, соціальний рейтинг або обидва.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що станеться на клітинці “Криза”?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Гравець тягне кризову картку — завжди негативну подію (наприклад, “Конфлікт з роботодавцем” ➤ -3 соціального рейтингу).
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Навіщо потрібні картки “Центральна Рада” та “Голова ПРМТУ”?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Це бонусні карти з потужними ефектами. Наприклад, “ЦР надала юридичну допомогу” ➤ +5 соц. рейтингу та +200 UnionCoin.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що таке “Обмінник”?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Можна обміняти 1 соціальний рейтинг на 100 UnionCoin. Купити рейтинг неможливо.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що буде, якщо рейтинг &lt; 0?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Штраф 100 UnionCoin за кожен “відсутній” бал. Наприклад, при -20 рейтингу з наявними 10 ➤ штраф 1000 UnionCoin.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Як завершити гру?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Гра закінчується, коли всі підприємства викуплені. Розпочинається фінальний підрахунок.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Хто перемагає у грі?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Переможець — з найбільшими активами: UnionCoin + вартість ППО + (соціальний рейтинг × 100).
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Чи можуть гравці з від’ємним рейтингом виграти?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Ні. Рейтинг < 1 автоматично виключає з фінального підрахунку.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що відбувається при першому банкрутстві?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Гравець може звернутися до БФ «Мортранс» та отримати 1000 UnionCoin як одноразову допомогу.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Як працює “З’їзд профспілки”?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Кожні 5 раундів гравці сплачують по 50 UnionCoin у спільний фонд. На З’їзді всі кошти переходять найбіднішому гравцю (за сумою UnionCoin + ППО + рейтинг).
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Скільки платять кожен раунд?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 В кінці кожного раунду всі гравці сплачують 50 UnionCoin до фонду З’їзду.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Чи можна обмінювати ресурси між гравцями?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Ні, прямий обмін між гравцями заборонений.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що означає “Відпочинок”?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Гравець нічого не платить і відновлює ресурси: +20 UnionCoin та +1 соціальний рейтинг.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Чи можна купити соціальний рейтинг?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Ні, рейтинг можна здобути тільки в грі.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Як відрізняються картки криз від негативних?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Кризи — це потужні негативні події (наприклад: “Кібератака” ➤ -300 UnionCoin; “Незаконне звільнення” ➤ -6 рейтинг).
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Що таке “соціальний рейтинг”?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Рейтинг — репутація гравця, використовується для підрахунку переможця та дає ігрові переваги.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div>Які типи карток можуть тягнути?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-content">
+            🔸 Позитивні: бонуси (UnionCoin, рейтинг)<br>
+            🔸 Негативні: штрафи або втрати<br>
+            🔸 Нейтральні: вибір з двох наслідків<br>
+            🔸 Ресурси: гарантовані бонуси<br>
+            🔸 Кризи: серйозні випробування<br>
+            🔸 Центральна Рада & Голова ПРМТУ: потужні бонуси
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
     
     <!-- Download Button Section -->
     <section class="download-section" id="download">
