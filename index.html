@@ -380,74 +380,93 @@
             transform: scale(1.05);
         }
         
-        /* Cards Gallery Section */
-        .cards-section {
-            position: relative;
-            padding: 100px 20px;
-            background: linear-gradient(135deg, #e6f2ff 0%, #d9edff 100%);
-        }
-        
-        .cards-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .card-item {
-            position: relative;
-            height: 350px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
-        
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-        
-        .card-item:hover .card-inner {
-            transform: translateY(-20px) rotateY(10deg);
-        }
-        
-        .card-front {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-wave) 100%);
-            border-radius: 15px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            border: 5px solid white;
-        }
-        
-        .card-icon {
-            font-size: 3rem;
-            color: var(--gold);
-            margin-bottom: 20px;
-        }
-        
-        .card-title {
-            font-size: 1.5rem;
-            color: white;
-            text-align: center;
-            font-weight: 600;
-        }
-        
+<!-- Cards Gallery Section -->
+<section class="cards-section" id="cards">
+  <div class="cards-container">
+    <h2 class="section-title">Галерея карток</h2>
+    <div class="cards-grid">
+
+      <!-- Позитивна картка -->
+      <div class="card-item">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-icon">🌟</div>
+            <h3 class="card-title">Позитивна картка</h3>
+          </div>
+          <div class="card-back">
+            <p>🎉 Отримано грант на профспілковий розвиток:<br>+500 UnionCoin</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Картка кризи -->
+      <div class="card-item">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-icon">⚠️</div>
+            <h3 class="card-title">Картка кризи</h3>
+          </div>
+          <div class="card-back">
+            <p>🚨 У порту страйк:<br>–150 UnionCoin, –1 соціальний рейтинг</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Центральна Рада -->
+      <div class="card-item">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-icon">🧩</div>
+            <h3 class="card-title">Центральна Рада</h3>
+          </div>
+          <div class="card-back">
+            <p>🤝 Центральна Рада підтримує ваш проєкт:<br>+1 бонусна дія</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Фінансова картка -->
+      <div class="card-item">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-icon">💰</div>
+            <h3 class="card-title">Фінансова картка</h3>
+          </div>
+          <div class="card-back">
+            <p>💵 Зібрано внески:<br>+300 UnionCoin</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Картка допомоги -->
+      <div class="card-item">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-icon">🛟</div>
+            <h3 class="card-title">Картка допомоги</h3>
+          </div>
+          <div class="card-back">
+            <p>🤗 Ви допомогли колезі:<br>+1 соціальний рейтинг</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Картка завдань -->
+      <div class="card-item">
+        <div class="card-inner">
+          <div class="card-front">
+            <div class="card-icon">📜</div>
+            <h3 class="card-title">Картка завдань</h3>
+          </div>
+          <div class="card-back">
+            <p>📝 Виконайте завдання:<br>– якщо удача на вашому боці – +200 UC, інакше –100 UC</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
         /* FAQ Section */
         .faq-section {
             position: relative;
@@ -1015,6 +1034,61 @@
             }
         }
     </style>
+    .cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.card-item {
+  perspective: 1000px;
+  height: 350px;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s;
+}
+
+.card-item:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Фронтальна сторона */
+.card-front,
+.card-back {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  font-weight: 500;
+}
+
+/* Оформлення фронту */
+.card-front {
+  background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-wave) 100%);
+  color: #fff;
+}
+
+/* Оформлення звороту */
+.card-back {
+  background: #fff;
+  color: var(--deep-blue);
+  transform: rotateY(180deg);
+}
+
 </head>
 <body>
     <!-- Header Section -->
