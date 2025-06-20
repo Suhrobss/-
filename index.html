@@ -7,224 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* —— Message-in-a-Bottle Section —— */
-.message-bottle-section {
-  position: relative;
-  width: 100%;
-  height: 80vh;
-  overflow: hidden;
-  background: linear-gradient(to bottom, #2a9d8f 0%, #0a3b5c 70%);
-}
-.port-silhouette {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 25%;
-  background: url('data:image/svg+xml;utf8,\
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200">\
-  <rect x="0" y="120" width="200" height="80" fill="%230a3b5c"/>\
-  <rect x="220" y="80" width="30" height="120" fill="%232a9d8f"/>\
-  <rect x="260" y="60" width="20" height="140" fill="%232a9d8f"/>\
-  <rect x="300" y="100" width="200" height="60" fill="%230a3b5c"/>\
-  <path d="M600,120 L800,120 L780,80 L620,80 Z" fill="%232a9d8f"/>\
-  <path d="M850,110 L950,110 L950,90 L850,90 Z" fill="%230a3b5c"/>\
-</svg>') bottom center/cover no-repeat;
-  opacity: 0.4;
-}
 
-.bottle-container {
-  position: absolute;
-  bottom: 15%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  cursor: pointer;
-}
-.bottle-container svg {
-  width: 100%;
-  display: block;
-  animation: bob 4s ease-in-out infinite;
-  transform-origin: bottom center;
-}
-@keyframes bob {
-  0%,100% { transform: translateY(0) rotate(0deg); }
-  50%     { transform: translateY(-15px) rotate(3deg); }
-}
-
-.bottle-message {
-  position: absolute;
-  top: -200px;
-  left: 50%;
-  transform: translateX(-50%) scale(0.5);
-  width: 260px;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  opacity: 0;
-  transition: all 0.6s ease;
-  pointer-events: none;
-}
-.bottle-container.open .bottle-message {
-  top: -260px;
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
-  pointer-events: auto;
-}
-.bottle-message .message-content {
-  padding: 20px;
-  text-align: center;
-}
-.bottle-message h3 {
-  margin-bottom: 16px;
-  font-size: 1.1rem;
-  color: #0a3b5c;
-}
-.bottle-message .btn-join {
-  padding: 10px 20px;
-  background: #e9c46a;
-  border: none;
-  border-radius: 24px;
-  color: #0a3b5c;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background .3s;
-}
-.bottle-message .btn-join:hover {
-  background: #d4b14d;
-}
-
-        :root {
-            --deep-blue: #0a3b5c;
-            --sea-wave: #2a9d8f;
-            --gold: #e9c46a;
-            --white: #ffffff;
-            --mint: #a8dadc;
-            --cloud-gray: #6d8299;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
-        }
-        
-        body {
-            background-color: #f0f8ff;
-            overflow-x: hidden;
-        }
-        
-        /* er Section */
-        .er {
-            position: relative;
-            height: 100vh;
-            width: 100%;
-            overflow: hidden;
-            background: linear-gradient(180deg, rgba(10,59,92,0.8) 0%, rgba(42,157,143,0.6) 100%);
-        }
-        
-        .er-content {
-            position: relative;
-            z-index: 10;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-        }
-        
-        .logo-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin-bottom: 20px;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        .logo {
-            width: 100%;
-            height: 100%;
-        }
-        
-        .title {
-            font-size: 4rem;
-            font-weight: 800;
-            color: white;
-            text-shadow: 2px 2px 0 var(--gold), 4px 4px 0 rgba(0,0,0,0.2);
-            margin-bottom: 10px;
-            animation: shine 3s infinite;
-            letter-spacing: 2px;
-        }
-        
-        .subtitle {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.9);
-            background: linear-gradient(90deg, var(--mint), var(--white));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 30px;
-        }
-        
-        /* Animated Elements */
-        .wave {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23a8dadc' fill-opacity='0.8' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-            background-size: cover;
-            background-repeat: no-repeat;
-            animation: wave-animation 10s linear infinite;
-        }
-        
-        .wave:nth-child(2) {
-            bottom: 10px;
-            opacity: 0.5;
-            animation: wave-animation 7s linear infinite;
-        }
-        
-        .wave:nth-child(3) {
-            bottom: 20px;
-            opacity: 0.2;
-            animation: wave-animation 5s linear infinite;
-        }
-        
-        .ship {
-            position: absolute;
-            bottom: 120px;
-            left: -150px;
-            width: 120px;
-            height: 60px;
-            animation: ship-movement 30s linear infinite;
-        }
-        
-        .seagull {
-            position: absolute;
-            top: 100px;
-            left: -50px;
-            width: 30px;
-            height: 20px;
-            animation: seagull-flight 15s linear infinite;
-        }
-        
-        .seagull:nth-child(2) {
-            top: 150px;
-            left: -100px;
-            animation-delay: 5s;
-        }
-        
-        .seagull:nth-child(3) {
-            top: 80px;
-            left: -150px;
-            animation-delay: 8s;
-        }
-        
         /* Welcome Section */
         .welcome-section {
             position: relative;
@@ -1164,147 +947,162 @@
 </head>
 <body>
     <!-- Header Section -->
-   <!-- ============================
-     Message-in-a-Bottle Section
-============================ -->
-<section id="message-bottle" class="message-bottle-section">
-  <!-- силует порту + судно -->
+   <!-- Port Crane Section -->
+<section id="port-crane" class="port-crane">
+  <!-- силует порту -->
   <div class="port-silhouette"></div>
-  <!-- контейнер пляшки -->
-  <div class="bottle-container">
-    <img src="https://your.cdn/beer-bottle.png" alt="Пляшка з посланням" class="bottle" />
-
-    <!-- лист-послання (скритий спочатку) -->
-    <div class="bottle-message">
-      <div class="message-content">
-        <h3>Об’єднуємо серця. Захищаємо права.</h3>
-        <button class="btn-join">Дізнатись більше</button>
+  <!-- кран із контейнером -->
+  <div class="crane">
+    <!-- SVG крану -->
+    <svg class="crane-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- опора -->
+      <rect x="10" y="40" width="10" height="160" fill="var(--deep-blue)"/>
+      <!-- стріла -->
+      <path d="M15,40 L160,10" stroke="var(--sea-wave)" stroke-width="8" stroke-linecap="round"/>
+      <!-- трос -->
+      <line id="hook-line" x1="160" y1="10" x2="160" y2="60" stroke="var(--cloud-gray)" stroke-width="2"/>
+      <!-- гак -->
+      <circle id="hook" cx="160" cy="70" r="6" fill="var(--cloud-gray)"/>
+    </svg>
+    <!-- контейнер -->
+    <div id="cargo-container" class="cargo-container">
+      <div class="cargo-header">Об’єднуємо серця</div>
+      <div class="cargo-body">
+        <p>Захищаємо ваші права через гру <strong>Unionpoly</strong>.</p>
+        <a href="#welcome" class="cargo-btn">Дізнатись більше</a>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  /* ---- базові стилі секції ---- */
-  .message-bottle-section {
+  :root {
+    --deep-blue: #0a3b5c;
+    --sea-wave: #2a9d8f;
+    --gold: #e9c46a;
+    --cloud-gray: #6d8299;
+    --white: #ffffff;
+  }
+
+  .port-crane {
     position: relative;
     width: 100%;
-    height: 80vh;
+    height: 60vh;
+    background: linear-gradient(to bottom, var(--sea-wave) 0%, var(--deep-blue) 85%);
     overflow: hidden;
-    background: linear-gradient(to bottom, #2a9d8f 0%, #0a3b5c 70%);
   }
-  /* ---- портовий силует ---- */
-  .port-silhouette {
+  .port-crane .port-silhouette {
     position: absolute;
     bottom: 0;
     width: 100%;
     height: 25%;
-    background: url('data:image/svg+xml;utf8,\
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 200">\
-        <rect x="0" y="120" width="200" height="80" fill="%230a3b5c"/>\
-        <rect x="220" y="80" width="30" height="120" fill="%232a9d8f"/>\
-        <rect x="260" y="60" width="20" height="140" fill="%232a9d8f"/>\
-        <rect x="300" y="100" width="200" height="60" fill="%230a3b5c"/>\
-        <path d="M600,120 L800,120 L780,80 L620,80 Z" fill="%232a9d8f"/>\
-        <path d="M850,110 L950,110 L950,90 L850,90 Z" fill="%230a3b5c"/>\
-      </svg>') bottom center / cover no-repeat;
-    opacity: 0.4;
+    background: url("data:image/svg+xml;utf8,\
+      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 200'>\
+        <rect x='0' y='120' width='200' height='80' fill='%230a3b5c'/>\
+        <rect x='220' y='80' width='30' height='120' fill='%232a9d8f'/>\
+        <rect x='260' y='60' width='20' height='140' fill='%232a9d8f'/>\
+        <rect x='300' y='100' width='200' height='60' fill='%230a3b5c'/>\
+        <path d='M600,120 L800,120 L780,80 L620,80 Z' fill='%232a9d8f'/>\
+        <path d='M850,110 L950,110 L950,90 L850,90 Z' fill='%230a3b5c'/>\
+      </svg>") bottom center / cover no-repeat;
+    opacity: 0.3;
   }
 
-  /* ---- пляшка ---- */
-  .bottle-container {
+  .port-crane .crane {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .port-crane .crane-svg {
     position: absolute;
-    bottom: 15%;
+    top: 0; left: 50%;
+    width: 200px;
+    transform: translateX(-50%);
+    animation: crane-sway 4s ease-in-out infinite;
+    z-index: 2;
+  }
+  @keyframes crane-sway {
+    0%,100% { transform: translateX(-50%) rotate(0deg); }
+    50%     { transform: translateX(-50%) rotate(2deg); }
+  }
+
+  .cargo-container {
+    position: absolute;
+    top: 60px; /* під гаком */
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
-    height: auto;
+    width: 240px;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    overflow: hidden;
     cursor: pointer;
+    transition: top 0.6s ease, height 0.6s ease;
+    height: 60px; /* тільки заголовок */
   }
-  .bottle {
-    width: 100%;
-    display: block;
-    animation: bob 4s ease-in-out infinite;
-    transform-origin: bottom center;
+  .cargo-header {
+    height: 60px;
+    line-height: 60px;
+    background: var(--sea-wave);
+    color: var(--white);
+    font-weight: 600;
+    text-align: center;
+    font-size: 1.1rem;
   }
-  @keyframes bob {
-    0%,100% { transform: translateY(0) rotate(0deg); }
-    50%     { transform: translateY(-15px) rotate(3deg); }
+  .cargo-body {
+    padding: 16px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+  }
+  .cargo-body p {
+    margin-bottom: 12px;
+    color: var(--deep-blue);
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+  .cargo-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--gold);
+    color: var(--deep-blue);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.3s;
+  }
+  .cargo-btn:hover {
+    background: darken(var(--gold),10%);
   }
 
-  /* ---- лист-послання ---- */
-  .bottle-message {
-    position: absolute;
-    top: -200px;
-    left: 50%;
-    transform: translateX(-50%) scale(0.5);
-    width: 260px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    opacity: 0;
-    transition: all 0.6s ease;
-    pointer-events: none;
+  /* відкритий стан */
+  .cargo-container.open {
+    top: 40px;
+    height: 180px;
   }
-  .bottle-container.open .bottle-message {
-    top: -260px;
+  .cargo-container.open .cargo-body {
     opacity: 1;
-    transform: translateX(-50%) scale(1);
-    pointer-events: auto;
+    transform: translateY(0);
   }
-  .message-content {
-    padding: 20px;
-    text-align: center;
+
+  /* трос реагує на відкриття (трохи підтягується) */
+  .cargo-container.open ~ .crane-svg #hook-line {
+    animation: rope-pull 0.6s forwards;
   }
-  .message-content h3 {
-    margin-bottom: 16px;
-    font-size: 1.1rem;
-    color: #0a3b5c;
-  }
-  .message-content .btn-join {
-    padding: 10px 20px;
-    background: #e9c46a;
-    border: none;
-    border-radius: 24px;
-    color: #0a3b5c;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background .3s;
-  }
-  .message-content .btn-join:hover {
-    background: #d4b14d;
+  @keyframes rope-pull {
+    to { y2: 50; }
   }
 </style>
 
 <script>
-  // вмикаємо відкриття пляшки при кліку/дотику
   document.addEventListener('DOMContentLoaded', () => {
-    const bottleWrap = document.querySelector('.bottle-container');
-    bottleWrap.addEventListener('click', () => {
-      bottleWrap.classList.toggle('open');
+    const cargo = document.getElementById('cargo-container');
+    cargo.addEventListener('click', () => {
+      cargo.classList.toggle('open');
     });
   });
 </script>
-    <!-- Message-in-a-Bottle Section -->
-<section id="message-bottle" class="message-bottle-section">
-  <div class="port-silhouette"></div>
-
-  <div class="bottle-container">
-    <!-- Інлайн-SVG пляшки -->
-    <svg viewBox="0 0 64 128" xmlns="http://www.w3.org/2000/svg">
-      <path d="M28 0h8v32h9l5 16v80H6V48l5-16h9V0z"
-            fill="#fff" stroke="#0a3b5c" stroke-width="2"/>
-      <rect x="26" y="32" width="12" height="16" fill="#2a9d8f"/>
-    </svg>
-
-    <!-- повідомлення всередині пляшки -->
-    <div class="bottle-message">
-      <div class="message-content">
-        <h3>Об’єднуємо серця. Захищаємо права.</h3>
-        <button class="btn-join">Дізнатись більше</button>
-      </div>
-    </div>
-  </div>
 </section>
     
 <!-- Welcome Section -->
@@ -2264,74 +2062,8 @@
     </div>
     
     <!-- JavaScript -->
-    <script>
-        // Animate goal items on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const goalItems = document.querySelectorAll('.goal-item');
-            
-            function checkScroll() {
-                goalItems.forEach(item => {
-                    const itemTop = item.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (itemTop < windowHeight - 100) {
-                        item.classList.add('animate');
-                    }
-                });
-            }
-            
-            // Initial check
-            checkScroll();
-            
-            // Check on scroll
-            window.addEventListener('scroll', checkScroll);
-     // FAQ accordion
-    // FAQ accordion
-    const faqQuestions = document.querySelectorAll('.faq-question');
-
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            question.classList.toggle('active');
-            const answer = question.nextElementSibling;
-            answer.classList.toggle('active');
-        });
-    });
-
-    // Board modal
-    const boardWrapper = document.querySelector('.board-wrapper');
-    const boardModal = document.getElementById('boardModal');
-    const modalClose = boardModal.querySelector('.modal-close');
-
-    boardWrapper.addEventListener('click', () => {
-        boardModal.classList.add('active');
-    });
-
-    modalClose.addEventListener('click', () => {
-        boardModal.classList.remove('active');
-    });
-
-    // Back to top button
-    const backToTop = document.querySelector('.back-to-top');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
-        }
-    });
-
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-});
-    </script>
-    <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const bottle = document.querySelector('.bottle-container');
-    bottle.addEventListener('click', () => {
-      bottle.classList.toggle('open');
-    });
-  });
+   
+ 
 </script>
 
 </body>
