@@ -1843,52 +1843,67 @@
   </div>
 </section>
     
-<!-- ===========================
-     Leaderboard Section
-=========================== -->
-<section id="leaderboard" class="leaderboard-section" style="padding:80px 20px; background: #e6f2ff;">
-  <div class="container" style="max-width:1200px; margin:0 auto;">
-    <h2 class="section-title" style="color: var(--deep-blue);">Таблиця лідерів</h2>
-    <div style="overflow-x:auto; margin-top:30px;">
-      <table id="leaderboard-table" style="width:100%; border-collapse: collapse; background:#fff; box-shadow:0 5px 20px rgba(0,0,0,0.1);">
-        <thead>
-          <tr style="background: var(--deep-blue); color:#fff;">
-            <th style="padding:12px; text-align:left;">Місце</th>
-            <th style="padding:12px; text-align:left;">Ім'я Прізвище</th>
-            <th style="padding:12px; text-align:left;">Соц. рейтинг</th>
-            <th style="padding:12px; text-align:left;">UC</th>
-            <th style="padding:12px; text-align:left;">ППО</th>
-            <th style="padding:12px; text-align:left;">Загалом UC</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+<!-- Leaderboard Section -->
+<section id="leaderboard" class="px-4 py-16 bg-white">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl font-bold text-[var(--deep-blue)] text-center mb-6">Таблиця лідерів</h2>
+    <div id="leaderboard-table"></div>
   </div>
 </section>
 
+<!-- Styles for leaderboard -->
+<style>
+  #leaderboard-table table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  #leaderboard-table th {
+    background: var(--deep-blue);
+    color: white;
+    padding: 12px;
+    text-align: left;
+  }
+  #leaderboard-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  #leaderboard-table tr:nth-child(even) td {
+    background: #f9fafb;
+  }
+</style>
+
+<!-- Google Charts loader -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
-// Скачуємо CSV із Google Sheets і заповнюємо таблицю
-;(async function(){
-  const csvUrl = 'https://docs.google.com/spreadsheets/d/180V6ZvXt9H3slJXJVJhV05Eexs_D0dRhPf5DaSGjga0/export?format=csv&gid=0';
-  const res = await fetch(csvUrl);
-  const text = await res.text();
-  // Розбиваємо по рядках і комах
-  const rows = text.trim().split('\n').map(r => r.split(','));
-  const tbody = document.querySelector('#leaderboard-table tbody');
-  // Виводимо заголовки (рядок 0) пропускаємо, беремо 10 гравців
-  rows.slice(1, 11).forEach(row => {
-    const tr = document.createElement('tr');
-    row.forEach(cell => {
-      const td = document.createElement('td');
-      td.textContent = cell;
-      td.style.padding = '12px';
-      td.style.borderBottom = '1px solid #eee';
-      tr.appendChild(td);
+  google.charts.load('current', {'packages':['table']});
+  google.charts.setOnLoadCallback(drawLeaderboard);
+
+  function drawLeaderboard() {
+    // Замість gid=0 поставте свій gid листа, якщо потрібно
+    var query = new google.visualization.Query(
+      'https://docs.google.com/spreadsheets/d/180V6ZvXt9H3slJXJVJhV05Eexs_D0dRhPf5DaSGjga0/gviz/tq?gid=0&headers=1'
+    );
+    query.send(function(response) {
+      if (response.isError()) {
+        document.getElementById('leaderboard-table').innerText =
+          'Не вдалося завантажити таблицю: ' + response.getMessage();
+        return;
+      }
+      var data = response.getDataTable();
+      var table = new google.visualization.Table(
+        document.getElementById('leaderboard-table')
+      );
+      table.draw(data, {
+        showRowNumber: false,
+        width: '100%',
+        height: 'auto',
+        allowHtml: true
+      });
     });
-    tbody.appendChild(tr);
-  });
-})();
+  }
 </script>
 
     <!-- Footer Section -->
