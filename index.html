@@ -1906,6 +1906,89 @@
   }
 </script>
 
+    <!-- UC & Рейтинг Калькулятор -->
+<section id="calculator" style="padding: 80px 20px; background: linear-gradient(135deg, #e6f2ff 0%, #d9edff 100%);">
+  <div style="max-width: 600px; margin: 0 auto; text-align:center;">
+    <h2 style="
+        font-size:2.5rem;
+        color:#0a3b5c;
+        margin-bottom:40px;
+        position:relative;
+        display:inline-block;
+      ">
+      Калькулятор фінального UC
+      <span style="
+          content: '';
+          position: absolute;
+          bottom: -15px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 100px;
+          height: 4px;
+          background: #e9c46a;
+          border-radius: 2px;
+        "></span>
+    </h2>
+
+    <div style="
+        background: rgba(255,255,255,0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      ">
+      <div style="margin-bottom:20px; text-align:left;">
+        <label for="calc-rating" style="font-weight:600;">Соціальний рейтинг:</label>
+        <input id="calc-rating" type="number" min="0" value="0"
+               style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:5px;" />
+        <small style="color:#555;">(×100 UC)</small>
+      </div>
+
+      <div style="margin-bottom:20px; text-align:left;">
+        <label for="calc-uc" style="font-weight:600;">Накопичені UC:</label>
+        <input id="calc-uc" type="number" min="0" value="0"
+               style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:5px;" />
+      </div>
+
+      <div style="margin-bottom:30px; text-align:left;">
+        <label for="calc-enterprise" style="font-weight:600;">Сумарна номінальна вартість ППО (UC):</label>
+        <input id="calc-enterprise" type="number" min="0" value="0"
+               style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:5px;" />
+      </div>
+
+      <button id="calc-btn" style="
+          padding:12px 30px;
+          background: #2a9d8f;
+          color:#fff;
+          font-weight:600;
+          border:none;
+          border-radius:50px;
+          cursor:pointer;
+          box-shadow:0 5px 15px rgba(42,157,143,0.4);
+          transition:all .3s;
+        ">
+        Розрахувати
+      </button>
+
+      <div id="calc-result" style="margin-top:25px; font-size:1.2rem; color:#0a3b5c;"></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.getElementById('calc-btn').addEventListener('click', () => {
+    const rating = Number(document.getElementById('calc-rating').value) || 0;
+    const uc     = Number(document.getElementById('calc-uc').value) || 0;
+    const ent    = Number(document.getElementById('calc-enterprise').value) || 0;
+
+    // формула: rating*100 + UC + сумарна номінальна вартість ППО
+    const finalUC = rating * 100 + uc + ent;
+
+    document.getElementById('calc-result').innerHTML =
+      `Ваш фінальний UC: <strong>${finalUC.toLocaleString()}</strong>`;
+  });
+</script>
+
     <!-- Footer Section -->
     <footer class="footer" id="contact">
         <div class="footer-waves"></div>
