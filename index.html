@@ -1075,7 +1075,7 @@
 }
      
     </style>
-</>
+</head>
 <body>
     <!-- Header Section -->
    <!-- ============================
@@ -1196,11 +1196,10 @@
     background-size: cover;
     background-repeat: no-repeat;
   }
-  .wave1 {
-    bottom: 0;
-    background-image: url("data:image/svg+xml,...");
-    animation: wave1 10s infinite linear;
-  }
+ .wave1 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath fill='%23a8dadc' d='M0 20 … Z'/%3E%3C/svg%3E");
+  /* … */
+}
   .wave2 {
     bottom:10px; opacity:.6;
     animation: wave2 7s infinite linear;
@@ -2065,9 +2064,10 @@
 
     <!-- Footer Section -->
 <footer class="footer" id="contact">
+<!-- ОДИН БЛОК хвиль + маяк -->
+  <div class="footer-waves-and-lighthouse">
   <!-- хвилі -->
   <div class="wave-footer wave1"></div>
-  <div class="wave-footer wave2"></div>
 
   <div class="footer-container">
     <div class="footer-logo">
@@ -2090,26 +2090,27 @@
     </div>
   </div>
 
-  <!-- острів і маяк -->
-  <div class="lighthouse">
-    <svg viewBox="0 0 80 200" xmlns="http://www.w3.org/2000/svg">
-      <!-- острівок -->
-      <ellipse cx="40" cy="190" rx="60" ry="10" fill="#654321"/>
-      <!-- корпус маяка -->
-      <path d="M30,150 L50,150 L55,50 L25,50 Z" fill="white" stroke="#0a3b5c" stroke-width="2"/>
-      <!-- смужки -->
-      <rect x="25" y="120" width="30" height="10" fill="#0a3b5c"/>
-      <rect x="25" y="90"  width="30" height="10" fill="#0a3b5c"/>
-      <rect x="25" y="60"  width="30" height="10" fill="#0a3b5c"/>
-      <!-- верхня платформа -->
-      <rect x="30" y="50" width="20" height="10" fill="#0a3b5c"/>
-      <!-- ліхтар -->
-      <circle cx="40" cy="40" r="10" fill="#e9c46a"/>
-    </svg>
-    <div class="lighthouse-beam"></div>
-    <div class="lighthouse-light"></div>
+    <!-- маяк з островом -->
+    <div class="lighthouse">
+      <svg viewBox="0 0 80 200" xmlns="http://www.w3.org/2000/svg">
+     <!-- острівок -->
+        <ellipse cx="40" cy="190" rx="60" ry="10" fill="#654321"/>
+        <!-- корпус маяка -->
+        <path d="M30,150 L50,150 L55,50 L25,50 Z" fill="white" stroke="#0a3b5c" stroke-width="2"/>
+        <!-- смужки -->
+        <rect x="25" y="120" width="30" height="10" fill="#0a3b5c"/>
+        <rect x="25" y="90"  width="30" height="10" fill="#0a3b5c"/>
+        <rect x="25" y="60"  width="30" height="10" fill="#0a3b5c"/>
+        <!-- верхня платформа -->
+        <rect x="30" y="50" width="20" height="10" fill="#0a3b5c"/>
+        <!-- ліхтар -->
+        <circle cx="40" cy="40" r="10" fill="#e9c46a"/>
+      </svg>
+      <div class="lighthouse-beam"></div>
+      <div class="lighthouse-light"></div>
+    </div>
   </div>
-
+    
   <div class="copyright">
     © 2023 Union Poly. Всі права захищені.
   </div>
