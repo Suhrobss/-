@@ -1053,6 +1053,80 @@
     animation: lighthouse-blink 3s infinite;
   }
 
+    /* —– Footer waves —– */
+.wave-footer {
+  position: absolute;
+  bottom: 120px;
+  left: 0;
+  width: 200%;
+  height: 60px;
+  background-repeat: repeat-x;
+}
+/* верхній шар хвиль */
+.wave1 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath fill='%23a8dadc' d='M0 20 Q150 40 300 20 T600 20 T900 20 T1200 20 V60 H0 Z'/%3E%3C/svg%3E");
+  background-size: 600px 60px;
+  animation: waveMove1 6s linear infinite;
+}
+/* нижній шар хвиль */
+.wave2 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath fill='%232a9d8f' d='M0 15 Q150 30 300 15 T600 15 T900 15 T1200 15 V40 H0 Z'/%3E%3C/svg%3E");
+  background-size: 400px 40px;
+  opacity: 0.5;
+  bottom: 110px;
+  animation: waveMove2 8s linear infinite;
+}
+@keyframes waveMove1 {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes waveMove2 {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* —– Lighthouse animations —– */
+.lighthouse {
+  position: absolute;
+  bottom: 0;
+  right: 50px;
+  width: 80px;
+  height: 200px;
+  pointer-events: none;
+}
+.lighthouse-beam {
+  position: absolute;
+  bottom: 150px;
+  left: 50%;
+  width: 300px;
+  height: 300px;
+  transform-origin: 50% 100%;
+  background: radial-gradient(ellipse at center, rgba(233,196,106,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  mix-blend-mode: screen;
+  animation: beamRotate 6s linear infinite;
+}
+.lighthouse-light {
+  position: absolute;
+  bottom: 165px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: #e9c46a;
+  border-radius: 50%;
+  box-shadow: 0 0 20px #e9c46a, 0 0 40px #e9c46a;
+  animation: lighthouse-blink 3s infinite;
+}
+@keyframes beamRotate {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(360deg); }
+}
+@keyframes lighthouse-blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.3; }
+}
+
     </style>
 </>
 <body>
@@ -2044,43 +2118,48 @@
 
     <!-- Footer Section -->
 <footer class="footer" id="contact">
-  <div class="footer-waves"></div>
+  <!-- хвилі -->
+  <div class="wave-footer wave1"></div>
+  <div class="wave-footer wave2"></div>
 
   <div class="footer-container">
     <div class="footer-logo">
-      <!-- Сюди ваш SVG та опис -->
       <svg width="150" height="100" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg">
-        <rect width="150" height="100" fill="#0a3b5c" rx="10" />
+        <rect width="150" height="100" fill="#0a3b5c" rx="10"/>
         <text x="75" y="40" font-family="Montserrat" font-weight="bold" font-size="20" text-anchor="middle" fill="white">ПРМТУ</text>
         <text x="75" y="70" font-family="Montserrat" font-size="12" text-anchor="middle" fill="white">Профспілка робітників</text>
         <text x="75" y="85" font-family="Montserrat" font-size="12" text-anchor="middle" fill="white">морського транспорту України</text>
       </svg>
       <p>Профспілка робітників морського транспорту України — захист прав та інтересів працівників.</p>
     </div>
-
     <div class="footer-contact">
       <h3>Контакти</h3>
       <div class="contact-item"><div class="contact-icon">📍</div><div>м. Одеса, Аркадійське Плато 5-б, прим. 1</div></div>
       <div class="contact-item"><div class="contact-icon">📞</div><div>+38 (048) 2 42 99 01</div></div>
       <div class="contact-item"><div class="contact-icon">✉️</div><div>mtwtuyouth@gmail.com</div></div>
       <div class="social-links">
-        <!-- ваші social-link іконки -->
+        <!-- ваші соц-іконки -->
       </div>
     </div>
   </div>
 
+  <!-- острів і маяк -->
   <div class="lighthouse">
-    <div class="lighthouse-beam"></div>
-    <!-- SVG маяка -->
     <svg viewBox="0 0 80 200" xmlns="http://www.w3.org/2000/svg">
-      <rect x="30" y="150" width="20" height="50" fill="#e9c46a" />
-      <path d="M20,150 L60,150 L50,50 L30,50 Z" fill="white" stroke="#0a3b5c" stroke-width="2"/>
-      <rect x="25" y="130" width="30" height="10" fill="#0a3b5c"/>
-      <rect x="25" y="100" width="30" height="10" fill="#0a3b5c"/>
-      <rect x="25" y="70" width="30" height="10" fill="#0a3b5c"/>
-      <path d="M30,50 L50,50 L45,30 L35,30 Z" fill="#e9c46a"/>
-      <circle cx="40" cy="30" r="10" fill="#0a3b5c"/>
+      <!-- острівок -->
+      <ellipse cx="40" cy="190" rx="60" ry="10" fill="#654321"/>
+      <!-- корпус маяка -->
+      <path d="M30,150 L50,150 L55,50 L25,50 Z" fill="white" stroke="#0a3b5c" stroke-width="2"/>
+      <!-- смужки -->
+      <rect x="25" y="120" width="30" height="10" fill="#0a3b5c"/>
+      <rect x="25" y="90"  width="30" height="10" fill="#0a3b5c"/>
+      <rect x="25" y="60"  width="30" height="10" fill="#0a3b5c"/>
+      <!-- верхня платформа -->
+      <rect x="30" y="50" width="20" height="10" fill="#0a3b5c"/>
+      <!-- ліхтар -->
+      <circle cx="40" cy="40" r="10" fill="#e9c46a"/>
     </svg>
+    <div class="lighthouse-beam"></div>
     <div class="lighthouse-light"></div>
   </div>
 
