@@ -7,7 +7,138 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-
+        :root {
+            --deep-blue: #0a3b5c;
+            --sea-wave: #2a9d8f;
+            --gold: #e9c46a;
+            --white: #ffffff;
+            --mint: #a8dadc;
+            --cloud-gray: #6d8299;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: #f0f8ff;
+            overflow-x: hidden;
+        }
+        
+        /* er Section */
+        .er {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            background: linear-gradient(180deg, rgba(10,59,92,0.8) 0%, rgba(42,157,143,0.6) 100%);
+        }
+        
+        .er-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .logo-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin-bottom: 20px;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .logo {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .title {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            text-shadow: 2px 2px 0 var(--gold), 4px 4px 0 rgba(0,0,0,0.2);
+            margin-bottom: 10px;
+            animation: shine 3s infinite;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            background: linear-gradient(90deg, var(--mint), var(--white));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 30px;
+        }
+        
+        /* Animated Elements */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23a8dadc' fill-opacity='0.8' d='M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-repeat: no-repeat;
+            animation: wave-animation 10s linear infinite;
+        }
+        
+        .wave:nth-child(2) {
+            bottom: 10px;
+            opacity: 0.5;
+            animation: wave-animation 7s linear infinite;
+        }
+        
+        .wave:nth-child(3) {
+            bottom: 20px;
+            opacity: 0.2;
+            animation: wave-animation 5s linear infinite;
+        }
+        
+        .ship {
+            position: absolute;
+            bottom: 120px;
+            left: -150px;
+            width: 120px;
+            height: 60px;
+            animation: ship-movement 30s linear infinite;
+        }
+        
+        .seagull {
+            position: absolute;
+            top: 100px;
+            left: -50px;
+            width: 30px;
+            height: 20px;
+            animation: seagull-flight 15s linear infinite;
+        }
+        
+        .seagull:nth-child(2) {
+            top: 150px;
+            left: -100px;
+            animation-delay: 5s;
+        }
+        
+        .seagull:nth-child(3) {
+            top: 80px;
+            left: -150px;
+            animation-delay: 8s;
+        }
+        
         /* Welcome Section */
         .welcome-section {
             position: relative;
@@ -947,163 +1078,180 @@
 </head>
 <body>
     <!-- Header Section -->
-   <!-- Port Crane Section -->
-<section id="port-crane" class="port-crane">
-  <!-- силует порту -->
-  <div class="port-silhouette"></div>
-  <!-- кран із контейнером -->
-  <div class="crane">
-    <!-- SVG крану -->
-    <svg class="crane-svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <!-- опора -->
-      <rect x="10" y="40" width="10" height="160" fill="var(--deep-blue)"/>
-      <!-- стріла -->
-      <path d="M15,40 L160,10" stroke="var(--sea-wave)" stroke-width="8" stroke-linecap="round"/>
-      <!-- трос -->
-      <line id="hook-line" x1="160" y1="10" x2="160" y2="60" stroke="var(--cloud-gray)" stroke-width="2"/>
-      <!-- гак -->
-      <circle id="hook" cx="160" cy="70" r="6" fill="var(--cloud-gray)"/>
-    </svg>
-    <!-- контейнер -->
-    <div id="cargo-container" class="cargo-container">
-      <div class="cargo-header">Об’єднуємо серця</div>
-      <div class="cargo-body">
-        <p>Захищаємо ваші права через гру <strong>Unionpoly</strong>.</p>
-        <a href="#welcome" class="cargo-btn">Дізнатись більше</a>
-      </div>
-    </div>
+   <!-- ============================
+     Improved Header Section
+============================ -->
+<section class="header" id="home">
+  <!-- Canvas для партіклів -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="header-content">
+    <h1 class="title typewriter">Unionpoly</h1>
+    <p class="subtitle">Навчальна профспілкова настільна гра, що об’єднує серця</p>
+    <a href="#welcome" class="cta-button">Дізнатися більше</a>
   </div>
+
+  <!-- SVG хвилі -->
+  <div class="wave wave1"></div>
+  <div class="wave wave2"></div>
+  <div class="wave wave3"></div>
 </section>
 
 <style>
-  :root {
-    --deep-blue: #0a3b5c;
-    --sea-wave: #2a9d8f;
-    --gold: #e9c46a;
-    --cloud-gray: #6d8299;
-    --white: #ffffff;
-  }
-
-  .port-crane {
+  /* ---------- Загальні стилі ---------- */
+  .header {
     position: relative;
-    width: 100%;
-    height: 60vh;
-    background: linear-gradient(to bottom, var(--sea-wave) 0%, var(--deep-blue) 85%);
     overflow: hidden;
-  }
-  .port-crane .port-silhouette {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 25%;
-    background: url("data:image/svg+xml;utf8,\
-      <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 200'>\
-        <rect x='0' y='120' width='200' height='80' fill='%230a3b5c'/>\
-        <rect x='220' y='80' width='30' height='120' fill='%232a9d8f'/>\
-        <rect x='260' y='60' width='20' height='140' fill='%232a9d8f'/>\
-        <rect x='300' y='100' width='200' height='60' fill='%230a3b5c'/>\
-        <path d='M600,120 L800,120 L780,80 L620,80 Z' fill='%232a9d8f'/>\
-        <path d='M850,110 L950,110 L950,90 L850,90 Z' fill='%230a3b5c'/>\
-      </svg>") bottom center / cover no-repeat;
-    opacity: 0.3;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, #0a3b5c, #2a9d8f);
+    animation: bgShift 10s ease infinite;
   }
 
-  .port-crane .crane {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  /* ---------- Градієнтний бг ---------- */
+  @keyframes bgShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
-  .port-crane .crane-svg {
+  .header {
+    background-size: 200% 200%;
+  }
+
+  /* ---------- Canvas партікли ---------- */
+  #particle-canvas {
     position: absolute;
-    top: 0; left: 50%;
-    width: 200px;
-    transform: translateX(-50%);
-    animation: crane-sway 4s ease-in-out infinite;
+    top:0; left:0;
+    width:100%; height:100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ---------- Контент ---------- */
+  .header-content {
+    position: relative;
     z-index: 2;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
   }
-  @keyframes crane-sway {
-    0%,100% { transform: translateX(-50%) rotate(0deg); }
-    50%     { transform: translateX(-50%) rotate(2deg); }
+  .title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 0.5em;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .subtitle {
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: fadeIn 2s forwards 1s;
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
   }
 
-  .cargo-container {
-    position: absolute;
-    top: 60px; /* під гаком */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 240px;
-    background: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  /* ---------- Typewriter ---------- */
+  .typewriter {
     overflow: hidden;
-    cursor: pointer;
-    transition: top 0.6s ease, height 0.6s ease;
-    height: 60px; /* тільки заголовок */
+    border-right: .15em solid #e9c46a;
+    white-space: nowrap;
+    width: 0;
+    animation:
+      typing 3s steps(12, end) 0.5s forwards,
+      blinkCaret .75s step-end infinite;
   }
-  .cargo-header {
-    height: 60px;
-    line-height: 60px;
-    background: var(--sea-wave);
-    color: var(--white);
-    font-weight: 600;
-    text-align: center;
-    font-size: 1.1rem;
+  @keyframes typing {
+    to { width: 13ch; }
   }
-  .cargo-body {
-    padding: 16px;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.4s ease 0.2s, transform 0.4s ease 0.2s;
+  @keyframes blinkCaret {
+    50% { border-color: transparent; }
   }
-  .cargo-body p {
-    margin-bottom: 12px;
-    color: var(--deep-blue);
-    font-size: 0.95rem;
-    line-height: 1.4;
-  }
-  .cargo-btn {
+
+  /* ---------- CTA Button ---------- */
+  .cta-button {
     display: inline-block;
-    padding: 8px 16px;
+    margin-top: 2em;
+    padding: .75em 2em;
     background: var(--gold);
     color: var(--deep-blue);
-    border-radius: 20px;
-    font-size: 0.9rem;
     font-weight: 600;
+    border-radius: 50px;
     text-decoration: none;
-    transition: background 0.3s;
-  }
-  .cargo-btn:hover {
-    background: darken(var(--gold),10%);
-  }
-
-  /* відкритий стан */
-  .cargo-container.open {
-    top: 40px;
-    height: 180px;
-  }
-  .cargo-container.open .cargo-body {
-    opacity: 1;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     transform: translateY(0);
+    transition: all .3s;
+    opacity: 0;
+    animation: fadeIn 2s forwards 1.5s;
+  }
+  .cta-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
   }
 
-  /* трос реагує на відкриття (трохи підтягується) */
-  .cargo-container.open ~ .crane-svg #hook-line {
-    animation: rope-pull 0.6s forwards;
+  /* ---------- Waves (як раніше) ---------- */
+  .wave {
+    position:absolute; left:0; width:100%; height:100px;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
-  @keyframes rope-pull {
-    to { y2: 50; }
+ .wave1 {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath fill='%23a8dadc' d='M0 20 … Z'/%3E%3C/svg%3E");
+  /* … */
+}
+  .wave2 {
+    bottom:10px; opacity:.6;
+    animation: wave2 7s infinite linear;
   }
+  .wave3 {
+    bottom:20px; opacity:.3;
+    animation: wave3 5s infinite linear;
+  }
+  @keyframes wave1 { to { background-position-x: 1000px; } }
+  @keyframes wave2 { to { background-position-x: -1000px; } }
+  @keyframes wave3 { to { background-position-x: 500px; } }
 </style>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const cargo = document.getElementById('cargo-container');
-    cargo.addEventListener('click', () => {
-      cargo.classList.toggle('open');
+  // ---------- Canvas particles ----------
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function initParticles() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+    particles = Array.from({length: 100}, () => ({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: 1+Math.random()*3,
+      dx: (Math.random()-0.5)*0.5,
+      dy: (Math.random()-0.5)*0.5,
+      opacity: Math.random()
+    }));
+  }
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p => {
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
+      ctx.fill();
+      p.x += p.dx;
+      p.y += p.dy;
+      if (p.x<0||p.x>W) p.dx *= -1;
+      if (p.y<0||p.y>H) p.dy *= -1;
     });
-  });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', initParticles);
+  initParticles();
+  draw();
 </script>
-</section>
+    </section>
     
 <!-- Welcome Section -->
 <section class="welcome-section" id="welcome">
@@ -2062,9 +2210,66 @@
     </div>
     
     <!-- JavaScript -->
-   
- 
-</script>
+    <script>
+        // Animate goal items on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const goalItems = document.querySelectorAll('.goal-item');
+            
+            function checkScroll() {
+                goalItems.forEach(item => {
+                    const itemTop = item.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+                    
+                    if (itemTop < windowHeight - 100) {
+                        item.classList.add('animate');
+                    }
+                });
+            }
+            
+            // Initial check
+            checkScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', checkScroll);
+     // FAQ accordion
+    // FAQ accordion
+    const faqQuestions = document.querySelectorAll('.faq-question');
 
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            question.classList.toggle('active');
+            const answer = question.nextElementSibling;
+            answer.classList.toggle('active');
+        });
+    });
+
+    // Board modal
+    const boardWrapper = document.querySelector('.board-wrapper');
+    const boardModal = document.getElementById('boardModal');
+    const modalClose = boardModal.querySelector('.modal-close');
+
+    boardWrapper.addEventListener('click', () => {
+        boardModal.classList.add('active');
+    });
+
+    modalClose.addEventListener('click', () => {
+        boardModal.classList.remove('active');
+    });
+
+    // Back to top button
+    const backToTop = document.querySelector('.back-to-top');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+    </script>
 </body>
 </html>
