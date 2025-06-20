@@ -324,23 +324,61 @@
         }
         
         /* Game Board Section */
-       <!-- Game Board Section -->
-<section class="board-section" id="board">
-  <div class="board-container">
-    <h2 class="section-title">Ігрове поле</h2>
-    <div class="board-wrapper">
-      <img
-        src="unionpolyfin.jpg"
-        alt="Ігрове поле Union Poly"
-        class="board-image"
-      />
-      <div class="board-overlay">
-        <span>👁️‍🗨️</span> Натисни для збільшення
-      </div>
-    </div>
-  </div>
-</section>
-
+        .board-section {
+            position: relative;
+            padding: 80px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+        }
+        
+        .board-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .board-wrapper {
+            position: relative;
+            margin-top: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            border: 15px solid #8b5a2b;
+            background: linear-gradient(45deg, #7d4e24, #8b5a2b, #7d4e24);
+            padding: 10px;
+        }
+        
+        .board-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            transition: transform 0.5s;
+            cursor: pointer;
+        }
+        
+        .board-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .board-wrapper:hover .board-overlay {
+            opacity: 1;
+        }
+        
+           .board-wrapper:hover .board-image {
+            transform: scale(1.05);
+        }
         /* FAQ Section */
         .faq-section {
             position: relative;
