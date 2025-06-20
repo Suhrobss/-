@@ -1181,7 +1181,7 @@
     </section>
     
 <!-- Welcome Section -->
-     <!-- Привітання Голови ПРМТУ -->
+  <!-- Привітання Голови ПРМТУ -->
 <section class="welcome-section" id="welcome">
   <div class="welcome-container">
     <div class="welcome-image">
@@ -1191,21 +1191,11 @@
     </div>
     <div class="welcome-text">
       <h2>Привітання Голови ПРМТУ</h2>
-      <p>Шановні друзі та колеги! Радий представити вам унікальну настільну гру "Union Poly", яка допоможе кожному зрозуміти принципи роботи профспілки та важливість колективної співпраці.</p>
-      <p>Ця гра — результат нашої спільної роботи, спрямованої на інноваційні методи навчання та розвитку профспілкового руху. Сподіваюся, що "Union Poly" стане не лише захоплюючою розвагою, але й корисним інструментом для розуміння механізмів захисту прав працівників.</p>
-      <p>Бажаю вам захоплюючої гри та нових відкриттів у світі профспілкової діяльності!</p>
-      <div class="mt-6 flex justify-end space-x-4">
-        <button 
-          class="download-button"
-          onclick="alert('Перейдіть за посиланням, підпишіться та поставте лайк і отримайте 100 UC');">
+      <!-- ... ваш текст ... -->
+      <div id="btn-container-og" class="mt-6 flex justify-end">
+        <button id="get-og" class="download-button">
           Отримати 100 UC
         </button>
-        <a 
-          href="https://www.instagram.com/og3003?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-          target="_blank"
-          class="download-button">
-          Instagram
-        </a>
       </div>
     </div>
   </div>
@@ -1221,21 +1211,11 @@
     </div>
     <div class="welcome-text">
       <h2>Привітання Голови Молодіжної ради ПРМТУ</h2>
-      <p>Дорогі друзі! Маю честь представити вам навчальний проєкт «Union Poly», створений за підтримки молодіжної спільноти. Наша гра покликана об’єднати нове покоління лідерів у захисті трудових прав та показати важливість партнерства.</p>
-      <p>Як Голова Молодіжної ради, я пишаюся тим, що «Union Poly» поєднує інноваційні підходи до навчання із веселою командною грою. Сподіваюся, що ця гра подарує вам яскраві враження і нові знання.</p>
-      <p>Бажаю кожному з вас успіхів у досягненні цілей та незабутніх партій разом із «Union Poly»!</p>
-      <div class="mt-6 flex justify-end space-x-4">
-        <button 
-          class="download-button"
-          onclick="alert('Перейдіть за посиланням, підпишіться та поставте лайк і отримайте 100 UC');">
+      <!-- ... ваш текст ... -->
+      <div id="btn-container-yer" class="mt-6 flex justify-end">
+        <button id="get-yer" class="download-button">
           Отримати 100 UC
         </button>
-        <a 
-          href="https://www.instagram.com/yerinenko_iryna?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-          target="_blank"
-          class="download-button">
-          Instagram
-        </a>
       </div>
     </div>
   </div>
@@ -1251,25 +1231,43 @@
     </div>
     <div class="welcome-text">
       <h2>Привітання Юриста ПРМТУ</h2>
-      <p>Шановні колеги та гравці! Як юрист ПРМТУ та один з авторів концепції «Union Poly», запрошую вас до захопливої подорожі ігровим полем, де кожне рішення може стати правовим випробуванням.</p>
-      <p>Моя мета — показати вам важливість юридичної грамотності в профспілковій діяльності через інтерактивні завдання та рольові ситуації. Вірю, що «Union Poly» допоможе вам відчути відповідальність за свої дії й зрозуміти правові механізми захисту працівників.</p>
-      <p>Нехай ваша партія буде не лише цікавою, а й надихаючою на нові звершення у сфері праці та права!</p>
-      <div class="mt-6 flex justify-end space-x-4">
-        <button 
-          class="download-button"
-          onclick="alert('Перейдіть за посиланням, підпишіться та поставте лайк і отримайте 100 UC');">
+      <!-- ... ваш текст ... -->
+      <div id="btn-container-sob" class="mt-6 flex justify-end">
+        <button id="get-sob" class="download-button">
           Отримати 100 UC
         </button>
-        <a 
-          href="https://www.instagram.com/sobirovs_s?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-          target="_blank"
-          class="download-button">
-          Instagram
-        </a>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  function setupCTA(btnId, containerId, instaUrl) {
+    const btn = document.getElementById(btnId);
+    const container = document.getElementById(containerId);
+    btn.addEventListener('click', () => {
+      container.innerHTML = `
+        <p class="mb-4 text-gray-800">Перейдіть за посиланням, підпишіться та поставте лайк і отримайте 100 UC</p>
+        <div class="flex space-x-3">
+          <button id="exit-${btnId}" class="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500">
+            Вийти
+          </button>
+          <a href="${instaUrl}" target="_blank" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+            Instagram
+          </a>
+        </div>
+      `;
+      document.getElementById(`exit-${btnId}`)
+        .addEventListener('click', () => window.location.href = '#');
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    setupCTA('get-og',  'btn-container-og',  'https://www.instagram.com/og3003?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==');
+    setupCTA('get-yer','btn-container-yer','https://www.instagram.com/yerinenko_iryna?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==');
+    setupCTA('get-sob','btn-container-sob','https://www.instagram.com/sobirovs_s?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==');
+  });
+</script>
 
     <!-- Game Goal Section -->
     <section class="goal-section" id="goal">
