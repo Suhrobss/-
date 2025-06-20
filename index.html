@@ -29,8 +29,8 @@
             overflow-x: hidden;
         }
         
-        /* Header Section */
-        .header {
+        /* er Section */
+        .er {
             position: relative;
             height: 100vh;
             width: 100%;
@@ -38,7 +38,7 @@
             background: linear-gradient(180deg, rgba(10,59,92,0.8) 0%, rgba(42,157,143,0.6) 100%);
         }
         
-        .header-content {
+        .er-content {
             position: relative;
             z-index: 10;
             height: 100%;
@@ -1000,8 +1000,61 @@
   transform: rotateY(180deg);
 }
 
+      /* —— Футер: хвилі —— */
+  .footer-waves {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 50px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f0f8ff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E") repeat-x;
+    background-size: 50% 100%;
+    animation: footerWave 12s linear infinite;
+  }
+  @keyframes footerWave {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* —— Маяк —— */
+  .lighthouse {
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+    width: 80px;
+    height: 200px;
+  }
+  .lighthouse-beam {
+    position: absolute;
+    bottom: 150px;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    transform-origin: 50% 100%;
+    background: radial-gradient(ellipse at center, rgba(233,196,106,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    animation: beamRotate 6s linear infinite;
+  }
+  @keyframes beamRotate {
+    from { transform: translateX(-50%) rotate(0deg); }
+    to   { transform: translateX(-50%) rotate(360deg); }
+  }
+  .lighthouse-light {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 30px;
+    background: var(--gold);
+    border-radius: 50%;
+    box-shadow: 0 0 30px var(--gold), 0 0 60px var(--gold);
+    animation: lighthouse-blink 3s infinite;
+  }
+
     </style>
-</head>
+</>
 <body>
     <!-- Header Section -->
    <!-- ============================
@@ -1990,68 +2043,51 @@
 </script>
 
     <!-- Footer Section -->
-    <footer class="footer" id="contact">
-        <div class="footer-waves"></div>
-        <div class="footer-container">
-            <div class="footer-logo">
-                <svg width="150" height="100" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="150" height="100" fill="#0a3b5c" rx="10" />
-                    <text x="75" y="40" font-family="Montserrat" font-weight="bold" font-size="20" text-anchor="middle" fill="white">ПРМТУ</text>
-                    <text x="75" y="70" font-family="Montserrat" font-size="12" text-anchor="middle" fill="white">Профспілка робітників</text>
-                    <text x="75" y="85" font-family="Montserrat" font-size="12" text-anchor="middle" fill="white">морського транспорту</text>
-                    <text x="75" y="95" font-family="Montserrat" font-size="12" text-anchor="middle" fill="white"> України</text>
-                </svg>
-                <p>Профспілка робітників морського транспорту України - захист прав та інтересів працівників.</p>
-            </div>
-            <div class="footer-contact">
-                <h3>Контакти</h3>
-                <div class="contact-item">
-                    <div class="contact-icon">📍</div>
-                    <div>м. Одеса, Аркадійське Плато 5-б, прим. 1</div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">📞</div>
-                    <div>+38 (048) 2 42 99 01</div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div>mtwtuyouth@gmail.com</div>
-                </div>
-                <div class="social-links">
-                    <a href="#" class="social-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM16.64 8.8C16.49 10.38 15.84 14.22 15.51 15.99C15.37 16.74 15.09 16.99 14.83 17.02C14.25 17.07 13.81 16.64 13.25 16.27C12.37 15.69 11.87 15.33 11.02 14.77C10.03 14.12 10.67 13.76 11.24 13.18C11.39 13.03 13.95 10.7 14 10.49C14.0069 10.4582 14.0069 10.4252 14 10.3934C13.9931 10.3615 13.9796 10.3324 13.96 10.31C13.89 10.26 13.78 10.28 13.69 10.29C13.57 10.31 12.2 11.24 9.57 13.08C9.07 13.41 8.63 13.57 8.23 13.56C7.79 13.55 6.95 13.33 6.32 13.14C5.55 12.9 4.94 12.78 5 12.35C5.03 12.13 5.33 11.91 5.9 11.69C8.75 10.39 10.72 9.54 11.83 9.12C15.02 7.91 15.72 7.67 16.19 7.67C16.28 7.67 16.51 7.7 16.65 7.81C16.76 7.91 16.79 8.04 16.8 8.13C16.79 8.22 16.81 8.55 16.64 8.8H16.64Z" fill="currentColor"/>
-                        </svg>
-                    </a>
-                    <a href="#" class="social-link">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2.163C15.204 2.163 15.584 2.175 16.85 2.233C20.102 2.381 21.621 3.924 21.769 7.152C21.827 8.417 21.838 8.797 21.838 12.001C21.838 15.206 21.826 15.585 21.769 16.85C21.62 20.075 20.105 21.621 16.85 21.769C15.584 21.827 15.206 21.839 12 21.839C8.796 21.839 8.416 21.827 7.151 21.769C3.891 21.62 2.38 20.07 2.232 16.849C2.174 15.584 2.162 15.205 2.162 12C2.162 8.796 2.175 8.417 2.232 7.151C2.381 3.924 3.896 2.38 7.151 2.232C8.417 2.175 8.796 2.163 12 2.163ZM12 0C8.741 0 8.333 0.014 7.053 0.072C2.695 0.272 0.273 2.69 0.073 7.052C0.014 8.333 0 8.741 0 12C0 15.259 0.014 15.668 0.072 16.948C0.272 21.306 2.69 23.728 7.052 23.928C8.333 23.986 8.741 24 12 24C15.259 24 15.668 23.986 16.948 23.928C21.302 23.728 23.73 21.31 23.927 16.948C23.986 15.668 24 15.259 24 12C24 8.741 23.986 8.333 23.928 7.053C23.732 2.699 21.311 0.273 16.949 0.073C15.668 0.014 15.259 0 12 0V0ZM12 5.838C8.597 5.838 5.838 8.597 5.838 12C5.838 15.403 8.597 18.163 12 18.163C15.403 18.163 18.162 15.404 18.162 12C18.162 8.597 15.403 5.838 12 5.838ZM12 16C9.791 16 8 14.21 8 12C8 9.791 9.791 8 12 8C14.209 8 16 9.791 16 12C16 14.21 14.209 16 12 16ZM18.406 4.155C17.61 4.155 16.965 4.8 16.965 5.595C16.965 6.39 17.61 7.035 18.406 7.035C19.201 7.035 19.845 6.39 19.845 5.595C19.845 4.8 19.201 4.155 18.406 4.155Z" fill="currentColor"/>
-                        </svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="lighthouse">
-            <svg viewBox="0 0 80 200" xmlns="http://www.w3.org/2000/svg">
-                <rect x="30" y="150" width="20" height="50" fill="#e9c46a" />
-                <path d="M20,150 L60,150 L50,50 L30,50 Z" fill="white" stroke="#0a3b5c" stroke-width="2" />
-                <rect x="25" y="130" width="30" height="10" fill="#0a3b5c" />
-                <rect x="25" y="100" width="30" height="10" fill="#0a3b5c" />
-                <rect x="25" y="70" width="30" height="10" fill="#0a3b5c" />
-                <path d="M30,50 L50,50 L45,30 L35,30 Z" fill="#e9c46a" />
-                <circle cx="40" cy="30" r="10" fill="#0a3b5c" />
-            </svg>
-            <div class="lighthouse-light"></div>
-        </div>
-        <div class="copyright">
-            © 2023 Unionpoly. Всі права захищені.
-        </div>
-    </footer>
+<footer class="footer" id="contact">
+  <div class="footer-waves"></div>
+
+  <div class="footer-container">
+    <div class="footer-logo">
+      <!-- Сюди ваш SVG та опис -->
+      <svg width="150" height="100" viewBox="0 0 150 100" xmlns="http://www.w3.org/2000/svg">
+        <rect width="150" height="100" fill="#0a3b5c" rx="10" />
+        <text x="75" y="40" font-family="Montserrat" font-weight="bold" font-size="20" text-anchor="middle" fill="white">ПРМТУ</text>
+        <text x="75" y="70" font-family="Montserrat" font-size="12" text-anchor="middle" fill="white">Профспілка робітників</text>
+        <text x="75" y="85" font-family="Montserrat" font-size="12" text-anchor="middle" fill="white">морського транспорту України</text>
+      </svg>
+      <p>Профспілка робітників морського транспорту України — захист прав та інтересів працівників.</p>
+    </div>
+
+    <div class="footer-contact">
+      <h3>Контакти</h3>
+      <div class="contact-item"><div class="contact-icon">📍</div><div>м. Одеса, Аркадійське Плато 5-б, прим. 1</div></div>
+      <div class="contact-item"><div class="contact-icon">📞</div><div>+38 (048) 2 42 99 01</div></div>
+      <div class="contact-item"><div class="contact-icon">✉️</div><div>mtwtuyouth@gmail.com</div></div>
+      <div class="social-links">
+        <!-- ваші social-link іконки -->
+      </div>
+    </div>
+  </div>
+
+  <div class="lighthouse">
+    <div class="lighthouse-beam"></div>
+    <!-- SVG маяка -->
+    <svg viewBox="0 0 80 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="30" y="150" width="20" height="50" fill="#e9c46a" />
+      <path d="M20,150 L60,150 L50,50 L30,50 Z" fill="white" stroke="#0a3b5c" stroke-width="2"/>
+      <rect x="25" y="130" width="30" height="10" fill="#0a3b5c"/>
+      <rect x="25" y="100" width="30" height="10" fill="#0a3b5c"/>
+      <rect x="25" y="70" width="30" height="10" fill="#0a3b5c"/>
+      <path d="M30,50 L50,50 L45,30 L35,30 Z" fill="#e9c46a"/>
+      <circle cx="40" cy="30" r="10" fill="#0a3b5c"/>
+    </svg>
+    <div class="lighthouse-light"></div>
+  </div>
+
+  <div class="copyright">
+    © 2023 Union Poly. Всі права захищені.
+  </div>
+</footer>
     
     <!-- Back to Top Button -->
     <div class="back-to-top">
