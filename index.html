@@ -1081,215 +1081,98 @@
    <!-- ============================
      Improved Header Section
 ============================ -->
-<!-- WOW Cover Section -->
-<section class="wow-cover" id="home">
-  <!-- сонячні промені -->
-  <div class="sun-rays"></div>
-
-  <!-- фон світанку -->
-  <div class="sunrise-bg"></div>
-
-  <!-- хвилі -->
-  <div class="waves">
-    <div class="wave wave--back"></div>
-    <div class="wave wave--mid"></div>
-    <div class="wave wave--front"></div>
-  </div>
-
-  <!-- плаваюче судно -->
-  <div class="ship">
-    <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
-      <!-- корпус -->
-      <rect x="10" y="40" width="180" height="20" rx="4" fill="#0a3b5c"/>
-      <!-- надбудова -->
-      <rect x="60" y="25" width="40" height="20" fill="#e9c46a"/>
-      <rect x="110" y="30" width="20" height="15" fill="#e9c46a"/>
-      <!-- контейнери -->
-      <rect x="20" y="30" width="15" height="10" fill="#2a9d8f"/>
-      <rect x="40" y="30" width="15" height="10" fill="#a8dadc"/>
-      <rect x="160" y="30" width="15" height="10" fill="#2a9d8f"/>
-      <rect x="180" y="30" width="15" height="10" fill="#a8dadc"/>
-    </svg>
-  </div>
-
-  <!-- контент -->
-  <div class="wow-content">
-    <h1 class="wow-title">Unionpoly</h1>
-    <p class="wow-sub">Навчальна профспілкова настільна гра, що об’єднує серця</p>
-    <a href="#welcome" class="wow-cta">Дізнатись більше</a>
-  </div>
-</section>
-
+<!-- ====== Animated Header with Typewriter ====== -->
 <style>
-  :root {
-    --deep-blue: #0a3b5c;
-    --sea-wave:  #2a9d8f;
-    --gold:      #e9c46a;
-    --sunrise1:  #FF9A8B;
-    --sunrise2:  #FF6A88;
-    --sunrise3:  #FF99AC;
+  /* --- Плавний градієнтний фон --- */
+  @keyframes gradientShift {
+    0%   { background-position: 0% 50%; }
+    50%  { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
-
-  .wow-cover {
+  .header {
     position: relative;
     height: 100vh;
-    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-  }
-
-  /* фон світанку */
-  .sunrise-bg {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: linear-gradient(180deg, var(--sunrise1), var(--sunrise2), var(--sunrise3), var(--deep-blue));
-    z-index: 1;
-  }
-
-  /* сонячні промені */
-  .sun-rays {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 200vmax; height: 200vmax;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.3) 0%, transparent 70%);
-    transform: translate(-50%, -50%);
-    animation: rotateRays 20s linear infinite;
-    z-index: 2;
-  }
-  @keyframes rotateRays {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to   { transform: translate(-50%, -50%) rotate(360deg); }
-  }
-
-  /* хвилі */
-  .waves {
-    position: absolute;
-    bottom: 0; left: 0;
-    width: 200%; height: 30%;
-    z-index: 4;
+    background: linear-gradient(60deg, #1e2e3e, #405a7a, #1e2e3e);
+    background-size: 300% 300%;
+    animation: gradientShift 25s ease infinite;
     overflow: hidden;
   }
-  .wave {
+  /* —– Тонка зерниста текстура (опціонально) —– */
+  .header::before {
+    content: '';
     position: absolute;
-    bottom: 0;
-    width: 50%; height: 100%;
-    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 120 28' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q30 20 60 10 T120 10 V30 H0 Z' fill='%23ffffff'/%3E%3C/svg%3E") repeat-x;
-    background-size: contain;
-  }
-  .wave--back  { opacity: 0.2; animation: moveWave 12s linear infinite; }
-  .wave--mid   { opacity: 0.4; animation: moveWave 8s linear infinite reverse; bottom: 10px; }
-  .wave--front { opacity: 0.6; animation: moveWave 5s linear infinite; bottom: 20px; }
-
-  @keyframes moveWave {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+    top:0; left:0; width:100%; height:100%;
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAA...') repeat;
+    opacity: 0.04;
+    pointer-events: none;
   }
 
-  /* судно */
-  .ship {
-    position: absolute;
-    bottom: 25%;
-    width: 200px;
-    animation: floatShip 10s ease-in-out infinite, sailShip 30s linear infinite;
-    z-index: 5;
-  }
-  @keyframes floatShip {
-    0%,100% { transform: translateY(0) scale(1); }
-    50%     { transform: translateY(-10px) scale(1.02); }
-  }
-  @keyframes sailShip {
-    0%   { left: -25%; }
-    100% { left: 125%; }
-  }
-
-  /* контент */
-  .wow-content {
+  .header-content {
     position: relative;
+    z-index: 1;
     text-align: center;
-    z-index: 6;
-    animation: fadeInUp 1s ease-out both;
+    color: #fff;
+    padding: 0 20px;
   }
-  .wow-title {
+
+  /* --- Typewriter Effect --- */
+  .title {
     font-size: 4rem;
     font-weight: 800;
-    margin-bottom: 0.5em;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: .15em solid #e9c46a;
+    width: 0;
+    animation: typing 3s steps(12,end) 0.5s forwards,
+               blinkCaret .75s step-end infinite;
   }
-  .wow-sub {
+  @keyframes typing {
+    to { width: 11ch; /* кількість символів Unionpoly */ }
+  }
+  @keyframes blinkCaret {
+    50% { border-color: transparent; }
+  }
+
+  /* --- Subtitle Fade-in --- */
+  .subtitle {
+    margin-top: 0.5em;
     font-size: 1.25rem;
-    margin-bottom: 1.5em;
-    opacity: 0.9;
+    opacity: 0;
+    animation: fadeIn 2s forwards 3s;
   }
-  .wow-cta {
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* --- CTA Button --- */
+  .cta-button {
     display: inline-block;
-    padding: 0.75em 2em;
-    background: var(--gold);
-    color: var(--deep-blue);
+    margin-top: 2em;
+    padding: .75em 2em;
+    background: #e9c46a;
+    color: #1e2e3e;
     font-weight: 600;
     border-radius: 50px;
     text-decoration: none;
-    transition: transform .3s, box-shadow .3s;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s forwards 4.5s;
   }
-  .wow-cta:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-  }
-
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-
-  /* адаптив */
-  @media (max-width: 768px) {
-    .wow-title { font-size: 2.5rem; }
-    .wow-sub   { font-size: 1rem; }
-    .ship      { width: 140px; bottom: 20%; }
+  .cta-button:hover {
+    transform: translateY(0) scale(1.05);
   }
 </style>
 
-<script>
-  // ---------- Canvas particles ----------
-  const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, particles = [];
-
-  function initParticles() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
-    particles = Array.from({length: 100}, () => ({
-      x: Math.random()*W,
-      y: Math.random()*H,
-      r: 1+Math.random()*3,
-      dx: (Math.random()-0.5)*0.5,
-      dy: (Math.random()-0.5)*0.5,
-      opacity: Math.random()
-    }));
-  }
-
-  function draw() {
-    ctx.clearRect(0,0,W,H);
-    particles.forEach(p => {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(255,255,255,${p.opacity})`;
-      ctx.fill();
-      p.x += p.dx;
-      p.y += p.dy;
-      if (p.x<0||p.x>W) p.dx *= -1;
-      if (p.y<0||p.y>H) p.dy *= -1;
-    });
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', initParticles);
-  initParticles();
-  draw();
-</script>
-    </section>
+<section class="header" id="home">
+  <div class="header-content">
+    <h1 class="title">Unionpoly</h1>
+    <p class="subtitle">Навчальна профспілкова настільна гра, що об’єднує серця</p>
+    <a href="#welcome" class="cta-button">Дізнатися більше</a>
+  </div>
+</section>
     
 <!-- Welcome Section -->
 <section class="welcome-section" id="welcome">
