@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Unionpoly – Настільна гра</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <!-- TailwindCSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    /* —– Змінні та ресет —– */
+    /* —– Змінні та базовий ресет —– */
     :root {
       --deep-blue: #0a3b5c;
       --sea-wave:  #2a9d8f;
       --gold:      #e9c46a;
     }
-    * {
+    *, *::before, *::after {
       margin: 0; padding: 0;
       box-sizing: border-box;
       font-family: 'Montserrat', sans-serif;
@@ -29,10 +31,10 @@
       0%,100% { background-position: 0% 50%; }
       50%     { background-position: 100% 50%; }
     }
-    @keyframes typing    { to { width: 11ch; } }
-    @keyframes blinkCaret{ 50% { border-color: transparent; } }
-    @keyframes fadeIn    { to { opacity: 1; transform: translateY(0); } }
-    @keyframes fishSwim  {
+    @keyframes typing     { to { width: 11ch; } }
+    @keyframes blinkCaret { 50% { border-color: transparent; } }
+    @keyframes fadeIn     { to { opacity:1; transform: translateY(0); } }
+    @keyframes fishSwim   {
       0%   { transform: translateX(0) scaleX(1); }
       50%  { transform: translateX(110vw) scaleX(1); }
       51%  { transform: translateX(110vw) scaleX(-1); }
@@ -61,8 +63,11 @@
       text-align: center;
     }
     .title {
-      font-size: 4rem; font-weight: 800; color: #fff;
-      overflow: hidden; white-space: nowrap;
+      font-size: 4rem;
+      font-weight: 800;
+      color: #fff;
+      overflow: hidden;
+      white-space: nowrap;
       border-right: .15em solid var(--gold);
       width: 0;
       animation:
@@ -71,8 +76,10 @@
     }
     .subtitle {
       margin-top: .5em;
-      font-size: 1.25rem; color: rgba(255,255,255,.9);
-      opacity: 0; transform: translateY(20px);
+      font-size: 1.25rem;
+      color: rgba(255,255,255,.9);
+      opacity: 0;
+      transform: translateY(20px);
       animation: fadeIn 2s forwards 3s;
     }
     .cta-button {
@@ -84,14 +91,15 @@
       border-radius: 50px;
       font-weight: 600;
       text-decoration: none;
-      opacity: 0; transform: translateY(20px);
+      opacity: 0;
+      transform: translateY(20px);
       animation: fadeIn 1s forwards 4.5s;
     }
     .cta-button:hover {
       transform: translateY(0) scale(1.05);
     }
 
-    /* —– Рибки —– */
+    /* —– Fish —– */
     .fish {
       position: absolute; z-index: 5; pointer-events: none;
       background: url('https://svgshare.com/i/t7j.svg') no-repeat center/contain;
@@ -101,7 +109,7 @@
     .fish:nth-child(2) { width:60px;  height:30px; bottom:25%; left:-150px; animation-delay:4s; }
     .fish:nth-child(3) { width:100px; height:50px; bottom:15%; left:-130px; animation-delay:8s; }
 
-    /* —– Бульбашки —– */
+    /* —– Bubbles —– */
     .bubble {
       position: absolute; bottom:0;
       background: rgba(255,255,255,0.6);
@@ -114,6 +122,7 @@
   </style>
 </head>
 <body>
+  <!-- Hero Section -->
   <section class="header" id="home">
     <div class="header-content">
       <h1 class="title">Unionpoly</h1>
@@ -123,138 +132,125 @@
     <div class="fish"></div>
     <div class="fish"></div>
     <div class="fish"></div>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        const container = document.querySelector('.header');
-        for (let i = 0; i < 30; i++) {
-          const b = document.createElement('div');
-          b.className = 'bubble';
-          const size = 5 + Math.random() * 25;
-          b.style.width = size + 'px';
-          b.style.height = size + 'px';
-          b.style.left = Math.random() * 100 + 'vw';
-          const dur = 4 + Math.random() * 6;
-          b.style.animationDuration = dur + 's';
-          b.style.animationDelay = -Math.random() * dur + 's';
-          container.appendChild(b);
-          b.addEventListener('mousemove', e => {
-            const r = b.getBoundingClientRect();
-            const dx = (r.left + r.width/2) - e.clientX;
-            const dy = (r.top  + r.height/2) - e.clientY;
-            const dist = Math.hypot(dx,dy);
-            if (dist < 80) {
-              const ang = Math.atan2(dy,dx);
-              b.style.transform = `translate(${Math.cos(ang)*30}px,${Math.sin(ang)*30}px)`;
-              b.style.transition = 'transform .2s';
-            }
-          });
-          b.addEventListener('mouseleave', () => {
-            b.style.transform = '';
-            b.style.transition = 'transform 1s';
-          });
-        }
-      });
-    </script>
+    <!-- bubbles and interactivity script will go in next chunk -->
   </section>
-<!-- Welcome Section: Голова ПРМТУ -->
-<section class="welcome-section" id="welcome">
-  <div class="welcome-container md:flex items-center gap-8">
-    <!-- Фото -->
-    <div class="welcome-image bg-gray-100 p-2 rounded-xl shadow-lg">
-      <img src="oleg-grigoryuk.jpg" alt="Олег ГРИГОРЮК" class="rounded-lg w-full h-auto" />
-      <div class="chairman-title">Олег ГРИГОРЮК</div>
+  <!-- Bubbles + Interaction Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.querySelector('.header');
+      for (let i = 0; i < 30; i++) {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const size = 5 + Math.random() * 25;
+        b.style.width = size + 'px';
+        b.style.height = size + 'px';
+        b.style.left = Math.random() * 100 + 'vw';
+        const dur = 4 + Math.random() * 6;
+        b.style.animationDuration = dur + 's';
+        b.style.animationDelay = -Math.random() * dur + 's';
+        container.appendChild(b);
+        // hover / proximity effect
+        b.addEventListener('mousemove', e => {
+          const r = b.getBoundingClientRect();
+          const dx = (r.left + r.width / 2) - e.clientX;
+          const dy = (r.top + r.height / 2) - e.clientY;
+          const dist = Math.hypot(dx, dy);
+          if (dist < 80) {
+            const ang = Math.atan2(dy, dx);
+            b.style.transform = `translate(${Math.cos(ang) * 30}px, ${Math.sin(ang) * 30}px)`;
+            b.style.transition = 'transform .2s';
+          }
+        });
+        b.addEventListener('mouseleave', () => {
+          b.style.transform = '';
+          b.style.transition = 'transform 1s';
+        });
+      }
+    });
+  </script>
+
+  <!-- Welcome Section -->
+  <section class="py-16 bg-white" id="welcome">
+    <div class="max-w-5xl mx-auto px-4 space-y-16">
+      <!-- Chairman -->
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="w-64 h-64 rounded-xl overflow-hidden shadow-lg">
+          <img src="oleg-grigoryuk.jpg" alt="Олег ГРИГОРЮК" class="object-cover w-full h-full"/>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-[var(--deep-blue)] mb-4">Привітання Голови ПРМТУ</h2>
+          <p class="mb-4">Шановні друзі та колеги! Радий представити вам унікальну настільну гру «Unionpoly», яка допоможе кожному зрозуміти принципи роботи профспілки та важливість колективної співпраці.</p>
+          <button id="btn-og" class="px-6 py-2 bg-[var(--sea-wave)] text-white rounded-full hover:bg-[var(--deep-blue)] transition">Отримати 100 UC</button>
+        </div>
+      </div>
+
+      <!-- Youth Council -->
+      <div class="flex flex-col md:flex-row-reverse items-center gap-8">
+        <div class="w-64 h-64 rounded-xl overflow-hidden shadow-lg">
+          <img src="iryna-erinennko.jpg" alt="Ірина ЄРІНЕНКО" class="object-cover w-full h-full"/>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-[var(--deep-blue)] mb-4">Привітання Голови Молодіжної ради ПРМТУ</h2>
+          <p class="mb-4">Дорогі друзі! Маю честь представити вам навчальний проєкт «Unionpoly», створений за підтримки молодіжної спільноти. Наша гра покликана обʼєднати нове покоління лідерів у захисті трудових прав та показати важливість партнерства.</p>
+          <button id="btn-youth" class="px-6 py-2 bg-[var(--sea-wave)] text-white rounded-full hover:bg-[var(--deep-blue)] transition">Отримати 100 UC</button>
+        </div>
+      </div>
+
+      <!-- Legal Counsel -->
+      <div class="flex flex-col md:flex-row items-center gap-8">
+        <div class="w-64 h-64 rounded-xl overflow-hidden shadow-lg">
+          <img src="sukhrob-sobirov.jpg" alt="Сухроб СОБІРОВ" class="object-cover w-full h-full"/>
+        </div>
+        <div>
+          <h2 class="text-2xl font-bold text-[var(--deep-blue)] mb-4">Привітання Юриста ПРМТУ</h2>
+          <p class="mb-4">Шановні колеги та гравці! Як юрист ПРМТУ та один з авторів концепції «Unionpoly», запрошую вас до захопливої подорожі ігровим полем, де кожне рішення може стати правовим випробуванням.</p>
+          <button id="btn-legal" class="px-6 py-2 bg-[var(--sea-wave)] text-white rounded-full hover:bg-[var(--deep-blue)] transition">Отримати 100 UC</button>
+        </div>
+      </div>
     </div>
-    <!-- Текст + кнопка -->
-    <div class="welcome-text">
-      <h2>Привітання Голови ПРМТУ</h2>
-      <p class="mb-4">
-        Шановні друзі та колеги! Радий представити вам унікальну настільну гру «Unionpoly», яка допоможе кожному зрозуміти принципи роботи профспілки та важливість колективної співпраці.
-      </p>
-      <button id="btn-og" class="cta-button-secondary">
-        Отримати 100 UC
-      </button>
+  </section>
+  <!-- Modals Structure -->
+  <div id="modal-og" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-white rounded-xl p-6 max-w-xs w-full text-center relative">
+      <button data-close="modal-og" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800">&times;</button>
+      <p class="mb-4">Перейдіть за посиланням в Instagram та отримайте <strong>100 UC</strong>:</p>
+      <a href="https://www.instagram.com/og3003" target="_blank" class="inline-block px-6 py-2 bg-[var(--sea-wave)] text-white rounded-full hover:bg-[var(--deep-blue)] transition">Instagram</a>
     </div>
   </div>
-</section>
 
-<!-- Youth Council Section: Голова Молодіжної ради -->
-<section class="welcome-section" id="youth-council">
-  <div class="welcome-container md:flex items-center gap-8">
-    <div class="welcome-image bg-gray-100 p-2 rounded-xl shadow-lg">
-      <img src="iryna-erinennko.jpg" alt="Ірина ЄРІНЕНКО" class="rounded-lg w-full h-auto" />
-      <div class="chairman-title">Ірина ЄРІНЕНКО</div>
-    </div>
-    <div class="welcome-text">
-      <h2>Привітання Голови Молодіжної ради ПРМТУ</h2>
-      <p class="mb-4">
-        Дорогі друзі! Маю честь представити вам навчальний проєкт «Unionpoly», створений за підтримки молодіжної спільноти. Наша гра покликана обʼєднати нове покоління лідерів у захисті трудових прав та показати важливість партнерства.
-      </p>
-      <button id="btn-youth" class="cta-button-secondary">
-        Отримати 100 UC
-      </button>
+  <div id="modal-youth" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-white rounded-xl p-6 max-w-xs w-full text-center relative">
+      <button data-close="modal-youth" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800">&times;</button>
+      <p class="mb-4">Перейдіть за посиланням в Instagram та отримайте <strong>100 UC</strong>:</p>
+      <a href="https://www.instagram.com/yerinenko_iryna" target="_blank" class="inline-block px-6 py-2 bg-[var(--sea-wave)] text-white rounded-full hover:bg-[var(--deep-blue)] transition">Instagram</a>
     </div>
   </div>
-</section>
 
-<!-- Legal Counsel Section: Юрист ПРМТУ -->
-<section class="welcome-section" id="legal-counsel">
-  <div class="welcome-container md:flex items-center gap-8">
-    <div class="welcome-image bg-gray-100 p-2 rounded-xl shadow-lg">
-      <img src="sukhrob-sobirov.jpg" alt="Сухроб СОБІРОВ" class="rounded-lg w-full h-auto" />
-      <div class="chairman-title">Сухроб СОБІРОВ</div>
-    </div>
-    <div class="welcome-text">
-      <h2>Привітання Юриста ПРМТУ</h2>
-      <p class="mb-4">
-        Шановні колеги та гравці! Як юрист ПРМТУ та один з авторів концепції «Unionpoly», запрошую вас до захопливої подорожі ігровим полем, де кожне рішення може стати правовим випробуванням.
-      </p>
-      <button id="btn-legal" class="cta-button-secondary">
-        Отримати 100 UC
-      </button>
+  <div id="modal-legal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="bg-white rounded-xl p-6 max-w-xs w-full text-center relative">
+      <button data-close="modal-legal" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800">&times;</button>
+      <p class="mb-4">Перейдіть за посиланням в Instagram та отримайте <strong>100 UC</strong>:</p>
+      <a href="https://www.instagram.com/sobirovs_s" target="_blank" class="inline-block px-6 py-2 bg-[var(--sea-wave)] text-white rounded-full hover:bg-[var(--deep-blue)] transition">Instagram</a>
     </div>
   </div>
-</section>
 
-<!-- Modals -->
-<div id="modal-og" class="modal">
-  <div class="modal-content">
-    <p>Перейдіть за посиланням в Instagram та отримайте 100 UC:</p>
-    <div class="modal-actions">
-      <button data-close="modal-og" class="button-secondary">Вийти</button>
-      <a href="https://www.instagram.com/og3003" target="_blank" class="button-primary">Instagram</a>
-    </div>
-  </div>
-</div>
-
-<div id="modal-youth" class="modal">
-  <div class="modal-content">
-    <p>Перейдіть за посиланням в Instagram та отримайте 100 UC:</p>
-    <div class="modal-actions">
-      <button data-close="modal-youth" class="button-secondary">Вийти</button>
-      <a href="https://www.instagram.com/yerinenko_iryna" target="_blank" class="button-primary">Instagram</a>
-    </div>
-  </div>
-</div>
-
-<div id="modal-legal" class="modal">
-  <div class="modal-content">
-    <p>Перейдіть за посиланням в Instagram та отримайте 100 UC:</p>
-    <div class="modal-actions">
-      <button data-close="modal-legal" class="button-secondary">Вийти</button>
-      <a href="https://www.instagram.com/sobirovs_s" target="_blank" class="button-primary">Instagram</a>
-    </div>
-  </div>
-</div>
-
-<!-- Скрипт для модалок -->
-<script>
-  ['og','youth','legal'].forEach(key => {
-    document.getElementById('btn-' + key)
-      .addEventListener('click', () => document.getElementById('modal-' + key).classList.add('active'));
-    document.querySelectorAll('[data-close="modal-' + key + '"]')
-      .forEach(btn => btn.addEventListener('click', () => document.getElementById('modal-' + key).classList.remove('active')));
-  });
-</script>
+  <!-- Modals JS -->
+  <script>
+    ['og','youth','legal'].forEach(key => {
+      document.getElementById('btn-' + key)
+        .addEventListener('click', () => {
+          const m = document.getElementById('modal-' + key);
+          m.classList.remove('opacity-0', 'pointer-events-none');
+          m.classList.add('opacity-100');
+        });
+      document.querySelectorAll('[data-close="modal-' + key + '"]')
+        .forEach(btn => btn.addEventListener('click', () => {
+          const m = document.getElementById('modal-' + key);
+          m.classList.add('opacity-0');
+          setTimeout(() => m.classList.add('pointer-events-none'), 300);
+        }));
+    });
+  </script>
 <!-- Game Goal Section -->
 <section class="goal-section" id="goal">
   <div class="goal-container">
@@ -263,36 +259,100 @@
       <div class="goal-item">
         <div class="goal-icon">🧭</div>
         <h3>Навчання через гру</h3>
-        <p>Зрозуміти основні принципи роботи профспілки в інтерактивному та захоплюючому форматі настільної гри.</p>
+        <p>Зрозуміти основні принципи роботи профспілки в інтерактивному форматі.</p>
       </div>
       <div class="goal-item">
         <div class="goal-icon">🚢</div>
         <h3>Стратегічне мислення</h3>
-        <p>Розвинути навички прийняття рішень, планування ресурсів та вирішення кризових ситуацій у профспілковій діяльності.</p>
+        <p>Розвинути навички прийняття рішень і планування ресурсів.</p>
       </div>
       <div class="goal-item">
         <div class="goal-icon">⚓</div>
         <h3>Командна робота</h3>
-        <p>Сприяти розумінню важливості співпраці, переговорів та колективних дій для досягнення спільних цілей.</p>
+        <p>Підвищити розуміння важливості співпраці та переговорів.</p>
       </div>
       <div class="goal-item">
         <div class="goal-icon">🏆</div>
         <h3>Перемога</h3>
-        <p>Набрати найбільшу кількість балів через ефективне управління ресурсами, вирішення проблем та розвиток профспілкової організації.</p>
+        <p>Набрати максимальні активи через ефективне управління.</p>
       </div>
     </div>
   </div>
+
+  <!-- Optional decorative floating icons -->
+  <div class="absolute top-0 right-10 opacity-20 animate-pulse text-[5rem]">🌊</div>
+  <div class="absolute bottom-10 left-8 opacity-20 animate-bounce text-[4rem]">⚓</div>
 </section>
 
+<style>
+  .goal-section {
+    padding: 100px 20px;
+    background: radial-gradient(circle at top left, rgba(42,157,143,0.2), transparent 70%);
+    position: relative;
+    overflow: hidden;
+  }
+  .goal-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .goal-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+  .goal-item {
+    background: rgba(255,255,255,0.9);
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transition: transform .3s, box-shadow .3s;
+  }
+  .goal-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  }
+  .goal-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--sea-wave);
+  }
+  .section-title {
+    font-size: 2.5rem;
+    color: var(--deep-blue);
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
+  }
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+</style>
 <!-- Game Board Section -->
 <section class="board-section" id="board">
   <div class="board-container">
     <h2 class="section-title">Ігрове поле</h2>
     <div class="board-wrapper">
+      <!-- SVG поле -->
       <svg class="board-image" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-        <rect width="800" height="600" fill="#a8dadc"/>
-        <path d="M50,50 L750,50 L750,550 L50,550 Z" fill="#f0f8ff" stroke="#0a3b5c" stroke-width="5"/>
-        <!-- Grid -->
+        <!-- фон -->
+        <rect width="800" height="600" fill="url(#gradBoard)" />
+        <defs>
+          <linearGradient id="gradBoard" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#a8dadc"/>
+            <stop offset="100%" stop-color="#f0f8ff"/>
+          </linearGradient>
+        </defs>
+        <!-- сітка -->
         <g stroke="#0a3b5c" stroke-width="2">
           <line x1="200" y1="50" x2="200" y2="550"/>
           <line x1="350" y1="50" x2="350" y2="550"/>
@@ -303,23 +363,24 @@
           <line x1="50"  y1="350" x2="750" y2="350"/>
           <line x1="50"  y1="450" x2="750" y2="450"/>
         </g>
-        <!-- Elements -->
+        <!-- елементи -->
         <circle cx="125" cy="100" r="30" fill="#e9c46a"/>
-        <text  x="125" y="105" font-family="Montserrat" font-size="12" font-weight="bold" text-anchor="middle">СТАРТ</text>
-        <rect  x="225" y="75" width="100" height="50" rx="10" fill="#2a9d8f"/>
-        <text  x="275" y="105" font-family="Montserrat" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">ПОРТ</text>
-        <rect  x="375" y="75" width="100" height="50" rx="10" fill="#0a3b5c"/>
-        <text  x="425" y="105" font-family="Montserrat" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">КРИЗА</text>
-        <rect  x="525" y="75" width="100" height="50" rx="10" fill="#e9c46a"/>
-        <text  x="575" y="105" font-family="Montserrat" font-size="12" font-weight="bold" text-anchor="middle">БОНУС</text>
-        <rect  x="675" y="75" width="50" height="50" rx="10" fill="#6d8299"/>
-        <text  x="700" y="105" font-family="Montserrat" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">?</text>
-        <!-- Center Logo -->
+        <text x="125" y="105" font-family="Montserrat" font-size="12" font-weight="bold" text-anchor="middle">СТАРТ</text>
+        <rect x="225" y="75" width="100" height="50" rx="10" fill="#2a9d8f"/>
+        <text x="275" y="105" font-family="Montserrat" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">ПОРТ</text>
+        <rect x="375" y="75" width="100" height="50" rx="10" fill="#0a3b5c"/>
+        <text x="425" y="105" font-family="Montserrat" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">КРИЗА</text>
+        <rect x="525" y="75" width="100" height="50" rx="10" fill="#e9c46a"/>
+        <text x="575" y="105" font-family="Montserrat" font-size="12" font-weight="bold" text-anchor="middle">БОНУС</text>
+        <rect x="675" y="75" width="50" height="50" rx="10" fill="#6d8299"/>
+        <text x="700" y="105" font-family="Montserrat" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">?</text>
+        <!-- логотип -->
         <circle cx="400" cy="300" r="100" fill="#0a3b5c"/>
         <circle cx="400" cy="300" r="80" fill="none" stroke="#e9c46a" stroke-width="5"/>
         <circle cx="400" cy="300" r="60" fill="#2a9d8f" opacity="0.7"/>
-        <text  x="400" y="310" font-family="Montserrat" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">Unionpoly</text>
+        <text x="400" y="310" font-family="Montserrat" font-size="24" font-weight="bold" fill="#fff" text-anchor="middle">Unionpoly</text>
       </svg>
+      <!-- overlay для збільшення -->
       <div class="board-overlay">
         <span>👁️‍🗨️</span> Натисни для збільшення
       </div>
@@ -327,12 +388,60 @@
   </div>
 </section>
 
+<style>
+  .board-section {
+    padding: 80px 20px;
+    background: radial-gradient(circle at bottom right, #e4f0f5, #f5fafc);
+  }
+  .board-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+  .board-wrapper {
+    position: relative;
+    margin-top: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    cursor: zoom-in;
+  }
+  .board-image {
+    width: 100%;
+    height: auto;
+    transition: transform .4s;
+  }
+  .board-wrapper:hover .board-image {
+    transform: scale(1.02);
+  }
+  .board-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(10,59,92,0.7);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    transition: opacity .3s;
+  }
+  .board-wrapper:hover .board-overlay {
+    opacity: 1;
+  }
+</style>
 <!-- Cards Gallery Section -->
 <section class="cards-section" id="cards">
   <div class="cards-container">
     <h2 class="section-title">Галерея карток</h2>
     <div class="cards-grid md:grid-cols-3 grid-cols-1 gap-6">
-      <!-- Позитивні -->
+      
+      <!-- Позитивні картки -->
       <div class="card-item">
         <div class="card-inner">
           <div class="card-front">
@@ -344,7 +453,8 @@
           </div>
         </div>
       </div>
-      <!-- Негативні -->
+      
+      <!-- Негативні картки -->
       <div class="card-item">
         <div class="card-inner">
           <div class="card-front">
@@ -356,7 +466,8 @@
           </div>
         </div>
       </div>
-      <!-- Нейтральні -->
+      
+      <!-- Нейтральні картки -->
       <div class="card-item">
         <div class="card-inner">
           <div class="card-front">
@@ -368,7 +479,8 @@
           </div>
         </div>
       </div>
-      <!-- Ресурсні -->
+      
+      <!-- Ресурсні картки -->
       <div class="card-item">
         <div class="card-inner">
           <div class="card-front">
@@ -380,6 +492,7 @@
           </div>
         </div>
       </div>
+      
       <!-- Картки криз -->
       <div class="card-item">
         <div class="card-inner">
@@ -392,7 +505,8 @@
           </div>
         </div>
       </div>
-      <!-- Бонусні -->
+      
+      <!-- Бонусні картки -->
       <div class="card-item">
         <div class="card-inner">
           <div class="card-front">
@@ -404,45 +518,186 @@
           </div>
         </div>
       </div>
+      
     </div>
   </div>
 </section>
+
+<style>
+  .cards-section {
+    padding: 80px 20px;
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
+  }
+  .cards-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .cards-grid {
+    display: grid;
+    gap: 30px;
+  }
+  .card-item {
+    perspective: 1000px;
+  }
+  .card-inner {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+    border-radius: 15px;
+  }
+  .card-item:hover .card-inner {
+    transform: rotateY(180deg);
+  }
+  .card-front, .card-back {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+  .card-front {
+    background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-wave) 100%);
+    color: #fff;
+  }
+  .card-back {
+    background: #fff;
+    color: var(--deep-blue);
+    transform: rotateY(180deg);
+  }
+  .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+</style>
 <!-- FAQ Section -->
 <section class="faq-section" id="faq">
   <div class="faq-container">
     <h2 class="section-title">Правила гри</h2>
     <div class="faq-items">
+
       <!-- Питання 1 -->
       <div class="faq-item">
         <div class="faq-question">
           <div class="faq-icon">🔹</div>
-          <div>Хто починає гру першим?</div>
+          <div class="faq-text">Хто починає гру першим?</div>
           <div class="faq-arrow">▼</div>
         </div>
         <div class="faq-answer">
-          <div class="faq-answer-content">
-            🔸 Усі гравці кидають кубики — хто виб’є найбільше, той починає гру.
-          </div>
+          <p>🔸 Усі гравці кидають кубики — хто виб’є найбільше, той починає гру.</p>
         </div>
       </div>
+
       <!-- Питання 2 -->
       <div class="faq-item">
         <div class="faq-question">
           <div class="faq-icon">🔹</div>
-          <div>З чого починається гра?</div>
+          <div class="faq-text">З чого починається гра?</div>
           <div class="faq-arrow">▼</div>
         </div>
         <div class="faq-answer">
-          <div class="faq-answer-content">
-            🔸 Усі гравці стартують із клітинки “Старт”, мають по 2000 UnionCoin та 10 балів соціального рейтингу.
-          </div>
+          <p>🔸 Усі гравці стартують із клітинки “Старт”, мають по 2000 UnionCoin та 10 балів соціального рейтингу.</p>
         </div>
       </div>
-      <!-- додай інші запитання за потреби за тією ж структурою -->
+
+      <!-- Питання 3 -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <div class="faq-icon">🔹</div>
+          <div class="faq-text">Що робити, якщо гравець потрапляє на ППО?</div>
+          <div class="faq-arrow">▼</div>
+        </div>
+        <div class="faq-answer">
+          <p>🔸 Вільна → купити; Зайнята → сплатити власнику; Ваша → отримати дохід.</p>
+        </div>
+      </div>
+
+      <!-- Додайте інші питання за тією ж структурою -->
     </div>
   </div>
 </section>
 
+<style>
+  .faq-section {
+    padding: 100px 20px;
+    background: linear-gradient(135deg, #f0f8ff 0%, #e6f2ff 100%);
+  }
+  .faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  .faq-question {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: linear-gradient(135deg, var(--deep-blue) 0%, var(--sea-wave) 100%);
+    color: #fff;
+    padding: 15px 20px;
+    cursor: pointer;
+    position: relative;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .faq-question:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  }
+  .faq-icon {
+    font-size: 1.5rem;
+  }
+  .faq-text {
+    flex: 1;
+  }
+  .faq-arrow {
+    transition: transform .3s;
+  }
+  .faq-question.active .faq-arrow {
+    transform: rotate(180deg);
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    background: #fff;
+    transition: max-height .5s, padding .5s;
+  }
+  .faq-answer p {
+    margin: 0;
+    padding: 0 20px;
+    line-height: 1.6;
+    color: #333;
+  }
+  .faq-answer.open {
+    padding: 15px 20px;
+    max-height: 200px; /* adjust if answers longer */
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const answer = q.nextElementSibling;
+      q.classList.toggle('active');
+      answer.classList.toggle('open');
+    });
+  });
+</script>
 <!-- Leaderboard Section -->
 <section id="leaderboard" class="px-4 py-16 bg-white">
   <div class="max-w-5xl mx-auto">
@@ -451,28 +706,176 @@
   </div>
 </section>
 
+<style>
+  /* Leaderboard styles */
+  #leaderboard-table table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  #leaderboard-table th {
+    background: var(--deep-blue);
+    color: #fff;
+    padding: 12px;
+    text-align: left;
+  }
+  #leaderboard-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  #leaderboard-table tr:nth-child(even) td {
+    background: #f9fafb;
+  }
+</style>
+
+<!-- Google Charts Loader + Draw Script -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+  google.charts.load('current', { packages: ['table'] });
+  google.charts.setOnLoadCallback(drawLeaderboard);
+
+  function drawLeaderboard() {
+    const query = new google.visualization.Query(
+      'https://docs.google.com/spreadsheets/d/180V6ZvXt9H3slJXJVJhV05Eexs_D0dRhPf5DaSGjga0/gviz/tq?gid=0&headers=1'
+    );
+    query.send(response => {
+      if (response.isError()) {
+        document.getElementById('leaderboard-table').innerText =
+          'Не вдалося завантажити таблицю: ' + response.getMessage();
+        return;
+      }
+      const table = new google.visualization.Table(
+        document.getElementById('leaderboard-table')
+      );
+      table.draw(response.getDataTable(), {
+        showRowNumber: false,
+        width: '100%',
+        height: 'auto',
+        allowHtml: true
+      });
+    });
+  }
+</script>
+<!-- Leaderboard Section -->
+<section id="leaderboard" class="px-4 py-16 bg-white">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="text-3xl font-bold text-[var(--deep-blue)] text-center mb-6">Таблиця лідерів</h2>
+    <div id="leaderboard-table"></div>
+  </div>
+</section>
+
+<style>
+  /* Leaderboard styles */
+  #leaderboard-table table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  #leaderboard-table th {
+    background: var(--deep-blue);
+    color: #fff;
+    padding: 12px;
+    text-align: left;
+  }
+  #leaderboard-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  #leaderboard-table tr:nth-child(even) td {
+    background: #f9fafb;
+  }
+</style>
+
+<!-- Google Charts Loader + Draw Script -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script>
+  google.charts.load('current', { packages: ['table'] });
+  google.charts.setOnLoadCallback(drawLeaderboard);
+
+  function drawLeaderboard() {
+    const query = new google.visualization.Query(
+      'https://docs.google.com/spreadsheets/d/180V6ZvXt9H3slJXJVJhV05Eexs_D0dRhPf5DaSGjga0/gviz/tq?gid=0&headers=1'
+    );
+    query.send(response => {
+      if (response.isError()) {
+        document.getElementById('leaderboard-table').innerText =
+          'Не вдалося завантажити таблицю: ' + response.getMessage();
+        return;
+      }
+      const table = new google.visualization.Table(
+        document.getElementById('leaderboard-table')
+      );
+      table.draw(response.getDataTable(), {
+        showRowNumber: false,
+        width: '100%',
+        height: 'auto',
+        allowHtml: true
+      });
+    });
+  }
+</script>
 <!-- UC & Рейтинг Калькулятор -->
 <section id="calculator" style="padding: 80px 20px; background: linear-gradient(135deg, #e6f2ff 0%, #d9edff 100%);">
-  <div style="max-width: 600px; margin: 0 auto; text-align:center;">
-    <h2 style="font-size:2.5rem; color:#0a3b5c; margin-bottom:40px; position:relative; display:inline-block;">
+  <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+    <h2 style="
+      font-size: 2.5rem;
+      color: #0a3b5c;
+      margin-bottom: 40px;
+      position: relative;
+      display: inline-block;
+    ">
       Калькулятор UC & рейтингу
-      <span style="content: ''; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 100px; height: 4px; background: #e9c46a; border-radius: 2px;"></span>
+      <span style="
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: #e9c46a;
+        border-radius: 2px;
+      "></span>
     </h2>
-    <div style="background: rgba(255,255,255,0.8); backdrop-filter: blur(10px); border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
-      <div style="margin-bottom:20px; text-align:left;">
-        <label for="calc-rating" style="font-weight:600;">Соціальний рейтинг:</label>
-        <input id="calc-rating" type="number" min="0" value="0" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:5px;" />
+
+    <div style="
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    ">
+      <div style="margin-bottom: 20px; text-align: left;">
+        <label for="calc-rating" style="font-weight: 600;">Соціальний рейтинг:</label>
+        <input id="calc-rating" type="number" min="0" value="0"
+          style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:5px;" />
         <small style="color:#555;">(×100 UC)</small>
       </div>
-      <div style="margin-bottom:20px; text-align:left;">
-        <label for="calc-uc" style="font-weight:600;">Накопичені UC:</label>
-        <input id="calc-uc" type="number" min="0" value="0" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:5px;" />
+      <div style="margin-bottom: 20px; text-align: left;">
+        <label for="calc-uc" style="font-weight: 600;">Накопичені UC:</label>
+        <input id="calc-uc" type="number" min="0" value="0"
+          style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:5px;" />
       </div>
-      <div style="margin-bottom:30px; text-align:left;">
-        <label for="calc-enterprise" style="font-weight:600;">Сумарна номінальна вартість ППО (UC):</label>
-        <input id="calc-enterprise" type="number" min="0" value="0" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:5px;" />
+      <div style="margin-bottom: 30px; text-align: left;">
+        <label for="calc-enterprise" style="font-weight: 600;">Сумарна номінальна вартість ППО (UC):</label>
+        <input id="calc-enterprise" type="number" min="0" value="0"
+          style="width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; margin-top:5px;" />
       </div>
-      <button id="calc-btn" style="padding:12px 30px; background: #2a9d8f; color:#fff; font-weight:600; border:none; border-radius:50px; cursor:pointer; box-shadow:0 5px 15px rgba(42,157,143,0.4); transition:all .3s;">
+      <button id="calc-btn" style="
+        padding:12px 30px;
+        background: #2a9d8f;
+        color: #fff;
+        font-weight:600;
+        border:none;
+        border-radius:50px;
+        cursor:pointer;
+        box-shadow:0 5px 15px rgba(42,157,143,0.4);
+        transition:all .3s;
+      ">
         Розрахувати
       </button>
       <div id="calc-result" style="margin-top:25px; font-size:1.2rem; color:#0a3b5c;"></div>
@@ -480,35 +883,14 @@
   </div>
 </section>
 
-<!-- Підключаємо скрипти -->
 <script>
-  // FAQ-акордеон
-  document.querySelectorAll('.faq-question').forEach(q => {
-    q.addEventListener('click', () => {
-      q.classList.toggle('active');
-      q.nextElementSibling.classList.toggle('active');
-    });
-  });
-
-  // Google Charts для Лідерборду
-  google.charts.load('current', {'packages':['table']});
-  google.charts.setOnLoadCallback(() => {
-    new google.visualization.Query(
-      'https://docs.google.com/spreadsheets/d/180V6ZvXt9H3slJXJVJhV05Eexs_D0dRhPf5DaSGjga0/gviz/tq?gid=0'
-    ).send(response => {
-      if (response.isError()) return document.getElementById('leaderboard-table').innerText = 'Не вдалося завантажити таблицю';
-      const table = new google.visualization.Table(document.getElementById('leaderboard-table'));
-      table.draw(response.getDataTable(), {allowHtml:true, width:'100%', height:'auto'});
-    });
-  });
-
-  // Калькулятор UC
   document.getElementById('calc-btn').addEventListener('click', () => {
-    const rating = +document.getElementById('calc-rating').value || 0;
-    const uc     = +document.getElementById('calc-uc').value || 0;
-    const ent    = +document.getElementById('calc-enterprise').value || 0;
-    const finalUC = rating*100 + uc + ent;
-    document.getElementById('calc-result').innerHTML = `Кількість Ваших UC: <strong>${finalUC.toLocaleString()}</strong>`;
+    const rating = Number(document.getElementById('calc-rating').value) || 0;
+    const uc = Number(document.getElementById('calc-uc').value) || 0;
+    const ent = Number(document.getElementById('calc-enterprise').value) || 0;
+    const finalUC = rating * 100 + uc + ent;
+    document.getElementById('calc-result').innerHTML =
+      `Кількість Ваших UC: <strong>${finalUC.toLocaleString()}</strong>`;
   });
 </script>
 <!-- Footer Section -->
@@ -516,7 +898,7 @@
   <!-- Waves Background -->
   <div class="footer-waves">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-      <path fill="#f0f8ff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+      <path fill="#f0f8ff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"/>
     </svg>
   </div>
 
@@ -554,7 +936,6 @@
   </svg>
 </div>
 
-<!-- Footer Styles -->
 <style>
   .footer {
     position: relative;
@@ -563,7 +944,11 @@
     padding: 80px 20px 40px;
     overflow: hidden;
   }
-  .footer-waves { position: absolute; top: 0; left: 0; width: 100%; }
+  .footer-waves svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
   .footer-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -572,42 +957,85 @@
     gap: 40px;
     justify-content: space-between;
   }
-  .footer-logo { flex: 1; min-width: 250px; }
-  .footer-logo p { margin-top: 10px; color: rgba(255,255,255,0.7); line-height: 1.6; }
-  .footer-contact { flex: 1; min-width: 250px; }
+  .footer-logo {
+    flex: 1;
+    min-width: 250px;
+  }
+  .footer-logo p {
+    margin-top: 10px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+  }
+  .footer-contact {
+    flex: 1;
+    min-width: 250px;
+  }
   .footer-contact h3 {
-    position: relative; font-size: 1.5rem; margin-bottom: 20px;
+    position: relative;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
   }
   .footer-contact h3::after {
-    content: ''; position: absolute; bottom: -10px; left: 0; width: 50px; height: 3px; background: var(--gold);
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--gold);
   }
-  .contact-item { display: flex; align-items: center; margin-bottom: 15px; }
-  .contact-icon { margin-right: 10px; font-size: 1.2rem; color: var(--gold); }
-  .social-links { display: flex; gap: 15px; margin-top: 10px; }
-  .copyright {
-    text-align: center; margin-top: 40px; font-size: 0.9rem; color: rgba(255,255,255,0.6);
+  .contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .contact-icon {
+    margin-right: 10px;
+    font-size: 1.2rem;
+    color: var(--gold);
+  }
+  .social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
   }
   .back-to-top {
-    position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
-    background: var(--sea-wave); border-radius: 50%; display: flex;
-    align-items: center; justify-content: center; cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2); opacity: 0; visibility: hidden;
-    transition: all .3s; z-index: 100;
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--sea-wave);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+    z-index: 100;
   }
-  .back-to-top.visible { opacity: 1; visibility: visible; }
-  .back-to-top:hover { transform: translateY(-5px); background: var(--deep-blue); }
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+  }
+  .back-to-top:hover {
+    transform: translateY(-5px);
+    background: var(--deep-blue);
+  }
 </style>
 
-<!-- Back to Top Script -->
 <script>
-  const btn = document.getElementById('backToTop');
+  const backBtn = document.getElementById('backToTop');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) btn.classList.add('visible');
-    else btn.classList.remove('visible');
+    if (window.scrollY > 300) backBtn.classList.add('visible');
+    else backBtn.classList.remove('visible');
   });
-  btn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  backBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
-<!-- Google Charts Loader and Leaderboard Script -->
+<!-- Google Charts Loader -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
   google.charts.load('current', {'packages':['table']});
@@ -636,8 +1064,7 @@
     });
   }
 </script>
-
-<!-- UC & Rating Calculator Script -->
+<!-- UC & Рейтинг Калькулятор Скрипт -->
 <script>
   document.getElementById('calc-btn').addEventListener('click', () => {
     const rating = Number(document.getElementById('calc-rating').value) || 0;
@@ -648,3 +1075,6 @@
       `Кількість Ваших UC: <strong>${finalUC.toLocaleString()}</strong>`;
   });
 </script>
+
+</body>
+</html>
