@@ -1384,7 +1384,6 @@
     background-size: 300% 300%;
     animation: gradientShift 20s ease infinite;
     overflow: hidden;
-    pointer-events: none; /* блоку не треба ловити жодних подій */
   }
 
   /* Контент (текст і кнопка) */
@@ -1455,6 +1454,87 @@
   }
 </style>
 
+<style>
+  @keyframes gradientShift {
+    0%,100% { background-position: 0% 50%; }
+    50%     { background-position: 100% 50%; }
+  }
+  .header {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(60deg, #0a3b5c, #2a9d8f, #0a3b5c);
+    background-size: 300% 300%;
+    animation: gradientShift 20s ease infinite;
+    overflow: hidden;
+    /* видалили pointer-events: none; */
+  }
+
+  .header-content {
+    position: relative; z-index: 10; text-align: center;
+  }
+  .title {
+    font-size: 4rem; font-weight: 800; color: #fff;
+    white-space: nowrap; overflow: hidden;
+    border-right: .15em solid #e9c46a;
+    width: 0;
+    animation: typing 3s steps(11,end) .5s forwards,
+               blinkCaret .75s step-end infinite;
+  }
+  .subtitle {
+    margin-top: .5em; font-size: 1.25rem; color: rgba(255,255,255,.9);
+    opacity: 0; transform: translateY(20px);
+    animation: fadeIn 1s forwards 3s;
+  }
+  .cta-button {
+    display: inline-block; margin-top: 1.5em;
+    padding: .75em 2em; background: #e9c46a; color: #0a3b5c;
+    border-radius: 50px; font-weight: 600;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeIn 1s forwards 4s;
+  }
+  .cta-button:hover { transform: translateY(0) scale(1.05); }
+
+  @keyframes typing  { to { width: 11ch; } }
+  @keyframes blinkCaret { 50% { border-color: transparent; } }
+  @keyframes fadeIn { to { opacity:1; transform: translateY(0); } }
+
+  /* РИБКИ */
+  .fish {
+    position: absolute; z-index: 5; pointer-events: none;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 32"><path fill="%23FFD166" d="M0,16c16-16,32,16,48,0s32-16,48,0"/></svg>')
+                no-repeat center/contain;
+    animation: fishSwim 12s linear infinite;
+  }
+  .fish:nth-child(1) { width:80px;  height:40px; bottom:30%; left:-120px; animation-delay:0s; }
+  .fish:nth-child(2) { width:60px;  height:30px; bottom:25%; left:-150px; animation-delay:4s; }
+  .fish:nth-child(3) { width:100px; height:50px; bottom:15%; left:-130px; animation-delay:8s; }
+
+  @keyframes fishSwim {
+    0%   { transform: translateX(0) scaleX(1); }
+    50%  { transform: translateX(110vw) scaleX(1); }
+    51%  { transform: translateX(110vw) scaleX(-1); }
+    100% { transform: translateX(0) scaleX(-1); }
+  }
+
+  /* БУЛЬБАШКИ */
+  .bubble {
+    position: absolute; bottom: 0;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    z-index: 5; pointer-events: auto;
+    animation-name: bubbleRise;
+    animation-iteration-count: infinite;
+  }
+  @keyframes bubbleRise {
+    0%   { transform: translateY(0) scale(1); opacity: .6; }
+    80%  { opacity: .2; }
+    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+  }
+</style>
+
 <section class="header" id="home">
   <div class="header-content">
     <h1 class="title">Unionpoly</h1>
@@ -1462,42 +1542,42 @@
     <a href="#welcome" class="cta-button">Дізнатися більше</a>
   </div>
 
-  <!-- риби -->
+  <!-- РИБКИ -->
   <div class="fish"></div>
   <div class="fish"></div>
   <div class="fish"></div>
 
-  <!-- скрипт для бульбашок -->
+  <!-- скрипт створення бульбашок -->
   <script>
-    const container = document.querySelector('.header');
-    for (let i = 0; i < 30; i++) {
-      const b = document.createElement('div');
-      b.className = 'bubble';
-      const size = 5 + Math.random()*25;
-      b.style.width = size+'px';
-      b.style.height = size+'px';
-      b.style.left = Math.random()*100+'vw';
-      const dur = 4 + Math.random()*6;
-      b.style.animationDuration = dur+'s';
-      b.style.animationDelay    = -Math.random()*dur+'s';
-      container.appendChild(b);
-      // інтерактивність
-      b.addEventListener('mousemove', e => {
-        const r = b.getBoundingClientRect();
-        const dx = (r.left + r.width/2) - e.clientX;
-        const dy = (r.top  + r.height/2)- e.clientY;
-        const dist = Math.hypot(dx,dy);
-        if (dist < 80) {
-          const ang = Math.atan2(dy,dx);
-          b.style.transform = `translate(${Math.cos(ang)*30}px,${Math.sin(ang)*30}px)`;
-          b.style.transition = 'transform .2s';
-        }
-      });
-      b.addEventListener('mouseleave', () => {
-        b.style.transform = '';
-        b.style.transition = 'transform 1s';
-      });
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.querySelector('.header');
+      for (let i = 0; i < 30; i++) {
+        const b = document.createElement('div');
+        b.className = 'bubble';
+        const size = 5 + Math.random()*25;
+        b.style.width = size+'px';
+        b.style.height = size+'px';
+        b.style.left = Math.random()*100+'vw';
+        const dur = 4 + Math.random()*6;
+        b.style.animationDuration = dur+'s';
+        b.style.animationDelay    = -Math.random()*dur+'s';
+        container.appendChild(b);
+        b.addEventListener('mousemove', e => {
+          const r = b.getBoundingClientRect();
+          const dx = (r.left + r.width/2) - e.clientX;
+          const dy = (r.top  + r.height/2)- e.clientY;
+          if (Math.hypot(dx,dy) < 80) {
+            const ang = Math.atan2(dy,dx);
+            b.style.transform = `translate(${Math.cos(ang)*30}px,${Math.sin(ang)*30}px)`;
+            b.style.transition = 'transform .2s';
+          }
+        });
+        b.addEventListener('mouseleave', () => {
+          b.style.transform = '';
+          b.style.transition = 'transform 1s';
+        });
+      }
+    });
   </script>
 </section>
     
@@ -2459,65 +2539,37 @@
     
     <!-- JavaScript -->
     <script>
-        // Animate goal items on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const goalItems = document.querySelectorAll('.goal-item');
-            
-            function checkScroll() {
-                goalItems.forEach(item => {
-                    const itemTop = item.getBoundingClientRect().top;
-                    const windowHeight = window.innerHeight;
-                    
-                    if (itemTop < windowHeight - 100) {
-                        item.classList.add('animate');
-                    }
-                });
-            }
-            
-            // Initial check
-            checkScroll();
-            
-            // Check on scroll
-            window.addEventListener('scroll', checkScroll);
-     // FAQ accordion
-    // FAQ accordion
-    const faqQuestions = document.querySelectorAll('.faq-question');
-
-    faqQuestions.forEach(question => {
-        question.addEventListener('click', () => {
-            question.classList.toggle('active');
-            const answer = question.nextElementSibling;
-            answer.classList.toggle('active');
-        });
-    });
-
-    // Board modal
-    const boardWrapper = document.querySelector('.board-wrapper');
-    const boardModal = document.getElementById('boardModal');
-    const modalClose = boardModal.querySelector('.modal-close');
-
-    boardWrapper.addEventListener('click', () => {
-        boardModal.classList.add('active');
-    });
-
-    modalClose.addEventListener('click', () => {
-        boardModal.classList.remove('active');
-    });
-
-    // Back to top button
-    const backToTop = document.querySelector('.back-to-top');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const container = document.querySelector('.header');
+    for (let i = 0; i < 30; i++) {
+      const b = document.createElement('div');
+      b.className = 'bubble';
+      const size = 5 + Math.random()*25;
+      b.style.width = size+'px';
+      b.style.height = size+'px';
+      b.style.left = Math.random()*100+'vw';
+      const dur = 4 + Math.random()*6;
+      b.style.animationDuration = dur+'s';
+      b.style.animationDelay    = -Math.random()*dur+'s';
+      container.appendChild(b);
+      b.addEventListener('mousemove', e => {
+        const r = b.getBoundingClientRect();
+        const dx = (r.left + r.width/2) - e.clientX;
+        const dy = (r.top  + r.height/2) - e.clientY;
+        const dist = Math.hypot(dx,dy);
+        if (dist < 80) {
+          const ang = Math.atan2(dy,dx);
+          b.style.transform = `translate(${Math.cos(ang)*30}px,${Math.sin(ang)*30}px)`;
+          b.style.transition = 'transform .2s';
         }
-    });
-
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-});
-    </script>
+      });
+      b.addEventListener('mouseleave', () => {
+        b.style.transform = '';
+        b.style.transition = 'transform 1s';
+      });
+    }
+  });
+</script>
 </body>
 </html>
