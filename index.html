@@ -1367,6 +1367,94 @@
   }
 </style>
 
+<!-- ====== OCEANIC HERO WITH INTERACTIVE BUBBLES ====== -->
+<style>
+  /* фон і градієнт */
+  @keyframes gradientShift {
+    0%,100% { background-position: 0% 50%; }
+    50%     { background-position: 100% 50%; }
+  }
+  .header {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(60deg, #0a3b5c, #2a9d8f, #0a3b5c);
+    background-size: 300% 300%;
+    animation: gradientShift 20s ease infinite;
+    overflow: hidden;
+    pointer-events: none; /* блоку не треба ловити жодних подій */
+  }
+
+  /* Контент (текст і кнопка) */
+  .header-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    pointer-events: auto; /* повертаємо події дочкам */
+  }
+  .title {
+    font-size: 4rem; font-weight: 800; color: #fff;
+    white-space: nowrap; overflow: hidden;
+    border-right: .15em solid #e9c46a;
+    width: 0;
+    animation: typing 3s steps(11,end) .5s forwards,
+               blinkCaret .75s step-end infinite;
+  }
+  .subtitle {
+    margin-top: .5em; font-size: 1.25rem; color: rgba(255,255,255,.9);
+    opacity: 0; transform: translateY(20px);
+    animation: fadeIn 1s forwards 3s;
+  }
+  .cta-button {
+    display: inline-block; margin-top: 1.5em;
+    padding: .75em 2em; background: #e9c46a; color: #0a3b5c;
+    border-radius: 50px; font-weight: 600;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeIn 1s forwards 4s;
+    pointer-events: auto;
+  }
+  .cta-button:hover { transform: translateY(0) scale(1.05); }
+
+  @keyframes typing  { to { width: 11ch; } }
+  @keyframes blinkCaret { 50% { border-color: transparent; } }
+  @keyframes fadeIn { to { opacity:1; transform: translateY(0); } }
+
+  /* риби (трохи життя) */
+  .fish {
+    position: absolute; z-index: 5; pointer-events: none;
+    background: url('https://svgshare.com/i/t7j.svg') no-repeat center/contain;
+    animation: fishSwim 12s linear infinite;
+  }
+  .fish:nth-child(1) { width:80px;  height:40px; bottom:30%; left:-120px; animation-delay:0s; }
+  .fish:nth-child(2) { width:60px;  height:30px; bottom:25%; left:-150px; animation-delay:4s; }
+  .fish:nth-child(3) { width:100px; height:50px; bottom:15%; left:-130px; animation-delay:8s; }
+
+  @keyframes fishSwim {
+    0%   { transform: translateX(0) scaleX(1); }
+    50%  { transform: translateX(110vw) scaleX(1); }
+    51%  { transform: translateX(110vw) scaleX(-1); }
+    100% { transform: translateX(0) scaleX(-1); }
+  }
+
+  /* бульбашки */
+  .bubble {
+    position: absolute; bottom: 0;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50%;
+    z-index: 5;
+    pointer-events: auto;
+    animation-name: bubbleRise;
+    animation-iteration-count: infinite;
+  }
+  @keyframes bubbleRise {
+    0%   { transform: translateY(0) scale(1); opacity: .6; }
+    80%  { opacity: .2; }
+    100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+  }
+</style>
+
 <section class="header" id="home">
   <div class="header-content">
     <h1 class="title">Unionpoly</h1>
@@ -1374,36 +1462,34 @@
     <a href="#welcome" class="cta-button">Дізнатися більше</a>
   </div>
 
-  <!-- Риби -->
+  <!-- риби -->
   <div class="fish"></div>
   <div class="fish"></div>
   <div class="fish"></div>
 
-  <!-- Скрипт для нескінченних бульбашок + інтерактивності -->
+  <!-- скрипт для бульбашок -->
   <script>
     const container = document.querySelector('.header');
     for (let i = 0; i < 30; i++) {
       const b = document.createElement('div');
       b.className = 'bubble';
-      const size = 5 + Math.random() * 25;
-      b.style.width = size + 'px';
-      b.style.height = size + 'px';
-      b.style.left = Math.random() * 100 + 'vw';
-      const dur = 4 + Math.random() * 6;
-      b.style.animationDuration = dur + 's';
-      // даємо від'ємний delay, щоб при вході вони були вже на різній висоті
-      b.style.animationDelay = (-Math.random() * dur) + 's';
+      const size = 5 + Math.random()*25;
+      b.style.width = size+'px';
+      b.style.height = size+'px';
+      b.style.left = Math.random()*100+'vw';
+      const dur = 4 + Math.random()*6;
+      b.style.animationDuration = dur+'s';
+      b.style.animationDelay    = -Math.random()*dur+'s';
       container.appendChild(b);
-
-      // інтерактивне відштовхування
+      // інтерактивність
       b.addEventListener('mousemove', e => {
-        const rect = b.getBoundingClientRect();
-        const dx = rect.left + rect.width/2 - e.clientX;
-        const dy = rect.top + rect.height/2 - e.clientY;
-        const dist = Math.hypot(dx, dy);
+        const r = b.getBoundingClientRect();
+        const dx = (r.left + r.width/2) - e.clientX;
+        const dy = (r.top  + r.height/2)- e.clientY;
+        const dist = Math.hypot(dx,dy);
         if (dist < 80) {
-          const angle = Math.atan2(dy, dx);
-          b.style.transform = `translate(${Math.cos(angle)*30}px, ${Math.sin(angle)*30}px)`;
+          const ang = Math.atan2(dy,dx);
+          b.style.transform = `translate(${Math.cos(ang)*30}px,${Math.sin(ang)*30}px)`;
           b.style.transition = 'transform .2s';
         }
       });
