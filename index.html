@@ -1077,10 +1077,7 @@
     </style>
 </head>
 <body>
-    <!-- Header Section -->
-   <!-- ============================
-     Improved Header Section
-============================ -->
+ <!-- Header Section -->
 <section class="header" id="home">
   <!-- Canvas для партіклів -->
   <canvas id="particle-canvas"></canvas>
@@ -1090,11 +1087,6 @@
     <p class="subtitle">Навчальна профспілкова настільна гра, що об’єднує серця</p>
     <a href="#welcome" class="cta-button">Дізнатися більше</a>
   </div>
-
-  <!-- SVG хвилі -->
-  <div class="wave wave1"></div>
-  <div class="wave wave2"></div>
-  <div class="wave wave3"></div>
 </section>
 
 <style>
@@ -1211,6 +1203,22 @@
   @keyframes wave1 { to { background-position-x: 1000px; } }
   @keyframes wave2 { to { background-position-x: -1000px; } }
   @keyframes wave3 { to { background-position-x: 500px; } }
+     .header {
+    /* робимо секцію флекс-контейнером і центруємо вміст */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+  }
+  .header-content {
+    /* щоб текст точно центрований */
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 20px;
+  }
 </style>
 
 <script>
