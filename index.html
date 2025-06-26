@@ -1175,18 +1175,16 @@ margin-top: 0;
       }
     }
     </style>
-    <style>
-/* Останній хак для одного скроллбара */
-html {
-  height: 100%;
-  overflow-y: hidden;
-}
-body {
-  min-height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-</style>
+  <!-- Новий блок JUST перед закриттям head -->
+  <style>
+    body {
+      overflow-y: hidden !important;
+    }
+    html {
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+    }
+  </style>
 </head>
 <body>
 <!-- Header Section -->
