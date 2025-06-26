@@ -1147,6 +1147,44 @@ margin-top: 0;
   }
   .wave-footer.wave1 { bottom: 0; height: 60px; /* ваш SVG */ }
   .wave-footer.wave2 { bottom: 60px; height: 30px; /* ваш SVG */ }
+
+        /* ————————————————————————— */
+/* Підняти і розкрити опис під “ПРМТУ” */
+/* ————————————————————————— */
+.footer {
+  /* зробити видимим все, що виходить за межі контейнера */
+  overflow: visible !important;
+  /* підняти весь футер вище, щоб опис був ближче до заголовка */
+  padding-top: 20px !important;
+  /* трохи додати простору знизу, щоб нічого не обрізалося */
+  padding-bottom: 60px !important;
+}
+
+.footer-logo {
+  /* вертикально вирівняти svg та текст по центру */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-logo svg {
+  /* зменшити відступ під svg (ПРМТУ) */
+  margin-bottom: 5px !important;
+}
+
+.footer-logo p {
+  /* прибрати будь-які зайві відступи зверху і знизу */
+  margin: 0 !important;
+  padding: 0 !important;
+  /* збільшити трохи шрифт, зробити текст чіткішим */
+  font-size: 1.1rem !important;
+  line-height: 1.6;
+  /* по центру */
+  text-align: center;
+  /* обмежити ширину, щоб текст не тягнувся в сторони */
+  max-width: 300px;
+}
+
     </style>
 </head>
 <body>
