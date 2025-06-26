@@ -1232,17 +1232,23 @@ margin-top: 0;
     }
   }
 </style>
+   <!-- Адаптація центрування ПРМТУ у мобільній версії -->
     <style>
-    @media (max-width: 768px) {
-      .footer-logo {
+    @media screen and (max-width: 768px) {
+      /* Вибірка саме вашого футера за id */
+      #contact .footer-logo {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
         text-align: center !important;
-      }
-      .footer-logo svg {
         margin: 0 auto !important;
       }
-      .footer-logo p {
+      #contact .footer-logo svg {
+        margin: 0 auto 8px auto !important;
+      }
+      #contact .footer-logo p {
         text-align: center !important;
-        margin: 10px auto !important;
+        margin: 0 auto !important;
       }
     }
     </style>
