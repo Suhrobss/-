@@ -1299,8 +1299,8 @@ margin-top: 0;
   let W, H, particles = [];
 
   function initParticles() {
-    W = canvas.width = window.innerWidth;
-    H = canvas.height = window.innerHeight;
+   W = canvas.width = canvas.clientWidth;
+   H = canvas.height = canvas.clientHeight;
     particles = Array.from({length: 100}, () => ({
       x: Math.random()*W,
       y: Math.random()*H,
