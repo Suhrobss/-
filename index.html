@@ -1184,8 +1184,54 @@ margin-top: 0;
   /* обмежити ширину, щоб текст не тягнувся в сторони */
   max-width: 300px;
 }
-
     </style>
+    
+    <style>
+  /* === Leaderboard: робимо таблицю прокручуваною на малих екранах === */
+  #leaderboard-table {
+    overflow-x: auto;
+    /* трохи відступу зверху й знизу */
+    margin: 1rem 0;
+  }
+  #leaderboard-table table {
+    width: 100%;
+    min-width: 600px; /* змінюйте під вашу мінімальну бажану ширину */
+  }
+
+  /* === Footer links: стовпцями замість рядків === */
+  @media (max-width: 768px) {
+    /* Всі колонки футера одна під одною */
+    .footer-container {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    /* Робимо корисні посилання шириною 100% */
+    .footer-links {
+      width: 100%;
+    }
+    /* Зменшуємо текст, щоб краще вміщалось */
+    .footer-links h3 {
+      font-size: 1.25rem;
+    }
+    .footer-links ul li {
+      margin-bottom: 1rem;
+    }
+    .footer-links ul li a {
+      font-size: 1rem;
+    }
+    .footer-links ul li p {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    /* Адаптація таблиці лідерів */
+    #leaderboard-table {
+      margin: 0.5rem -1rem; /* щоб ширше зайняло простір */
+      padding: 0 1rem;
+    }
+  }
+</style>
+
 </head>
 <body>
 <!-- Header Section -->
