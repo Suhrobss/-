@@ -561,6 +561,15 @@
            overflow: visible;    
         }
         
+        .footer-waves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23f0f8ff' fill-opacity='1' d='M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E") center/cover;
+        }
+        
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -1145,7 +1154,43 @@ margin-top: 0;
   html, body {
     overflow-x: hidden;
   }
-.header {
+</style>
+   <!-- Адаптація центрування ПРМТУ у мобільній версії -->
+    <style>
+    @media screen and (max-width: 768px) {
+      /* Вибірка саме вашого футера за id */
+      #contact .footer-logo {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        margin: 0 auto !important;
+      }
+      #contact .footer-logo svg {
+        margin: 0 auto 8px auto !important;
+      }
+      #contact .footer-logo p {
+        text-align: center !important;
+        margin: 0 auto !important;
+      }
+    }
+    </style>
+</head>
+<body>
+<!-- Header Section -->
+<section id="home" class="header">
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="header-content">
+    <h1 class="title">UNIONPOLY</h1>
+    <p class="subtitle">Навчальна профспілкова настільна гра, що об’єднує серця</p>
+    <a href="#welcome" class="cta-button">Дізнатися більше</a>
+  </div>
+
+</section>
+
+<style>
+  .header {
     position: relative;
     display: flex;
     justify-content: center;
@@ -1154,7 +1199,7 @@ margin-top: 0;
     background: linear-gradient(45deg, #0a3b5c, #2a9d8f);
     overflow: hidden;
   }
-.header-content {
+  .header-content {
     position: relative;
     z-index: 2;
     text-align: center;
@@ -1218,46 +1263,13 @@ margin-top: 0;
     padding: 0.75rem 1.5rem !important;
     font-size: 1rem !important;
   }
+  /* ховаємо хвилі, якщо вони лишилися десь у шапці */
+  .wave1, .wave2, .wave3 {
+    display: none !important;
+  }
 }
+
 </style>
-
-   <!-- Адаптація центрування ПРМТУ у мобільній версії -->
-    <style>
-    @media screen and (max-width: 768px) {
-      /* Вибірка саме вашого футера за id */
-      #contact .footer-logo {
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        text-align: center !important;
-        margin: 0 auto !important;
-      }
-      #contact .footer-logo svg {
-        margin: 0 auto 8px auto !important;
-      }
-      #contact .footer-logo p {
-        text-align: center !important;
-        margin: 0 auto !important;
-      }
-    }
-    </style>
-    <style>
-  
-</head>
-<body>
-<!-- Header Section -->
-<section id="home" class="header">
-  <canvas id="particle-canvas"></canvas>
-
-  <div class="header-content">
-    <h1 class="title">UNIONPOLY</h1>
-    <p class="subtitle">Навчальна профспілкова настільна гра, що об’єднує серця</p>
-    <a href="#welcome" class="cta-button">Дізнатися більше</a>
-  </div>
-
-
-
-
 <script>
   // ---------- Canvas particles ----------
   const canvas = document.getElementById('particle-canvas');
@@ -1296,6 +1308,7 @@ margin-top: 0;
   initParticles();
   draw();
 </script>
+    </section>
     
 <!-- Welcome Section -->
 <section class="welcome-section" id="welcome">
@@ -2336,3 +2349,4 @@ margin-top: 0;
     </script>
 </body>
 </html>
+
