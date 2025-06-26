@@ -1077,7 +1077,73 @@
   0%,100% { opacity: 1; }
   50%     { opacity: 0.4; }
 }
-     
+ 
+  .footer {
+    padding: 80px 20px 140px; /* більше простору знизу */
+  }
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-links {
+    flex: 1;
+    min-width: 250px;
+  }
+  .footer-links h3 {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .footer-links h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-links li {
+    margin-bottom: 1.5rem;
+  }
+  .footer-links a {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--sea-wave);
+    text-decoration: none;
+    transition: color .3s, transform .3s;
+  }
+  .footer-links a:hover {
+    color: var(--mint);
+    transform: translateX(5px);
+  }
+  .footer-links p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+    margin: 5px 0 0 0;
+    line-height: 1.4;
+  }
+  .wave-footer {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    background-repeat: repeat-x;
+    z-index: 1;
+  }
+  .wave-footer.wave1 { bottom: 0; height: 60px; /* ваш SVG */ }
+  .wave-footer.wave2 { bottom: 60px; height: 30px; /* ваш SVG */ }
     </style>
 </head>
 <body>
@@ -2020,12 +2086,12 @@
   });
 </script>
 
-    <!-- Footer Section -->
+   <!-- Footer Section -->
 <footer class="footer" id="contact">
-<!-- ОДИН БЛОК хвиль + маяк -->
   <div class="footer-waves-and-lighthouse">
   <!-- хвилі -->
-  <div class="wave-footer wave1"></div>
+    <div class="wave-footer wave1"></div>
+    <div class="wave-footer wave2"></div>
 
   <div class="footer-container">
     <div class="footer-logo">
@@ -2038,15 +2104,37 @@
       <p>Професійна спілка робітників морського транспорту України — захист прав та інтересів працівників.</p>
     </div>
     <div class="footer-contact">
-      <h3>Контакти</h3>
-      <div class="contact-item"><div class="contact-icon">📍</div><div>м. Одеса, Аркадійське Плато 5-б, прим. 1</div></div>
-      <div class="contact-item"><div class="contact-icon">📞</div><div>+38 (048) 2 42 99 01</div></div>
-      <div class="contact-item"><div class="contact-icon">✉️</div><div>mtwtuyouth@gmail.com</div></div>
-      <div class="social-links">
-        <!-- ваші соц-іконки -->
+     <!-- Нова колоcть посилань -->
+      <div class="footer-links">
+        <h3>Корисні посилання</h3>
+        <ul>
+          <li>
+            <a href="https://www.instagram.com/mtwtuyouth?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+              Instagram Молодіжної ради ПРМТУ
+            </a>
+            <p>Варто підписатись, щоб не пропустити заходи та активності молодіжної ради.</p>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/mtwtu_law_hub/" target="_blank">
+              Instagram MTWTU LAW HUB
+            </a>
+            <p>Тут про захист прав, варто підписатись, щоб не пропустити важливе та знати, як захищати свої права.</p>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/mtwtu_itf_ukraine?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+              Instagram ПРМТУ
+            </a>
+            <p>Основні новини та події ПРМТУ.</p>
+          </li>
+          <li>
+            <a href="https://wep.wf/uvmj7n" target="_blank">
+              Чат-бот ПРМТУ у Telegram
+            </a>
+            <p>Перевірити членство та оперативно отримати відповідь на всі питання.</p>
+          </li>
+        </ul>
       </div>
     </div>
-  </div>
 
     <!-- маяк з островом -->
     <div class="lighthouse">
@@ -2070,7 +2158,7 @@
   </div>
     
   <div class="copyright">
-    © 2023 Union Poly. Всі права захищені.
+    © 2025 Union Poly. Всі права захищені.
   </div>
     <div class="wave-footer wave1"></div>
 <div class="wave-footer wave2"></div>
