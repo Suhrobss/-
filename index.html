@@ -1263,6 +1263,34 @@ margin-top: 0;
   @keyframes wave1 { to { background-position-x: 1000px; } }
   @keyframes wave2 { to { background-position-x: -1000px; } }
   @keyframes wave3 { to { background-position-x: 500px; } }
+    /* === Адаптив для Header === */
+@media (max-width: 768px) {
+  .header {
+    height: auto;              /* знімемо 100vh, щоб контент не обрізався */
+    padding: 60px 20px;        /* додамо вертикальні відступи */
+  }
+  .header-content {
+    max-width: 100%;
+    padding: 0;
+  }
+  .header-content .title {
+    font-size: 2.5rem !important;   /* менш великий заголовок */
+    margin-bottom: 0.5em;
+  }
+  .header-content .subtitle {
+    font-size: 1rem !important;     /* підлаштовуємо під мобіль */
+    margin-bottom: 1em;
+  }
+  .header-content .cta-button {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1rem !important;
+  }
+  /* ховаємо хвилі, якщо вони лишилися десь у шапці */
+  .wave1, .wave2, .wave3 {
+    display: none !important;
+  }
+}
+
 </style>
 <script>
   // ---------- Canvas particles ----------
