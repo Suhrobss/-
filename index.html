@@ -1082,7 +1082,7 @@
 }
  
   .footer {
-    padding: 80px 20px 140px; /* більше простору знизу */
+    padding: 40px 20px 140px;
   }
   .footer-container {
     display: flex;
@@ -1100,7 +1100,7 @@
   .footer-links h3 {
     font-size: 1.5rem;
     color: var(--white);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     position: relative;
   }
   .footer-links h3::after {
@@ -1132,12 +1132,12 @@
     color: var(--mint);
     transform: translateX(5px);
   }
-  .footer-links p {
-    color: rgba(255,255,255,0.8);
-    font-size: 0.9rem;
-    margin: 5px 0 0 0;
-    line-height: 1.4;
-  }
+.footer-links p:first-of-type {
+margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.1rem;      /* трохи більший шрифт */
+  line-height: 1.6;
+}
   .wave-footer {
     width: 100%;
     position: absolute;
