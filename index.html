@@ -246,11 +246,12 @@
         }
         
         .section-title {
-            font-size: 2.5rem;
-            color: var(--deep-blue);
-            margin-bottom: 50px;
-            position: relative;
-            display: inline-block;
+        display: block;       /* займає всю ширину */
+        width: 100%;
+        font-size: 2.5rem;
+        color: var(--deep-blue);
+        margin-bottom: 50px;
+        position: relative;
         }
         
         .section-title::after {
@@ -264,6 +265,9 @@
             background: var(--gold);
             border-radius: 2px;
         }
+        .section-title.text-center {
+    text-align: center;   /* центруємо текст */
+    }
         
         .goal-items {
             display: grid;
@@ -1426,9 +1430,11 @@
     </section>
     
 <!-- Cards Gallery Section -->
+<!-- Галерея карток -->
 <section class="cards-section" id="cards">
   <div class="cards-container">
-    <h2 class="section-title text-center">Галерея карток</h2>
+    <!-- додали text-center -->
+   <h2 class="section-title text-center">Галерея карток</h2>
     <div class="cards-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; justify-items: center;">
       
       <!-- Перший ряд: Позитивні, Негативні, Нейтральні -->
@@ -1513,7 +1519,8 @@
   <!-- Правила гри -->
 <section class="faq-section" id="faq">
   <div class="faq-container">
-    <h2 class="section-title">Правила гри</h2>
+    <!-- додали text-center -->
+    <h2 class="section-title text-center">Правила гри</h2>
     <div class="faq-items">
 
       <div class="faq-item">
