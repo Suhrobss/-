@@ -2050,49 +2050,58 @@ margin-top: 0;
   #leaderboard-table tr:nth-child(even) td {
     background: #f9fafb;
   }
-    /* ==== Стилі для плаваючої кнопки ==== */
+    
+/* ==== Стилі для плаваючої кнопки ==== */
 .join-prmtu-btn {
   position: fixed;
-  bottom: 85px;
-  right: 10px;
+  bottom: 60px;
+  right: 20px;
   display: inline-block;
   padding: 16px 24px;
-  background: linear-gradient(45deg, #2a9d8f, #e9c46a);
+  background: linear-gradient(45deg, #2a9d8f, #e9c46a, #a8dadc, #2a9d8f);
+  background-size: 300% 300%;
   color: #fff;
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 50px;
   text-decoration: none;
-  box-shadow: 0 8px 24px rgba(42, 157, 143, 0.4),
-              0 4px 12px rgba(233, 196, 106, 0.3);
+  box-shadow: 0 8px 24px rgba(42,157,143,0.4), 
+              0 4px 12px rgba(233,196,106,0.3);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   z-index: 999;
-  animation: pulse-join 2.5s infinite;
+  animation: 
+    pulse-join    2s ease-in-out infinite,   /* пульсація */
+    gradient-shift 5s ease-in-out infinite;  /* перелив фону */
 }
 
 .join-prmtu-btn:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 12px 32px rgba(42, 157, 143, 0.6),
-              0 6px 16px rgba(233, 196, 106, 0.4);
+  transform: scale(1.2);
+  box-shadow: 0 14px 36px rgba(42,157,143,0.6),
+              0 6px 18px rgba(233,196,106,0.5);
 }
 
-/* Легка пульсація */
+/* Пульсація */
 @keyframes pulse-join {
-  0% {
-    box-shadow: 0 8px 24px rgba(42, 157, 143, 0.4),
-                0 4px 12px rgba(233, 196, 106, 0.3);
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 24px rgba(42,157,143,0.4), 
+                0 4px 12px rgba(233,196,106,0.3);
   }
   50% {
-    box-shadow: 0 12px 32px rgba(42, 157, 143, 0.5),
-                0 6px 16px rgba(233, 196, 106, 0.35);
-  }
-  100% {
-    box-shadow: 0 8px 24px rgba(42, 157, 143, 0.4),
-                0 4px 12px rgba(233, 196, 106, 0.3);
+    transform: scale(1.15);
+    box-shadow: 0 14px 36px rgba(42,157,143,0.6),
+                0 6px 18px rgba(233,196,106,0.5);
   }
 }
 
-/* Для мобільних */
+/* Перелив фону */
+@keyframes gradient-shift {
+  0%   { background-position:   0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position:   0% 50%; }
+}
+
+/* Адаптив */
 @media (max-width: 768px) {
   .join-prmtu-btn {
     bottom: 20px;
@@ -2101,6 +2110,7 @@ margin-top: 0;
     font-size: 1rem;
   }
 }
+
 </style>
 
 <!-- Google Charts loader -->
@@ -2436,9 +2446,8 @@ margin-top: 0;
     </script>
     <!-- ==== Плаваюча кнопка зворотнього зв'язку ==== -->
 <a href="https://docs.google.com/forms/d/e/1FAIpQLSf980cYFOoSLH3Zfeq5ivn5-ZOmgHiDaRbZl98Wsca12e9DDg/viewform?usp=sharing&ouid=102674742329136233100"
-   class="join-prmtu-btn"
    target="_blank"
-   rel="noopener">
+   class="join-prmtu-btn">
   Стань частиною ПРМТУ🫶
 </a>
 </body>
